@@ -6,11 +6,13 @@
   --text: #1c1b22;
   --text-dim: #5c5a66;
   --on-ink: #f3f1ea;
-  --on-ink-dim: #c8c4d8;
+  --on-ink-dim: #a9a6b8;
   --accent-cool: #4f6b80;
+  --accent-cool-bright: #8fb6cf;
   --accent-warm: #8a6a52;
+  --accent-warm-bright: #c9a688;
   --border: #d9d3c2;
-  --border-ink: #ffffff26;
+  --border-ink: #ffffff22;
 
   --serif: "Noto Serif KR", "Iowan Old Style", "Palatino Linotype", Georgia, "Times New Roman", serif;
   --sans: "Noto Sans KR", -apple-system, "Helvetica Neue", "Pretendard", sans-serif;
@@ -22,7 +24,7 @@
 html { scroll-behavior: smooth; background: var(--ink); }
 
 body {
-  background: var(--paper);
+  background: var(--ink);
   color: var(--text);
   font-family: var(--sans);
   font-size: 17px;
@@ -88,15 +90,29 @@ a:hover { text-decoration: underline; }
   text-align: left;
   padding: 7rem max(1.75rem, 8vw) 2.5rem;
   overflow-y: auto;
+  position: relative;
+}
+
+/* dark sections: hero, award, education, skills — grid texture + radial glow like stevo.ai */
+.hero, .award-banner, .education, .skills {
+  background:
+    linear-gradient(#ffffff0a 1px, transparent 1px),
+    linear-gradient(90deg, #ffffff0a 1px, transparent 1px),
+    radial-gradient(circle at 85% 15%, #4f6b8033, transparent 35%),
+    var(--ink);
+  background-size: 56px 56px, 56px 56px, auto, auto;
+  color: var(--on-ink);
+}
+.hero .eyebrow, .award-banner .eyebrow, .education .eyebrow, .skills .eyebrow {
+  color: var(--accent-cool-bright);
 }
 
 /* hero */
-.hero { background: var(--paper); color: var(--text); }
 .hero-label {
   font-family: var(--mono);
   font-size: 0.82rem;
   letter-spacing: 0.08em;
-  color: var(--accent-cool);
+  color: var(--accent-cool-bright);
   text-transform: uppercase;
   margin-bottom: 2rem;
 }
@@ -104,7 +120,7 @@ a:hover { text-decoration: underline; }
   font-family: var(--serif);
   font-weight: 600;
   font-size: clamp(1.4rem, 2.6vw, 1.9rem);
-  color: var(--text-dim);
+  color: var(--on-ink-dim);
   margin-bottom: 0.75rem;
   letter-spacing: -0.01em;
 }
@@ -115,12 +131,13 @@ a:hover { text-decoration: underline; }
   line-height: 1.12;
   font-size: clamp(2.6rem, 7vw, 5rem);
   max-width: 44rem;
+  color: var(--on-ink);
 }
 
 /* award banner */
-.award-banner { background: var(--paper-alt); cursor: pointer; }
-.award-text { font-family: var(--serif); font-size: clamp(1.4rem, 3vw, 2rem); max-width: 42rem; line-height: 1.45; }
-.award-cta { margin-top: 1.75rem; color: var(--text-dim); font-family: var(--mono); font-size: 0.85rem; }
+.award-banner { cursor: pointer; }
+.award-text { font-family: var(--serif); font-size: clamp(1.4rem, 3vw, 2rem); max-width: 42rem; line-height: 1.45; color: var(--on-ink); }
+.award-cta { margin-top: 1.75rem; color: var(--on-ink-dim); font-family: var(--mono); font-size: 0.85rem; }
 
 /* section titles shared */
 .education h2, .skills h2, .projects h2, .contact h2 {
@@ -129,15 +146,17 @@ a:hover { text-decoration: underline; }
   font-size: clamp(2rem, 4vw, 3rem);
   letter-spacing: -0.015em;
   margin-bottom: 2.5rem;
+  color: var(--on-ink);
 }
+.projects h2 { color: var(--text); }
 
 /* education */
-.edu-list { display: flex; flex-direction: column; max-width: 46rem; width: 100%; }
-.edu-item { border-top: 1px solid var(--border); padding: 1.75rem 0; }
-.edu-item:last-child { border-bottom: 1px solid var(--border); }
-.edu-period { font-family: var(--mono); color: var(--accent-cool); font-size: 0.82rem; margin-bottom: 0.5rem; }
-.edu-item h3 { font-family: var(--serif); font-size: 1.3rem; margin-bottom: 0.6rem; }
-.edu-item p:last-child { color: var(--text-dim); font-size: 0.96rem; max-width: 36rem; }
+.edu-list { display: flex; flex-direction: column; max-width: 46rem; width: 100%; position: relative; }
+.edu-item { border-top: 1px solid var(--border-ink); padding: 1.75rem 0; }
+.edu-item:last-child { border-bottom: 1px solid var(--border-ink); }
+.edu-period { font-family: var(--mono); color: var(--accent-cool-bright); font-size: 0.82rem; margin-bottom: 0.5rem; }
+.edu-item h3 { font-family: var(--serif); font-size: 1.3rem; margin-bottom: 0.6rem; color: var(--on-ink); }
+.edu-item p:last-child { color: var(--on-ink-dim); font-size: 0.96rem; max-width: 36rem; }
 
 /* skills */
 .skill-groups {
@@ -146,22 +165,23 @@ a:hover { text-decoration: underline; }
   gap: 0;
   max-width: 54rem;
   width: 100%;
-  border-top: 1px solid var(--border);
-  border-left: 1px solid var(--border);
+  border-top: 1px solid var(--border-ink);
+  border-left: 1px solid var(--border-ink);
+  position: relative;
 }
-.skill-group { border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 1.25rem 1.5rem; }
+.skill-group { border-right: 1px solid var(--border-ink); border-bottom: 1px solid var(--border-ink); padding: 1.25rem 1.5rem; }
 .skill-group h3 {
   font-family: var(--mono);
   font-size: 0.78rem;
-  color: var(--accent-warm);
+  color: var(--accent-warm-bright);
   text-transform: uppercase;
   letter-spacing: 0.06em;
   margin-bottom: 0.6rem;
 }
-.skill-group p { font-size: 0.95rem; color: var(--text-dim); }
+.skill-group p { font-size: 0.95rem; color: var(--on-ink-dim); }
 
-/* projects */
-.projects { justify-content: flex-start; padding-top: 6.5rem; }
+/* projects — cream, like stevo.ai's portfolio grid */
+.projects { justify-content: flex-start; padding-top: 6.5rem; background: var(--paper); color: var(--text); }
 .projects-head {
   display: flex;
   justify-content: space-between;
@@ -267,7 +287,7 @@ a:hover { text-decoration: underline; }
 }
 .subgroup-heading:first-child { margin-top: 0; }
 
-/* contact */
+/* contact — lavender, like stevo.ai's contact section */
 .contact { background: var(--lavender); }
 .contact h2 { color: var(--ink); }
 .contact-actions { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 0.5rem; }
