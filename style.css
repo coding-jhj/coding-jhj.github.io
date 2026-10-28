@@ -80,10 +80,14 @@ a:hover { text-decoration: underline; }
   overflow-y: auto;
 }
 
-/* hero — same paper theme as the rest of the page */
+/* hero — same paper theme as the rest of the page, left-aligned like stevo.ai */
 .hero {
   background: var(--paper);
   color: var(--text);
+  align-items: flex-start;
+  text-align: left;
+  padding-left: max(1.75rem, 8vw);
+  padding-right: max(1.75rem, 8vw);
 }
 .hero-label {
   font-family: var(--mono);
@@ -91,24 +95,22 @@ a:hover { text-decoration: underline; }
   letter-spacing: 0.08em;
   color: var(--accent-cool);
   text-transform: uppercase;
-  margin-bottom: 1.75rem;
-  border: 1px solid var(--border);
-  padding: 0.4rem 1rem;
-  border-radius: 999px;
+  margin-bottom: 2rem;
 }
 .hero-name {
   font-family: var(--serif);
-  font-size: clamp(1.6rem, 3.2vw, 2.4rem);
+  font-weight: 600;
+  font-size: clamp(1.4rem, 2.6vw, 1.9rem);
   color: var(--text-dim);
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
   letter-spacing: -0.01em;
 }
 .hero-main {
   font-family: var(--serif);
-  font-weight: 400;
-  letter-spacing: -0.03em;
-  line-height: 1.08;
-  font-size: clamp(2.6rem, 7vw, 5.2rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.12;
+  font-size: clamp(2.6rem, 7vw, 5rem);
   max-width: 44rem;
 }
 
