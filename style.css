@@ -11,8 +11,8 @@
   --border: #d9d3c2;
   --border-ink: #ffffff26;
 
-  --serif: "Iowan Old Style", "Palatino Linotype", Georgia, "Times New Roman", serif;
-  --sans: -apple-system, "Helvetica Neue", "Pretendard", "Noto Sans KR", sans-serif;
+  --serif: "Noto Serif KR", "Iowan Old Style", "Palatino Linotype", Georgia, "Times New Roman", serif;
+  --sans: "Noto Sans KR", -apple-system, "Helvetica Neue", "Pretendard", sans-serif;
   --mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
 }
 
