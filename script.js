@@ -1,3 +1,5 @@
+const CATEGORY_LABEL = { security: "SECURITY", ai: "AI SYSTEMS" };
+
 async function loadProjects() {
   const res = await fetch("projects.json");
   const projects = await res.json();
@@ -7,20 +9,29 @@ async function loadProjects() {
 
 function cardHTML(p) {
   const pending = p.status !== "ready";
-  const thumb = !pending && p.screenshot
+  const thumbImg = !pending && p.screenshot
     ? `<img src="${p.screenshot}" alt="${p.title} 스크린샷">`
     : "";
   const oneLiner = pending ? "콘텐츠 준비 중입니다." : (p.one_liner || "");
   const roles = pending ? "" : (p.roles || []).join(" · ");
   const award = p.award ? `<p class="award-tag">🏆 ${p.award}</p>` : "";
+  const statusLabel = pending ? "콘텐츠 준비 중" : "LIVE";
+  const catLabel = CATEGORY_LABEL[p.category] || p.category.toUpperCase();
 
   const inner = `
-    <div class="thumb">${thumb}</div>
+    <div class="thumb">
+      <div class="thumb-meta">
+        <span class="cat-label">${catLabel}</span>
+        <span class="status-pill${pending ? " pending" : ""}"><i></i>${statusLabel}</span>
+      </div>
+      ${thumbImg}
+    </div>
     <div class="card-body">
       <h3>${p.title}</h3>
       <p class="one-liner">${oneLiner}</p>
       <p class="roles">${roles}</p>
       ${award}
+      <div class="card-footer">${pending || !p.github ? "" : "GitHub에서 보기 ↗"}</div>
     </div>`;
 
   if (pending || !p.github) {
@@ -51,6 +62,10 @@ function render(projects, filter) {
 async function init() {
   const projects = await loadProjects();
   render(projects, "all");
+
+  const meta = document.getElementById("projects-meta");
+  const today = new Date().toISOString().slice(0, 10);
+  meta.textContent = `${projects.length}개 프로젝트 · ${today} 기준`;
 
   document.querySelectorAll(".tab-btn").forEach(btn => {
     btn.addEventListener("click", () => {
