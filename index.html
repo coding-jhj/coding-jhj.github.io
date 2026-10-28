@@ -11,108 +11,184 @@
 </head>
 <body>
 
-<header class="site-header">
-  <span class="logo">정환주</span>
-  <nav>
-    <a href="#hero">소개</a>
-    <a href="#education">역량·교육</a>
-    <a href="#skills">기술스택</a>
-    <a href="#projects">프로젝트</a>
-    <a href="#contact">연락처</a>
+<div class="vscode" id="app">
+
+  <!-- Title bar -->
+  <div class="vscode-titlebar">
+    <div class="titlebar-left">
+      <button type="button" id="sidebarToggle" class="sidebar-toggle" aria-label="탐색기 열기/닫기" aria-expanded="false" aria-controls="sidebar">
+        <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M2 4h12M2 8h12M2 12h12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <div class="titlebar-center">jeonghwanju-portfolio — Visual Studio Code</div>
+    <div class="titlebar-right" aria-hidden="true">
+      <span class="win-btn win-min"><svg viewBox="0 0 10 10" width="10" height="10"><line x1="0" y1="5" x2="10" y2="5" stroke="currentColor" stroke-width="1"/></svg></span>
+      <span class="win-btn win-max"><svg viewBox="0 0 10 10" width="10" height="10"><rect x="0.5" y="0.5" width="9" height="9" fill="none" stroke="currentColor" stroke-width="1"/></svg></span>
+      <span class="win-btn win-close"><svg viewBox="0 0 10 10" width="10" height="10"><line x1="0" y1="0" x2="10" y2="10" stroke="currentColor" stroke-width="1"/><line x1="10" y1="0" x2="0" y2="10" stroke="currentColor" stroke-width="1"/></svg></span>
+    </div>
+  </div>
+
+  <!-- Menu bar (decorative) -->
+  <nav class="vscode-menubar" aria-hidden="true">
+    <span class="menu-item">File</span>
+    <span class="menu-item">Edit</span>
+    <span class="menu-item">Selection</span>
+    <span class="menu-item">View</span>
+    <span class="menu-item">Go</span>
+    <span class="menu-item">Run</span>
+    <span class="menu-item">Terminal</span>
+    <span class="menu-item">Help</span>
   </nav>
-</header>
 
-<main class="scroll-container">
+  <div class="vscode-body">
 
-  <section id="hero" class="snap-section hero">
-    <p class="hero-label">ONLINE PORTFOLIO &amp; RESUME — SECURITY ENGINEER</p>
-    <p class="hero-name">정환주</p>
-    <h1 class="hero-main">공격해서 찾고,<br>코드로 고칩니다.</h1>
-  </section>
-
-  <section id="award" class="snap-section award-banner" tabindex="0">
-    <p class="eyebrow">AWARD</p>
-    <p class="award-text">
-      <strong>슬기로운 계약생활(Lease-Companion)</strong>으로<br>
-      제8회 K-디지털 트레이닝 해커톤 고용노동부장관상 장려상 수상
-    </p>
-    <p class="award-cta">2026-09 · ↓ 프로젝트 자세히 보기</p>
-  </section>
-
-  <section id="education" class="snap-section education">
-    <p class="eyebrow">CAREER &amp; EDUCATION</p>
-    <h2>역량 &amp; 교육</h2>
-    <div class="edu-list">
-      <div class="edu-item">
-        <p class="edu-period">2026.03.04 – 2026.07.31</p>
-        <h3>이스트소프트 AI 휴먼 Camp 4기</h3>
-        <p>생성형 AI와 AI 휴먼 제작 실무를 배우는 국비지원(KDT) 부트캠프. 3개 팀 프로젝트(VoiceGuide·Rainbow-Bridge·Lease-Companion) 수행.</p>
+    <!-- Activity bar (decorative) -->
+    <nav class="activity-bar" aria-hidden="true">
+      <div class="activity-icon active">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 3h7l4 4v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/><path d="M14 3v4h4"/></svg>
       </div>
-      <div class="edu-item">
-        <p class="edu-period">2026.08.11 – 2026.11.12</p>
-        <h3>SKT ALEPH(알레프)</h3>
-        <p>SK텔레콤과 고용노동부가 주관하는 K-뉴딜 아카데미 기반의 AI 인프라 및 보안·네트워크 실무자 양성 부트캠프.</p>
+      <div class="activity-icon">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M19.5 19.5 15 15"/></svg>
+      </div>
+      <div class="activity-icon">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="4" width="7" height="7" rx="1"/><rect x="13" y="4" width="7" height="7" rx="1"/><rect x="4" y="13" width="7" height="7" rx="1"/><rect x="13" y="13" width="7" height="7" rx="1"/></svg>
+      </div>
+    </nav>
+
+    <!-- Explorer sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <p class="sidebar-title">EXPLORER</p>
+      <div class="explorer-tree" role="tree" aria-label="PORTFOLIO">
+        <p class="tree-root">PORTFOLIO</p>
+        <ul class="tree-group" role="group">
+          <li class="tree-file active" role="treeitem" tabindex="0" data-file="readme" aria-selected="true">README.md</li>
+          <li class="tree-file" role="treeitem" tabindex="0" data-file="resume" aria-selected="false">resume.md</li>
+          <li class="tree-folder" role="treeitem" tabindex="-1" aria-expanded="true">about
+            <ul class="tree-group" role="group">
+              <li class="tree-file" role="treeitem" tabindex="0" data-file="education" aria-selected="false">education.md</li>
+              <li class="tree-file" role="treeitem" tabindex="0" data-file="skills" aria-selected="false">skills.json</li>
+            </ul>
+          </li>
+          <li class="tree-file" role="treeitem" tabindex="0" data-file="projects" aria-selected="false">projects.md</li>
+          <li class="tree-file" role="treeitem" tabindex="0" data-file="contact" aria-selected="false">contact.md</li>
+        </ul>
+      </div>
+    </aside>
+
+    <!-- Editor -->
+    <div class="editor-area">
+      <div class="tab-bar" role="tablist" aria-label="열린 파일">
+        <div class="tab active" id="tab-readme" role="tab" tabindex="0" data-file="readme" aria-selected="true" aria-controls="pane-readme">README.md</div>
+        <div class="tab" id="tab-resume" role="tab" tabindex="0" data-file="resume" aria-selected="false" aria-controls="pane-resume">resume.md</div>
+        <div class="tab" id="tab-education" role="tab" tabindex="0" data-file="education" aria-selected="false" aria-controls="pane-education">education.md</div>
+        <div class="tab" id="tab-skills" role="tab" tabindex="0" data-file="skills" aria-selected="false" aria-controls="pane-skills">skills.json</div>
+        <div class="tab" id="tab-projects" role="tab" tabindex="0" data-file="projects" aria-selected="false" aria-controls="pane-projects">projects.md</div>
+        <div class="tab" id="tab-contact" role="tab" tabindex="0" data-file="contact" aria-selected="false" aria-controls="pane-contact">contact.md</div>
+      </div>
+
+      <div class="editor-scroll" id="editorScroll">
+        <div class="editor-body">
+          <div class="gutter" id="gutter" aria-hidden="true"></div>
+
+          <div class="editor-content" id="editorContent">
+
+            <section class="file-pane active" id="pane-readme" role="tabpanel" aria-labelledby="tab-readme">
+              <p class="hero-label">PORTFOLIO &amp; RESUME</p>
+              <h1 class="hero-name">정환주</h1>
+              <p class="hero-role">정환주<span class="hero-role-type">: SecurityEngineer</span></p>
+              <p class="hero-main">공격해서 찾고, 코드로 고칩니다.</p>
+
+              <button type="button" class="award-banner" id="award">
+                <p class="eyebrow">AWARD</p>
+                <p class="award-project">슬기로운 계약생활 (Lease-Companion)</p>
+                <p class="award-detail">제8회 K-디지털 트레이닝 해커톤 · 고용노동부장관상 장려상 수상</p>
+                <p class="award-cta">2026-09 · ↓ 프로젝트 자세히 보기</p>
+              </button>
+            </section>
+
+            <section class="file-pane" id="pane-resume" role="tabpanel" aria-labelledby="tab-resume" aria-hidden="true">
+              <p class="eyebrow">RESUME</p>
+              <h2>이력서</h2>
+              <p class="pending-note">콘텐츠 준비 중입니다.</p>
+            </section>
+
+            <section class="file-pane" id="pane-education" role="tabpanel" aria-labelledby="tab-education" aria-hidden="true">
+              <p class="eyebrow">CAREER &amp; EDUCATION</p>
+              <h2>역량 &amp; 교육</h2>
+              <div class="edu-list">
+                <div class="edu-item">
+                  <p class="edu-period">2026.03.04 – 2026.07.31</p>
+                  <h3>이스트소프트 AI 휴먼 Camp 4기</h3>
+                  <p>생성형 AI와 AI 휴먼 제작 실무를 배우는 국비지원(KDT) 부트캠프. 3개 팀 프로젝트(VoiceGuide·Rainbow-Bridge·Lease-Companion) 수행.</p>
+                </div>
+                <div class="edu-item">
+                  <p class="edu-period">2026.08.11 – 2026.11.12</p>
+                  <h3>SKT ALEPH(알레프)</h3>
+                  <p>SK텔레콤과 고용노동부가 주관하는 K-뉴딜 아카데미 기반의 AI 인프라 및 보안·네트워크 실무자 양성 부트캠프.</p>
+                </div>
+              </div>
+            </section>
+
+            <section class="file-pane" id="pane-skills" role="tabpanel" aria-labelledby="tab-skills" aria-hidden="true">
+              <p class="eyebrow">TECH STACK</p>
+              <pre class="json-view"><code><span class="json-punc">{</span>
+  <span class="json-key">"언어"</span><span class="json-punc">:</span> <span class="json-value">"Python · TypeScript/JavaScript · Kotlin"</span><span class="json-punc">,</span>
+  <span class="json-key">"백엔드"</span><span class="json-punc">:</span> <span class="json-value">"FastAPI · SQLAlchemy · PostgreSQL · MongoDB(motor) · SQLite"</span><span class="json-punc">,</span>
+  <span class="json-key">"프론트엔드"</span><span class="json-punc">:</span> <span class="json-value">"React · Next.js · Vite · React Native"</span><span class="json-punc">,</span>
+  <span class="json-key">"AI/데이터"</span><span class="json-punc">:</span> <span class="json-value">"ChromaDB · Cohere · PyMuPDF · Gemini API · LangChain · scikit-learn · Hugging Face Transformers"</span><span class="json-punc">,</span>
+  <span class="json-key">"인증/보안 라이브러리"</span><span class="json-punc">:</span> <span class="json-value">"PyJWT · Passlib+bcrypt · cryptography · WebAuthn(@simplewebauthn) · Supabase"</span><span class="json-punc">,</span>
+  <span class="json-key">"테스트 도구"</span><span class="json-punc">:</span> <span class="json-value">"pytest · Playwright · Vitest"</span>
+<span class="json-punc">}</span></code></pre>
+            </section>
+
+            <section class="file-pane" id="pane-projects" role="tabpanel" aria-labelledby="tab-projects" aria-hidden="true">
+              <div class="projects-head">
+                <div>
+                  <p class="eyebrow">PORTFOLIO</p>
+                  <h2>프로젝트</h2>
+                </div>
+              </div>
+              <div class="tabs">
+                <button class="tab-btn active" data-filter="all">전체</button>
+                <button class="tab-btn" data-filter="ai">AI</button>
+                <button class="tab-btn" data-filter="security-project">보안 프로젝트</button>
+                <button class="tab-btn" data-filter="security-ctf">CTF 경험</button>
+              </div>
+              <div id="project-grid" class="project-grid"></div>
+            </section>
+
+            <section class="file-pane" id="pane-contact" role="tabpanel" aria-labelledby="tab-contact" aria-hidden="true">
+              <p class="eyebrow">CONTACT</p>
+              <h2>연락처</h2>
+              <div class="contact-actions">
+                <a class="pill-btn solid" href="mailto:ghkswnwjd@gmail.com">ghkswnwjd@gmail.com</a>
+                <a class="pill-btn outline" href="https://github.com/coding-jhj" target="_blank" rel="noopener">github.com/coding-jhj</a>
+              </div>
+            </section>
+
+          </div>
+        </div>
       </div>
     </div>
-  </section>
 
-  <section id="skills" class="snap-section skills">
-    <p class="eyebrow">TECH STACK</p>
-    <h2>기술스택</h2>
-    <div class="skill-groups">
-      <div class="skill-group">
-        <h3>언어</h3>
-        <p>Python · TypeScript/JavaScript · Kotlin</p>
-      </div>
-      <div class="skill-group">
-        <h3>백엔드</h3>
-        <p>FastAPI · SQLAlchemy · PostgreSQL · MongoDB(motor) · SQLite</p>
-      </div>
-      <div class="skill-group">
-        <h3>프론트엔드</h3>
-        <p>React · Next.js · Vite · React Native</p>
-      </div>
-      <div class="skill-group">
-        <h3>AI/데이터</h3>
-        <p>ChromaDB · Cohere · PyMuPDF · Gemini API · LangChain · scikit-learn · Hugging Face Transformers</p>
-      </div>
-      <div class="skill-group">
-        <h3>인증/보안 라이브러리</h3>
-        <p>PyJWT · Passlib+bcrypt · cryptography · WebAuthn(@simplewebauthn) · Supabase</p>
-      </div>
-      <div class="skill-group">
-        <h3>테스트 도구</h3>
-        <p>pytest · Playwright · Vitest</p>
-      </div>
-    </div>
-  </section>
+  </div>
 
-  <section id="projects" class="snap-section projects">
-    <div class="projects-head">
-      <div>
-        <p class="eyebrow">PORTFOLIO</p>
-        <h2>프로젝트</h2>
-      </div>
-      <p class="projects-meta" id="projects-meta"></p>
+  <!-- Status bar -->
+  <div class="statusbar">
+    <div class="statusbar-left">
+      <span class="status-item branch">
+        <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><circle cx="4" cy="3" r="1.6"/><circle cx="4" cy="13" r="1.6"/><circle cx="12" cy="6" r="1.6"/><path d="M4 4.6V11.4M4 7c0 2 2 3 4 3h2.5M12 7.6V6"/></svg>
+        main
+      </span>
     </div>
-    <div class="tabs">
-      <button class="tab-btn active" data-filter="all">전체</button>
-      <button class="tab-btn" data-filter="security">보안</button>
-      <button class="tab-btn" data-filter="ai">AI</button>
+    <div class="statusbar-right">
+      <span class="status-item" id="statusLang">Markdown</span>
+      <span class="status-item">UTF-8</span>
+      <span class="status-item">LF</span>
     </div>
-    <div id="project-grid" class="project-grid"></div>
-  </section>
+  </div>
 
-  <section id="contact" class="snap-section contact">
-    <p class="eyebrow">CONTACT</p>
-    <h2>연락처</h2>
-    <div class="contact-actions">
-      <a class="pill-btn solid" href="mailto:ghkswnwjd@gmail.com">ghkswnwjd@gmail.com</a>
-      <a class="pill-btn outline" href="https://github.com/coding-jhj" target="_blank" rel="noopener">github.com/coding-jhj</a>
-    </div>
-  </section>
-
-</main>
+</div>
 
 <script src="script.js"></script>
 </body>

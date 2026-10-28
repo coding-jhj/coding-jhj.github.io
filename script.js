@@ -40,32 +40,23 @@ function cardHTML(p) {
   return `<a class="project-card" href="${p.github}" target="_blank" rel="noopener">${inner}</a>`;
 }
 
+function matchesFilter(p, filter) {
+  if (filter === "all") return true;
+  if (filter === "ai") return p.category === "ai";
+  if (filter === "security-project") return p.category === "security" && p.subgroup === "project";
+  if (filter === "security-ctf") return p.category === "security" && p.subgroup === "ctf";
+  return false;
+}
+
 function render(projects, filter) {
   const grid = document.getElementById("project-grid");
-  const list = projects.filter(p => filter === "all" || p.category === filter);
-
-  if (filter === "security") {
-    const groups = [
-      { key: "project", label: "프로젝트" },
-      { key: "ctf", label: "CTF 경험" },
-    ];
-    grid.innerHTML = groups.map(g => {
-      const items = list.filter(p => p.subgroup === g.key);
-      if (!items.length) return "";
-      return `<div class="subgroup-heading">${g.label}</div>` + items.map(cardHTML).join("");
-    }).join("");
-  } else {
-    grid.innerHTML = list.map(cardHTML).join("");
-  }
+  const list = projects.filter(p => matchesFilter(p, filter));
+  grid.innerHTML = list.map(cardHTML).join("");
 }
 
 async function init() {
   const projects = await loadProjects();
   render(projects, "all");
-
-  const meta = document.getElementById("projects-meta");
-  const today = new Date().toISOString().slice(0, 10);
-  meta.textContent = `${projects.length}개 프로젝트 · ${today} 기준`;
 
   document.querySelectorAll(".tab-btn").forEach(btn => {
     btn.addEventListener("click", () => {
@@ -76,8 +67,145 @@ async function init() {
   });
 
   document.getElementById("award").addEventListener("click", () => {
-    document.getElementById("projects").scrollIntoView({ behavior: "smooth" });
+    goToFile("projects");
   });
 }
 
 init();
+
+// ---- VSCode shell: explorer/tab file switching, line-number gutter, mobile sidebar ----
+
+const FILE_LANG = {
+  readme: "Markdown",
+  resume: "Markdown",
+  education: "Markdown",
+  skills: "JSON",
+  projects: "Markdown",
+  contact: "Markdown",
+};
+const LINE_HEIGHT = 20; // px — decorative only, not tied to real line count
+const MOBILE_QUERY = "(max-width: 600px)";
+
+function validFileKey(key) {
+  return Object.prototype.hasOwnProperty.call(FILE_LANG, key) ? key : "readme";
+}
+
+function currentHashFile() {
+  return validFileKey(location.hash.slice(1));
+}
+
+function renderGutter() {
+  const gutter = document.getElementById("gutter");
+  const content = document.getElementById("editorContent");
+  const scroller = document.getElementById("editorScroll");
+  if (!gutter || !content) return;
+  const contentHeight = Math.max(content.scrollHeight, scroller ? scroller.clientHeight : 0);
+  const lineCount = Math.max(14, Math.ceil(contentHeight / LINE_HEIGHT));
+  if (gutter.dataset.count === String(lineCount)) return;
+  gutter.dataset.count = String(lineCount);
+  const frag = document.createDocumentFragment();
+  for (let i = 1; i <= lineCount; i++) {
+    const line = document.createElement("div");
+    line.className = "line-num";
+    line.textContent = String(i);
+    frag.appendChild(line);
+  }
+  gutter.innerHTML = "";
+  gutter.appendChild(frag);
+}
+
+function closeSidebar() {
+  const sidebar = document.getElementById("sidebar");
+  const toggle = document.getElementById("sidebarToggle");
+  if (!sidebar) return;
+  sidebar.classList.remove("mobile-open");
+  if (toggle) toggle.setAttribute("aria-expanded", "false");
+}
+
+function toggleSidebar() {
+  const sidebar = document.getElementById("sidebar");
+  const toggle = document.getElementById("sidebarToggle");
+  if (!sidebar) return;
+  const open = sidebar.classList.toggle("mobile-open");
+  if (toggle) toggle.setAttribute("aria-expanded", String(open));
+}
+
+function renderFile(fileKey) {
+  fileKey = validFileKey(fileKey);
+
+  Object.keys(FILE_LANG).forEach((key) => {
+    const pane = document.getElementById("pane-" + key);
+    if (!pane) return;
+    const active = key === fileKey;
+    pane.classList.toggle("active", active);
+    pane.setAttribute("aria-hidden", active ? "false" : "true");
+  });
+
+  document.querySelectorAll(".tree-file").forEach((el) => {
+    const active = el.dataset.file === fileKey;
+    el.classList.toggle("active", active);
+    el.setAttribute("aria-selected", active ? "true" : "false");
+  });
+
+  document.querySelectorAll(".tab").forEach((el) => {
+    const active = el.dataset.file === fileKey;
+    el.classList.toggle("active", active);
+    el.setAttribute("aria-selected", active ? "true" : "false");
+  });
+
+  const statusLang = document.getElementById("statusLang");
+  if (statusLang) statusLang.textContent = FILE_LANG[fileKey];
+
+  const scroller = document.getElementById("editorScroll");
+  if (scroller) scroller.scrollTop = 0;
+
+  renderGutter();
+
+  if (window.matchMedia(MOBILE_QUERY).matches) closeSidebar();
+}
+
+function goToFile(fileKey) {
+  fileKey = validFileKey(fileKey);
+  if (currentHashFile() === fileKey) {
+    renderFile(fileKey);
+  } else {
+    location.hash = fileKey;
+  }
+}
+
+function initShell() {
+  document.querySelectorAll(".tree-file").forEach((el) => {
+    el.addEventListener("click", () => goToFile(el.dataset.file));
+    el.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        goToFile(el.dataset.file);
+      }
+    });
+  });
+
+  document.querySelectorAll(".tab").forEach((el) => {
+    el.addEventListener("click", () => goToFile(el.dataset.file));
+    el.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        goToFile(el.dataset.file);
+      }
+    });
+  });
+
+  const toggle = document.getElementById("sidebarToggle");
+  if (toggle) toggle.addEventListener("click", toggleSidebar);
+
+  window.addEventListener("hashchange", () => renderFile(currentHashFile()));
+
+  let resizeTimer;
+  window.addEventListener("resize", () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(renderGutter, 150);
+  });
+
+  renderFile(currentHashFile());
+}
+
+initShell();
