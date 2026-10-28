@@ -6,11 +6,11 @@
     "subgroup": "project",
     "pinned_top": true,
     "award": "제8회 K-디지털 트레이닝 해커톤 장려상(고용노동부장관상), 2026-09",
-    "screenshot": "docs/assets/readme/screenshots/01-checklist.png",
+    "screenshot": "assets/screenshots/lease-companion-01-checklist.png",
     "one_liner": "첫 전월세 계약을 준비하는 청년을 위한 계약 확인 도우미",
     "roles": [
-      "정환주(팀장·AI/LLM 파이프라인)",
-      "김재현(RAG·데이터, AI 아바타 제작)",
+      "정환주(팀장·AI/LLM 파이프라인·RAG, MuseTalk 아바타 파이프라인 통합)",
+      "김재현(데이터·벡터DB, AI 아바타(MuseTalk) 구현)",
       "임명광(백엔드)"
     ],
     "github": "https://github.com/coding-jhj/Lease-Companion",
