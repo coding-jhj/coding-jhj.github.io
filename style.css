@@ -80,15 +80,10 @@ a:hover { text-decoration: underline; }
   overflow-y: auto;
 }
 
-/* hero — dark, like the ink panel */
+/* hero — same paper theme as the rest of the page */
 .hero {
-  background:
-    linear-gradient(#ffffff08 1px, transparent 1px),
-    linear-gradient(90deg, #ffffff08 1px, transparent 1px),
-    radial-gradient(circle at 82% 20%, #4f6b8033, transparent 32%),
-    var(--ink);
-  background-size: 64px 64px, 64px 64px, auto, auto;
-  color: var(--on-ink);
+  background: var(--paper);
+  color: var(--text);
 }
 .hero-label {
   font-family: var(--mono);
@@ -97,14 +92,14 @@ a:hover { text-decoration: underline; }
   color: var(--accent-cool);
   text-transform: uppercase;
   margin-bottom: 1.75rem;
-  border: 1px solid var(--border-ink);
+  border: 1px solid var(--border);
   padding: 0.4rem 1rem;
   border-radius: 999px;
 }
 .hero-name {
   font-family: var(--serif);
   font-size: clamp(1.6rem, 3.2vw, 2.4rem);
-  color: var(--on-ink-dim);
+  color: var(--text-dim);
   margin-bottom: 0.5rem;
   letter-spacing: -0.01em;
 }
