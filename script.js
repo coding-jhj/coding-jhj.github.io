@@ -284,6 +284,12 @@ function renderFile(fileKey) {
   const scroller = document.getElementById("editorScroll");
   if (scroller) scroller.scrollTop = 0;
 
+  const gutter = document.getElementById("gutter");
+  if (gutter) {
+    const isReadingPane = Object.prototype.hasOwnProperty.call(PROJECT_DETAIL_TAB_LABELS, fileKey);
+    gutter.classList.toggle("gutter-dim", isReadingPane);
+  }
+
   renderGutter();
 
   if (window.matchMedia(MOBILE_QUERY).matches) closeSidebar();

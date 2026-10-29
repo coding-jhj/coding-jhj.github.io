@@ -258,6 +258,7 @@ a:hover { text-decoration: underline; }
   text-align: right;
   padding-right: 0.85rem;
 }
+.gutter.gutter-dim .line-num { opacity: 0.3; }
 
 .editor-content {
   flex: 1 1 auto;
@@ -525,12 +526,16 @@ a:hover { text-decoration: underline; }
   vertical-align: middle;
 }
 
-.detail-hero { margin: 1.5rem 0 2rem; }
+.detail-hero {
+  margin: 1.5rem 0 2rem;
+  max-width: 46rem;
+  background: var(--vscode-sidebar-bg);
+  border: 1px solid var(--vscode-border);
+  padding: 0.85rem;
+}
 .detail-hero img {
   display: block;
   width: 100%;
-  max-width: 44rem;
-  border: 1px solid var(--vscode-border);
 }
 
 .detail-intro { margin-bottom: 2rem; max-width: 42rem; }
@@ -597,14 +602,19 @@ a:hover { text-decoration: underline; }
   color: var(--vscode-fg);
   margin-bottom: 0.6rem;
 }
-.detail-flow-body ul { padding-left: 1.1rem; margin-bottom: 0.9rem; }
-.detail-flow-body li { color: var(--vscode-fg); font-size: 0.96rem; line-height: 1.55; margin-bottom: 0.4rem; }
-.detail-flow-media { margin-top: 0.8rem; }
+.detail-flow-body ul { max-width: 34rem; padding-left: 1.2rem; margin-bottom: 0.9rem; }
+.detail-flow-body li { color: var(--vscode-fg); font-size: 1rem; line-height: 1.6; margin-bottom: 0.45rem; }
+.detail-flow-body li::marker { color: var(--vscode-keyword); }
+.detail-flow-media {
+  margin-top: 0.8rem;
+  max-width: 36rem;
+  background: var(--vscode-sidebar-bg);
+  border: 1px solid var(--vscode-border);
+  padding: 0.75rem;
+}
 .detail-flow-media img {
   display: block;
   width: 100%;
-  max-width: 36rem;
-  border: 1px solid var(--vscode-border);
 }
 .detail-flow-media figcaption {
   font-family: var(--mono);
@@ -613,8 +623,9 @@ a:hover { text-decoration: underline; }
   margin-top: 0.4rem;
 }
 
-.detail-leadership-list { padding-left: 1.1rem; max-width: 46rem; margin-bottom: 1rem; }
-.detail-leadership-list li { color: var(--vscode-fg); font-size: 0.98rem; line-height: 1.55; margin-bottom: 0.55rem; }
+.detail-leadership-list { padding-left: 1.2rem; max-width: 38rem; margin-bottom: 1rem; }
+.detail-leadership-list li { color: var(--vscode-fg); font-size: 1rem; line-height: 1.6; margin-bottom: 0.55rem; }
+.detail-leadership-list li::marker { color: var(--vscode-keyword); }
 
 .detail-metrics-note { color: var(--vscode-fg-muted); font-size: 0.85rem; max-width: 46rem; margin-bottom: 1.5rem; }
 
