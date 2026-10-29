@@ -41,7 +41,7 @@
           "title": "규칙 엔진 판정",
           "bullets": [
             "임대인-등기 소유자 일치 · 근저당/압류 등 권리 변동 · 금액·지급일 일관성",
-            "13개 판정 항목(J01~J13)을 Python 규칙 엔진이 결정론적으로 교차검증",
+            "13개 판정 항목(J01~J13)을 **Python 규칙 엔진이 결정론적으로 교차검증**",
             "단일 안전점수 아님 → 일치 / 불일치 / 확인 필요 등 9가지 상태로 세분화"
           ],
           "image": "assets/screenshots/lease-companion-02-result.png",
@@ -66,9 +66,9 @@
           "step": "05",
           "title": "AI 아바타와 계약 연습",
           "bullets": [
-            "AI 아바타와 실시간 대화로 질문·답변 연습하는 시뮬레이션",
-            "**직접 구현**: 상태 관리 · 답변 평가 엔진 · Gemini 기반 대화 생성 · 백엔드 세션 API",
-            "**팀원 구현 → 통합**: AI 아바타 영상 파이프라인(TTS + MuseTalk 립싱크)"
+            "AI 아바타와 **실시간 대화로 질문·답변 연습**하는 시뮬레이션",
+            "직접 구현: 상태 관리 · 답변 평가 엔진 · Gemini 기반 대화 생성 · 백엔드 세션 API",
+            "팀원 구현 → 통합: AI 아바타 영상 파이프라인(TTS + MuseTalk 립싱크)"
           ],
           "image": "assets/screenshots/lease-companion-03-avatar-practice.png",
           "image_caption": "가상 중개사와 실시간 대화 연습 화면"

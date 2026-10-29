@@ -539,13 +539,18 @@ a:hover { text-decoration: underline; }
   width: 100%;
 }
 
-.detail-intro { margin-bottom: 2rem; max-width: 42rem; }
+.detail-intro { margin-bottom: 2rem; max-width: 50rem; }
 .detail-intro p {
   font-family: var(--serif);
   font-size: clamp(1.05rem, 1.8vw, 1.25rem);
   line-height: 1.6;
   color: var(--vscode-fg);
   margin-bottom: 0.4rem;
+}
+.detail-intro p:last-child {
+  color: var(--vscode-keyword);
+  font-weight: 700;
+  font-size: clamp(0.98rem, 1.5vw, 1.12rem);
 }
 
 .detail-info-table,
