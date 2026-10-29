@@ -265,7 +265,7 @@ a:hover { text-decoration: underline; }
   padding: var(--editor-pad-top) clamp(1rem, 4vw, 3.5rem) 4rem 0.25rem;
 }
 
-.file-pane { display: none; }
+.file-pane { display: none; max-width: 68rem; margin: 0 auto; }
 .file-pane.active { display: block; }
 
 /* ===== README.md pane ===== */
@@ -492,7 +492,7 @@ a:hover { text-decoration: underline; }
 .card-github-link { display: inline-block; }
 
 /* ===== project detail pane (dynamic tab) ===== */
-.project-detail { max-width: 52rem; }
+.project-detail { max-width: 54rem; margin: 0 auto; }
 .project-detail .eyebrow { color: var(--vscode-comment); }
 .project-detail .eyebrow::before { content: "// "; }
 .project-detail h2::before {
@@ -598,7 +598,7 @@ a:hover { text-decoration: underline; }
   margin-bottom: 0.6rem;
 }
 .detail-flow-body ul { padding-left: 1.1rem; margin-bottom: 0.9rem; }
-.detail-flow-body li { color: var(--vscode-fg-muted); font-size: 0.94rem; margin-bottom: 0.3rem; }
+.detail-flow-body li { color: var(--vscode-fg); font-size: 0.96rem; line-height: 1.55; margin-bottom: 0.4rem; }
 .detail-flow-media { margin-top: 0.8rem; }
 .detail-flow-media img {
   display: block;
@@ -614,7 +614,7 @@ a:hover { text-decoration: underline; }
 }
 
 .detail-leadership-list { padding-left: 1.1rem; max-width: 46rem; margin-bottom: 1rem; }
-.detail-leadership-list li { color: var(--vscode-fg-muted); font-size: 0.96rem; margin-bottom: 0.5rem; }
+.detail-leadership-list li { color: var(--vscode-fg); font-size: 0.98rem; line-height: 1.55; margin-bottom: 0.55rem; }
 
 .detail-metrics-note { color: var(--vscode-fg-muted); font-size: 0.85rem; max-width: 46rem; margin-bottom: 1.5rem; }
 
