@@ -1,4 +1,4 @@
-const CATEGORY_LABEL = { security: "SECURITY", ai: "AI SYSTEMS" };
+const CATEGORY_LABEL = { security: "SECURITY", ai: "AI SYSTEMS", web: "WEB" };
 
 async function loadProjects() {
   const res = await fetch("projects.json");
@@ -159,6 +159,7 @@ function projectDetailHTML(p) {
 function matchesFilter(p, filter) {
   if (filter === "all") return true;
   if (filter === "ai") return p.category === "ai";
+  if (filter === "web") return p.category === "web";
   if (filter === "security-project") return p.category === "security" && p.subgroup === "project";
   if (filter === "security-ctf") return p.category === "security" && p.subgroup === "ctf";
   return false;

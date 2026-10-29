@@ -132,7 +132,7 @@
   {
     "id": "alpeh-fifth-homework",
     "title": "장애 내구성 모니터링 대시보드 (ALPEH_FIFTH_HOMEWORK)",
-    "category": "ai",
+    "category": "web",
     "subgroup": "project",
     "pinned_top": false,
     "screenshot": null,
@@ -223,7 +223,7 @@
   {
     "id": "stelive-data",
     "title": "Stelive_data",
-    "category": "security",
+    "category": "web",
     "subgroup": "project",
     "pinned_top": false,
     "screenshot": null,
@@ -280,5 +280,83 @@
     "github": null,
     "status": "needs_content",
     "notes": "22단계 전체(XDR 대시보드 포함) 확인됨, 레포 있음"
+  },
+  {
+    "id": "arkan-forgotten-throne",
+    "title": "ARKAN: 잊혀진 왕좌 (ARKAN_FORGOTTEN_THRONE)",
+    "category": "web",
+    "subgroup": "project",
+    "pinned_top": false,
+    "screenshot": null,
+    "one_liner": null,
+    "roles": [],
+    "github": "https://github.com/coding-jhj/ARKAN_FORGOTTEN_THRONE",
+    "status": "needs_content",
+    "notes": "브라우저 턴제 RPG(Canvas, 순수 JS). README의 headless QA 주장은 검증 보류 상태(별도 test 디렉터리 없음) — 내용 작성 시 과장 표현 주의"
+  },
+  {
+    "id": "my-career-planner",
+    "title": "MY_CAREER_PLANNER",
+    "category": "web",
+    "subgroup": "project",
+    "pinned_top": false,
+    "screenshot": null,
+    "one_liner": null,
+    "roles": [],
+    "github": "https://github.com/coding-jhj/MY_CAREER_PLANNER",
+    "status": "needs_content",
+    "notes": "Plan→Do→See 연구 워크플로우 관리 툴. Next.js+Supabase RLS, unit/E2E 테스트 존재. 내용 작성 필요"
+  },
+  {
+    "id": "ai-agent",
+    "title": "AI_AGENT",
+    "category": "ai",
+    "subgroup": "project",
+    "pinned_top": false,
+    "screenshot": null,
+    "one_liner": null,
+    "roles": [],
+    "github": "https://github.com/coding-jhj/AI_AGENT",
+    "status": "needs_content",
+    "notes": "ReAct 기반 검색 AI agent (Gemini+LangChain+DuckDuckGo), FastAPI+HuggingFace 데모. 자동화 테스트 suite 없음(README가 한계로 명시)"
+  },
+  {
+    "id": "fixed-token-sft-data-selection",
+    "title": "Fixed-Token-SFT-Data-Selection",
+    "category": "ai",
+    "subgroup": "project",
+    "pinned_top": false,
+    "screenshot": null,
+    "one_liner": null,
+    "roles": [],
+    "github": "https://github.com/coding-jhj/Fixed-Token-SFT-Data-Selection",
+    "status": "needs_content",
+    "notes": "고정 토큰 예산 QLoRA 데이터 선택 전략 재현 연구. 가설을 지지하지 않는 결과를 그대로 기록. 한국어 논문 PDF 포함"
+  },
+  {
+    "id": "aleph-second-mini-game",
+    "title": "ALEPH 2차 과제 미니게임 (alpeh-second-mini-game)",
+    "category": "web",
+    "subgroup": "project",
+    "pinned_top": false,
+    "screenshot": null,
+    "one_liner": null,
+    "roles": [],
+    "github": "https://github.com/coding-jhj/alpeh-second-mini-game",
+    "status": "needs_content",
+    "notes": "단일 HTML 미니게임 과제. 내용 보강 방법 상의 필요"
+  },
+  {
+    "id": "aleph-third-homework",
+    "title": "ALEPH 3차 과제 (aleph-third-homework)",
+    "category": "web",
+    "subgroup": "project",
+    "pinned_top": false,
+    "screenshot": null,
+    "one_liner": null,
+    "roles": [],
+    "github": "https://github.com/coding-jhj/aleph-third-homework",
+    "status": "needs_content",
+    "notes": "단일 HTML 과제. 내용 보강 방법 상의 필요"
   }
 ]
