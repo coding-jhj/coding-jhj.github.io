@@ -507,7 +507,7 @@ a:hover { text-decoration: underline; }
   font-weight: 700;
   font-size: clamp(1.25rem, 2.2vw, 1.6rem);
   margin: 2.5rem 0 1.1rem;
-  color: var(--vscode-fg);
+  color: var(--vscode-comment);
 }
 .detail-section-title::before {
   content: "### ";
@@ -605,7 +605,7 @@ a:hover { text-decoration: underline; }
   font-family: var(--serif);
   font-weight: 700;
   font-size: 1.05rem;
-  color: var(--vscode-fg);
+  color: var(--vscode-comment);
   margin-bottom: 0.6rem;
 }
 .detail-flow-body ul { max-width: 34rem; padding-left: 1.2rem; margin-bottom: 0.9rem; }
