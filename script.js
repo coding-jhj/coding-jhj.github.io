@@ -206,6 +206,30 @@ async function init() {
 
 init();
 
+// ---- skills.json pane: skill chip evidence toggles ----
+
+function toggleSkillEvidence(chip) {
+  const panel = document.getElementById(chip.getAttribute("aria-controls"));
+  if (!panel) return;
+  const open = panel.classList.toggle("open");
+  panel.setAttribute("aria-hidden", open ? "false" : "true");
+  chip.setAttribute("aria-expanded", open ? "true" : "false");
+  renderGutter();
+}
+
+function initSkillChips() {
+  document.querySelectorAll(".skill-chip").forEach((chip) => {
+    chip.addEventListener("click", () => toggleSkillEvidence(chip));
+    chip.addEventListener("keydown", (e) => {
+      if (e.key !== "Enter" && e.key !== " ") return;
+      e.preventDefault();
+      toggleSkillEvidence(chip);
+    });
+  });
+}
+
+initSkillChips();
+
 // ---- VSCode shell: explorer/tab file switching, line-number gutter, mobile sidebar ----
 
 const FILE_LANG = {

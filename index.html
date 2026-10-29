@@ -124,14 +124,241 @@
 
             <section class="file-pane" id="pane-skills" role="tabpanel" aria-labelledby="tab-skills" aria-hidden="true">
               <p class="eyebrow">TECH STACK</p>
-              <pre class="json-view"><code><span class="json-punc">{</span>
-  <span class="json-key">"언어"</span><span class="json-punc">:</span> <span class="json-value">"Python · TypeScript/JavaScript · Kotlin"</span><span class="json-punc">,</span>
-  <span class="json-key">"백엔드"</span><span class="json-punc">:</span> <span class="json-value">"FastAPI · SQLAlchemy · PostgreSQL · MongoDB(motor) · SQLite"</span><span class="json-punc">,</span>
-  <span class="json-key">"프론트엔드"</span><span class="json-punc">:</span> <span class="json-value">"React · Next.js · Vite · React Native"</span><span class="json-punc">,</span>
-  <span class="json-key">"AI/데이터"</span><span class="json-punc">:</span> <span class="json-value">"ChromaDB · Cohere · PyMuPDF · Gemini API · LangChain · scikit-learn · Hugging Face Transformers"</span><span class="json-punc">,</span>
-  <span class="json-key">"인증/보안 라이브러리"</span><span class="json-punc">:</span> <span class="json-value">"PyJWT · Passlib+bcrypt · cryptography · WebAuthn(@simplewebauthn) · Supabase"</span><span class="json-punc">,</span>
-  <span class="json-key">"테스트 도구"</span><span class="json-punc">:</span> <span class="json-value">"pytest · Playwright · Vitest"</span>
-<span class="json-punc">}</span></code></pre>
+              <h2>기술 스택</h2>
+
+              <p class="skills-legend">
+                <span class="legend-item direct"><i></i>직접 구현/적용</span>
+                <span class="legend-item team"><i></i>팀 프로젝트에서 사용</span>
+              </p>
+
+              <div class="skill-category">
+                <h3 class="detail-section-title">언어</h3>
+                <div class="skill-chip-row" role="group" aria-label="언어 기술 목록">
+                  <span class="skill-chip direct" role="button" tabindex="0" aria-expanded="false" aria-controls="skill-ev-python" aria-label="Python — 직접 구현/적용">Python</span>
+                  <span class="skill-chip direct" role="button" tabindex="0" aria-expanded="false" aria-controls="skill-ev-ts-js" aria-label="TypeScript/JavaScript — 직접 구현/적용">TypeScript/JavaScript</span>
+                  <span class="skill-chip direct" role="button" tabindex="0" aria-expanded="false" aria-controls="skill-ev-kotlin" aria-label="Kotlin — 직접 구현/적용">Kotlin</span>
+                </div>
+                <div class="skill-evidence-group">
+                  <div class="skill-evidence" id="skill-ev-python" aria-hidden="true">
+                    <p>Lease-Companion AI 파이프라인(규칙엔진·RAG·가드레일), VoiceGuide 서버, SKT ALEPH 교육과정 자동화 실습</p>
+                    <p class="skill-evidence-links">
+                      <a href="https://github.com/coding-jhj/Lease-Companion" target="_blank" rel="noopener">Lease-Companion GitHub ↗</a>
+                      <a href="https://github.com/coding-jhj/VoiceGuide" target="_blank" rel="noopener">VoiceGuide GitHub ↗</a>
+                    </p>
+                  </div>
+                  <div class="skill-evidence" id="skill-ev-ts-js" aria-hidden="true">
+                    <p>Lease-Companion 프론트, threatlens, datadiet, MINECRART_DASHBOARD</p>
+                    <p class="skill-evidence-links">
+                      <a href="https://github.com/coding-jhj/Lease-Companion" target="_blank" rel="noopener">Lease-Companion GitHub ↗</a>
+                      <a href="https://github.com/coding-jhj/MINECRART_DASHBOARD" target="_blank" rel="noopener">MINECRART_DASHBOARD GitHub ↗</a>
+                    </p>
+                  </div>
+                  <div class="skill-evidence" id="skill-ev-kotlin" aria-hidden="true">
+                    <p>VoiceGuide 안드로이드 앱(MainActivity.kt 등 직접 작성)</p>
+                    <p class="skill-evidence-links">
+                      <a href="https://github.com/coding-jhj/VoiceGuide" target="_blank" rel="noopener">VoiceGuide GitHub ↗</a>
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="skill-category">
+                <h3 class="detail-section-title">백엔드</h3>
+                <div class="skill-chip-row" role="group" aria-label="백엔드 기술 목록">
+                  <span class="skill-chip direct" role="button" tabindex="0" aria-expanded="false" aria-controls="skill-ev-fastapi" aria-label="FastAPI — 직접 구현/적용">FastAPI</span>
+                  <span class="skill-chip team" role="button" tabindex="0" aria-expanded="false" aria-controls="skill-ev-sqlalchemy" aria-label="SQLAlchemy — 팀 프로젝트에서 사용">SQLAlchemy</span>
+                  <span class="skill-chip team" role="button" tabindex="0" aria-expanded="false" aria-controls="skill-ev-postgresql" aria-label="PostgreSQL — 팀 프로젝트에서 사용">PostgreSQL</span>
+                  <span class="skill-chip team" role="button" tabindex="0" aria-expanded="false" aria-controls="skill-ev-mongodb" aria-label="MongoDB(motor) — 팀 프로젝트에서 사용">MongoDB(motor)</span>
+                  <span class="skill-chip direct" role="button" tabindex="0" aria-expanded="false" aria-controls="skill-ev-sqlite" aria-label="SQLite — 직접 구현/적용">SQLite</span>
+                </div>
+                <div class="skill-evidence-group">
+                  <div class="skill-evidence" id="skill-ev-fastapi" aria-hidden="true">
+                    <p>Lease-Companion · VoiceGuide · RepoPilot 백엔드</p>
+                    <p class="skill-evidence-links">
+                      <a href="https://github.com/coding-jhj/Lease-Companion" target="_blank" rel="noopener">Lease-Companion GitHub ↗</a>
+                      <a href="https://github.com/coding-jhj/VoiceGuide" target="_blank" rel="noopener">VoiceGuide GitHub ↗</a>
+                    </p>
+                  </div>
+                  <div class="skill-evidence" id="skill-ev-sqlalchemy" aria-hidden="true">
+                    <p>Lease-Companion 팀 프로젝트에서 사용 (DB 설계는 팀원 담당, 직접 구현 아님)</p>
+                    <p class="skill-evidence-links">
+                      <a href="https://github.com/coding-jhj/Lease-Companion" target="_blank" rel="noopener">Lease-Companion GitHub ↗</a>
+                    </p>
+                  </div>
+                  <div class="skill-evidence" id="skill-ev-postgresql" aria-hidden="true">
+                    <p>Lease-Companion 팀 프로젝트에서 사용 (직접 구현 아님)</p>
+                    <p class="skill-evidence-links">
+                      <a href="https://github.com/coding-jhj/Lease-Companion" target="_blank" rel="noopener">Lease-Companion GitHub ↗</a>
+                    </p>
+                  </div>
+                  <div class="skill-evidence" id="skill-ev-mongodb" aria-hidden="true">
+                    <p>Rainbow Bridge 팀 프로젝트에서 사용 (연결 코드는 팀원 작성, 직접 구현 아님)</p>
+                    <p class="skill-evidence-links">
+                      <a href="https://github.com/mosejong/Rainbow-Bridge" target="_blank" rel="noopener">Rainbow Bridge GitHub ↗</a>
+                    </p>
+                  </div>
+                  <div class="skill-evidence" id="skill-ev-sqlite" aria-hidden="true">
+                    <p>VoiceGuide 서버 코드에서 직접 사용(로컬 폴백 DB)</p>
+                    <p class="skill-evidence-links">
+                      <a href="https://github.com/coding-jhj/VoiceGuide" target="_blank" rel="noopener">VoiceGuide GitHub ↗</a>
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="skill-category">
+                <h3 class="detail-section-title">프론트엔드</h3>
+                <div class="skill-chip-row" role="group" aria-label="프론트엔드 기술 목록">
+                  <span class="skill-chip direct" role="button" tabindex="0" aria-expanded="false" aria-controls="skill-ev-react" aria-label="React — 직접 구현/적용">React</span>
+                  <span class="skill-chip direct" role="button" tabindex="0" aria-expanded="false" aria-controls="skill-ev-nextjs" aria-label="Next.js — 직접 구현/적용">Next.js</span>
+                  <span class="skill-chip direct" role="button" tabindex="0" aria-expanded="false" aria-controls="skill-ev-vite" aria-label="Vite — 직접 구현/적용">Vite</span>
+                </div>
+                <div class="skill-evidence-group">
+                  <div class="skill-evidence" id="skill-ev-react" aria-hidden="true">
+                    <p>Lease-Companion (UI 전반은 팀원 담당, 본인은 AI 아바타 연습 기능 상태 관리 일부 직접 구현)</p>
+                    <p class="skill-evidence-links">
+                      <a href="https://github.com/coding-jhj/Lease-Companion" target="_blank" rel="noopener">Lease-Companion GitHub ↗</a>
+                    </p>
+                  </div>
+                  <div class="skill-evidence" id="skill-ev-nextjs" aria-hidden="true">
+                    <p>MINECRART_DASHBOARD, RepoPilot</p>
+                    <p class="skill-evidence-links">
+                      <a href="https://github.com/coding-jhj/MINECRART_DASHBOARD" target="_blank" rel="noopener">MINECRART_DASHBOARD GitHub ↗</a>
+                    </p>
+                  </div>
+                  <div class="skill-evidence" id="skill-ev-vite" aria-hidden="true">
+                    <p>datadiet, Lease-Companion 프론트</p>
+                    <p class="skill-evidence-links">
+                      <a href="https://github.com/coding-jhj/Lease-Companion" target="_blank" rel="noopener">Lease-Companion GitHub ↗</a>
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="skill-category">
+                <h3 class="detail-section-title">AI/데이터</h3>
+                <div class="skill-chip-row" role="group" aria-label="AI/데이터 기술 목록">
+                  <span class="skill-chip direct" role="button" tabindex="0" aria-expanded="false" aria-controls="skill-ev-chromadb" aria-label="ChromaDB — 직접 구현/적용">ChromaDB</span>
+                  <span class="skill-chip direct" role="button" tabindex="0" aria-expanded="false" aria-controls="skill-ev-cohere" aria-label="Cohere — 직접 구현/적용">Cohere</span>
+                  <span class="skill-chip direct" role="button" tabindex="0" aria-expanded="false" aria-controls="skill-ev-pymupdf" aria-label="PyMuPDF — 직접 구현/적용">PyMuPDF</span>
+                  <span class="skill-chip direct" role="button" tabindex="0" aria-expanded="false" aria-controls="skill-ev-gemini" aria-label="Gemini API — 직접 구현/적용">Gemini API</span>
+                  <span class="skill-chip direct" role="button" tabindex="0" aria-expanded="false" aria-controls="skill-ev-langchain" aria-label="LangChain — 직접 구현/적용">LangChain</span>
+                  <span class="skill-chip direct" role="button" tabindex="0" aria-expanded="false" aria-controls="skill-ev-sklearn" aria-label="scikit-learn — 직접 구현/적용">scikit-learn</span>
+                  <span class="skill-chip direct" role="button" tabindex="0" aria-expanded="false" aria-controls="skill-ev-hf" aria-label="Hugging Face Transformers — 직접 구현/적용">Hugging Face Transformers</span>
+                </div>
+                <div class="skill-evidence-group">
+                  <div class="skill-evidence" id="skill-ev-chromadb" aria-hidden="true">
+                    <p>Lease-Companion RAG 인덱싱 파이프라인 직접 구현</p>
+                    <p class="skill-evidence-links">
+                      <a href="https://github.com/coding-jhj/Lease-Companion" target="_blank" rel="noopener">Lease-Companion GitHub ↗</a>
+                    </p>
+                  </div>
+                  <div class="skill-evidence" id="skill-ev-cohere" aria-hidden="true">
+                    <p>Lease-Companion 특약사항 RAG 재랭킹(rerank) 직접 구현</p>
+                    <p class="skill-evidence-links">
+                      <a href="https://github.com/coding-jhj/Lease-Companion" target="_blank" rel="noopener">Lease-Companion GitHub ↗</a>
+                    </p>
+                  </div>
+                  <div class="skill-evidence" id="skill-ev-pymupdf" aria-hidden="true">
+                    <p>Lease-Companion 문서 추출 파이프라인</p>
+                    <p class="skill-evidence-links">
+                      <a href="https://github.com/coding-jhj/Lease-Companion" target="_blank" rel="noopener">Lease-Companion GitHub ↗</a>
+                    </p>
+                  </div>
+                  <div class="skill-evidence" id="skill-ev-gemini" aria-hidden="true">
+                    <p>Lease-Companion 정보 추출·생성 파이프라인 직접 구현</p>
+                    <p class="skill-evidence-links">
+                      <a href="https://github.com/coding-jhj/Lease-Companion" target="_blank" rel="noopener">Lease-Companion GitHub ↗</a>
+                    </p>
+                  </div>
+                  <div class="skill-evidence" id="skill-ev-langchain" aria-hidden="true">
+                    <p>ReAct 검색 에이전트 프로젝트</p>
+                    <p class="skill-evidence-links">
+                      <a href="https://github.com/coding-jhj/AI_AGENT" target="_blank" rel="noopener">AI_AGENT GitHub ↗</a>
+                    </p>
+                  </div>
+                  <div class="skill-evidence" id="skill-ev-sklearn" aria-hidden="true">
+                    <p>ChemOT-Align, Personal-AI-Studio, 개인 머신러닝 학습 레포(분류·회귀·군집·앙상블 실습)</p>
+                    <p class="skill-evidence-links">
+                      <a href="https://github.com/coding-jhj/ChemOT-Align" target="_blank" rel="noopener">ChemOT-Align GitHub ↗</a>
+                    </p>
+                  </div>
+                  <div class="skill-evidence" id="skill-ev-hf" aria-hidden="true">
+                    <p>datadiet (@huggingface/transformers, Qwen3 토크나이저·MiniLM ONNX 임베더)</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="skill-category">
+                <h3 class="detail-section-title">인증/보안 라이브러리</h3>
+                <div class="skill-chip-row" role="group" aria-label="인증/보안 라이브러리 기술 목록">
+                  <span class="skill-chip team" role="button" tabindex="0" aria-expanded="false" aria-controls="skill-ev-pyjwt" aria-label="PyJWT — 팀 프로젝트에서 사용">PyJWT</span>
+                  <span class="skill-chip team" role="button" tabindex="0" aria-expanded="false" aria-controls="skill-ev-passlib" aria-label="Passlib — 팀 프로젝트에서 사용">Passlib</span>
+                  <span class="skill-chip team" role="button" tabindex="0" aria-expanded="false" aria-controls="skill-ev-bcrypt" aria-label="bcrypt — 팀 프로젝트에서 사용">bcrypt</span>
+                  <span class="skill-chip team" role="button" tabindex="0" aria-expanded="false" aria-controls="skill-ev-cryptography" aria-label="cryptography — 팀 프로젝트에서 사용">cryptography</span>
+                  <span class="skill-chip direct" role="button" tabindex="0" aria-expanded="false" aria-controls="skill-ev-webauthn" aria-label="WebAuthn(@simplewebauthn) — 직접 구현/적용">WebAuthn(@simplewebauthn)</span>
+                  <span class="skill-chip direct" role="button" tabindex="0" aria-expanded="false" aria-controls="skill-ev-supabase" aria-label="Supabase — 직접 구현/적용">Supabase</span>
+                </div>
+                <div class="skill-evidence-group">
+                  <div class="skill-evidence" id="skill-ev-pyjwt" aria-hidden="true">
+                    <p>Lease-Companion 팀 프로젝트에서 사용 (인증 구현은 팀원 담당, 직접 구현 아님)</p>
+                    <p class="skill-evidence-links">
+                      <a href="https://github.com/coding-jhj/Lease-Companion" target="_blank" rel="noopener">Lease-Companion GitHub ↗</a>
+                    </p>
+                  </div>
+                  <div class="skill-evidence" id="skill-ev-passlib" aria-hidden="true">
+                    <p>Lease-Companion 팀 프로젝트에서 사용 (직접 구현 아님)</p>
+                    <p class="skill-evidence-links">
+                      <a href="https://github.com/coding-jhj/Lease-Companion" target="_blank" rel="noopener">Lease-Companion GitHub ↗</a>
+                    </p>
+                  </div>
+                  <div class="skill-evidence" id="skill-ev-bcrypt" aria-hidden="true">
+                    <p>Lease-Companion 팀 프로젝트에서 사용 (직접 구현 아님)</p>
+                    <p class="skill-evidence-links">
+                      <a href="https://github.com/coding-jhj/Lease-Companion" target="_blank" rel="noopener">Lease-Companion GitHub ↗</a>
+                    </p>
+                  </div>
+                  <div class="skill-evidence" id="skill-ev-cryptography" aria-hidden="true">
+                    <p>Lease-Companion 팀 프로젝트에서 사용 (개인정보 암호화 코드는 팀원 작성, 직접 구현 아님)</p>
+                    <p class="skill-evidence-links">
+                      <a href="https://github.com/coding-jhj/Lease-Companion" target="_blank" rel="noopener">Lease-Companion GitHub ↗</a>
+                    </p>
+                  </div>
+                  <div class="skill-evidence" id="skill-ev-webauthn" aria-hidden="true">
+                    <p>Passkey 기반 Private 포트폴리오(aleph-first-homework), 14커밋 전부 본인 작성</p>
+                  </div>
+                  <div class="skill-evidence" id="skill-ev-supabase" aria-hidden="true">
+                    <p>aleph-first-homework, BYTE BACK(choi-bujang-secret-vault), MINECRART_DASHBOARD</p>
+                    <p class="skill-evidence-links">
+                      <a href="https://github.com/coding-jhj/MINECRART_DASHBOARD" target="_blank" rel="noopener">MINECRART_DASHBOARD GitHub ↗</a>
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="skill-category">
+                <h3 class="detail-section-title">테스트 도구</h3>
+                <div class="skill-chip-row" role="group" aria-label="테스트 도구 기술 목록">
+                  <span class="skill-chip direct" role="button" tabindex="0" aria-expanded="false" aria-controls="skill-ev-pytest" aria-label="pytest — 직접 구현/적용">pytest</span>
+                  <span class="skill-chip direct" role="button" tabindex="0" aria-expanded="false" aria-controls="skill-ev-playwright" aria-label="Playwright — 직접 구현/적용">Playwright</span>
+                  <span class="skill-chip direct" role="button" tabindex="0" aria-expanded="false" aria-controls="skill-ev-vitest" aria-label="Vitest — 직접 구현/적용">Vitest</span>
+                </div>
+                <div class="skill-evidence-group">
+                  <div class="skill-evidence" id="skill-ev-pytest" aria-hidden="true">
+                    <p>Lease-Companion, VoiceGuide 등 테스트 파일 직접 작성</p>
+                    <p class="skill-evidence-links">
+                      <a href="https://github.com/coding-jhj/Lease-Companion" target="_blank" rel="noopener">Lease-Companion GitHub ↗</a>
+                      <a href="https://github.com/coding-jhj/VoiceGuide" target="_blank" rel="noopener">VoiceGuide GitHub ↗</a>
+                    </p>
+                  </div>
+                  <div class="skill-evidence" id="skill-ev-playwright" aria-hidden="true">
+                    <p>threatlens</p>
+                  </div>
+                  <div class="skill-evidence" id="skill-ev-vitest" aria-hidden="true">
+                    <p>threatlens</p>
+                  </div>
+                </div>
+              </div>
             </section>
 
             <section class="file-pane" id="pane-projects" role="tabpanel" aria-labelledby="tab-projects" aria-hidden="true">

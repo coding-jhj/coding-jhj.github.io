@@ -344,17 +344,20 @@ a:hover { text-decoration: underline; }
 /* education.md / contact.md / resume.md: markdown-comment styling for eyebrow + heading */
 #pane-education .eyebrow,
 #pane-contact .eyebrow,
-#pane-resume .eyebrow {
+#pane-resume .eyebrow,
+#pane-skills .eyebrow {
   color: var(--vscode-comment);
 }
 #pane-education .eyebrow::before,
 #pane-contact .eyebrow::before,
-#pane-resume .eyebrow::before {
+#pane-resume .eyebrow::before,
+#pane-skills .eyebrow::before {
   content: "// ";
 }
 #pane-education h2::before,
 #pane-contact h2::before,
-#pane-resume h2::before {
+#pane-resume h2::before,
+#pane-skills h2::before {
   content: "## ";
   color: var(--vscode-fg-muted);
   font-family: var(--mono);
@@ -387,6 +390,64 @@ a:hover { text-decoration: underline; }
 .json-key { color: var(--vscode-string); }
 .json-value { color: var(--vscode-function); }
 .json-punc { color: var(--vscode-fg); }
+
+.skills-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  margin-bottom: 1.75rem;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--vscode-fg-muted);
+}
+.legend-item { display: inline-flex; align-items: center; gap: 0.45rem; }
+.legend-item i { width: 6px; height: 6px; border-radius: 50%; }
+.legend-item.direct i { background: var(--vscode-keyword); }
+.legend-item.team i { background: var(--vscode-comment); }
+
+.skill-category { margin-bottom: 2.25rem; }
+.skill-category:last-child { margin-bottom: 0; }
+
+.skill-chip-row { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+.skill-chip {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  padding: 0.35rem 0.7rem;
+  border: 1px solid var(--vscode-border);
+  border-radius: 3px;
+  cursor: pointer;
+  color: var(--vscode-fg);
+  background: var(--vscode-sidebar-bg);
+}
+.skill-chip::before { content: "[ "; color: var(--vscode-fg-muted); }
+.skill-chip::after { content: " ]"; color: var(--vscode-fg-muted); }
+.skill-chip:hover { border-color: var(--vscode-fg-muted); }
+.skill-chip[aria-expanded="true"] { background: #ffffff14; }
+.skill-chip.direct { border-left: 2px solid var(--vscode-keyword); }
+.skill-chip.team { border-left: 2px solid var(--vscode-comment); }
+
+.skill-evidence-group { margin-top: 0.9rem; display: flex; flex-direction: column; gap: 0.75rem; }
+.skill-evidence {
+  display: none;
+  max-width: 44rem;
+  background: rgba(0, 0, 0, 0.2);
+  border-left: 3px solid var(--vscode-border);
+  padding: 0.9rem 1.1rem;
+  font-size: 0.92rem;
+  color: var(--vscode-fg);
+}
+.skill-evidence.open { display: block; }
+.skill-evidence p { margin-bottom: 0.5rem; }
+.skill-evidence p:last-child { margin-bottom: 0; }
+.skill-evidence-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  font-family: var(--mono);
+  font-size: 0.8rem;
+}
 
 /* ===== projects.md pane ===== */
 .projects-head {
@@ -701,6 +762,11 @@ a:hover { text-decoration: underline; }
   .editor-content { padding-left: 0.2rem; padding-right: 1.1rem; }
 
   .projects-head { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+
+  .skill-chip-row { gap: 0.5rem; }
+  .skill-chip { font-size: 0.78rem; padding: 0.3rem 0.55rem; }
+  .skill-evidence { max-width: 100%; padding: 0.75rem 0.9rem; }
+  .skill-evidence-links { gap: 0.6rem; }
 
   .detail-flow-step { flex-direction: column; gap: 0.5rem; }
   .detail-flow-num { font-size: 0.95rem; }
