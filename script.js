@@ -211,7 +211,21 @@ init();
 function toggleSkillEvidence(chip) {
   const panel = document.getElementById(chip.getAttribute("aria-controls"));
   if (!panel) return;
-  const open = panel.classList.toggle("open");
+  const wasOpen = panel.classList.contains("open");
+
+  const category = chip.closest(".skill-category");
+  if (category) {
+    category.querySelectorAll(".skill-chip").forEach((otherChip) => {
+      if (otherChip === chip) return;
+      const otherPanel = document.getElementById(otherChip.getAttribute("aria-controls"));
+      if (otherPanel) otherPanel.classList.remove("open");
+      otherPanel?.setAttribute("aria-hidden", "true");
+      otherChip.setAttribute("aria-expanded", "false");
+    });
+  }
+
+  const open = !wasOpen;
+  panel.classList.toggle("open", open);
   panel.setAttribute("aria-hidden", open ? "false" : "true");
   chip.setAttribute("aria-expanded", open ? "true" : "false");
   renderGutter();
