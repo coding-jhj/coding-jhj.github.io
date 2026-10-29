@@ -515,6 +515,7 @@ a:hover { text-decoration: underline; }
   font-family: var(--mono);
   font-weight: 400;
 }
+.detail-emph { color: var(--vscode-keyword); font-weight: 700; }
 .detail-note-tag {
   font-family: var(--mono);
   font-size: 0.72rem;

@@ -50,6 +50,17 @@ function cardHTML(p) {
 
 // ---- project detail pane content (rendered into a dynamic file tab) ----
 
+function escapeHTML(str) {
+  return String(str).replace(/[&<>"']/g, (ch) => ({
+    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;",
+  }[ch]));
+}
+
+// Converts `**강조**` in detail content strings into a styled <strong>.
+function emphasize(str) {
+  return escapeHTML(str).replace(/\*\*(.+?)\*\*/g, '<strong class="detail-emph">$1</strong>');
+}
+
 function detailHeroHTML(d) {
   if (!d.hero_image) return "";
   return `<div class="detail-hero"><img src="${d.hero_image}" alt="프로젝트 대표 이미지"></div>`;
@@ -68,7 +79,7 @@ function detailInfoTableHTML(rows) {
 }
 
 function detailFlowStepHTML(step) {
-  const bullets = (step.bullets || []).map(b => `<li>${b}</li>`).join("");
+  const bullets = (step.bullets || []).map(b => `<li>${emphasize(b)}</li>`).join("");
   const media = step.image
     ? `<figure class="detail-flow-media">
         <img src="${step.image}" alt="${step.image_caption || step.title}">
@@ -93,7 +104,7 @@ function detailFlowHTML(steps) {
 
 function detailProblemsHTML(problems) {
   if (!problems || !problems.length) return "";
-  const rows = problems.map(p => `<tr><td>${p.problem}</td><td>${p.solution}</td></tr>`).join("");
+  const rows = problems.map(p => `<tr><td>${emphasize(p.problem)}</td><td>${emphasize(p.solution)}</td></tr>`).join("");
   return `
     <table class="detail-problems-table">
       <thead><tr><th>문제</th><th>해결</th></tr></thead>
@@ -103,13 +114,13 @@ function detailProblemsHTML(problems) {
 
 function detailLeadershipHTML(items) {
   if (!items || !items.length) return "";
-  return `<ul class="detail-leadership-list">${items.map(i => `<li>${i}</li>`).join("")}</ul>`;
+  return `<ul class="detail-leadership-list">${items.map(i => `<li>${emphasize(i)}</li>`).join("")}</ul>`;
 }
 
 function detailMetricsHTML(d) {
   if (!d.metrics || !d.metrics.length) return "";
-  const rows = d.metrics.map(m => `<tr><th>${m.label}</th><td>${m.value}</td></tr>`).join("");
-  const note = d.metrics_note ? `<p class="detail-metrics-note">${d.metrics_note}</p>` : "";
+  const rows = d.metrics.map(m => `<tr><th>${m.label}</th><td>${emphasize(m.value)}</td></tr>`).join("");
+  const note = d.metrics_note ? `<p class="detail-metrics-note">${emphasize(d.metrics_note)}</p>` : "";
   return `<table class="detail-metrics-table">${rows}</table>${note}`;
 }
 
