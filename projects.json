@@ -113,7 +113,8 @@
     "one_liner": null,
     "roles": [],
     "github": "https://github.com/coding-jhj/VoiceGuide",
-    "status": "needs_content"  },
+    "status": "needs_content"
+  },
   {
     "id": "rainbow-bridge",
     "title": "Rainbow Bridge",
@@ -124,7 +125,8 @@
     "one_liner": null,
     "roles": [],
     "github": "https://github.com/mosejong/Rainbow-Bridge",
-    "status": "needs_content"  },
+    "status": "needs_content"
+  },
   {
     "id": "fixed-token-sft-data-selection",
     "title": "Fixed-Token-SFT-Data-Selection",
@@ -135,7 +137,8 @@
     "one_liner": null,
     "roles": [],
     "github": "https://github.com/coding-jhj/Fixed-Token-SFT-Data-Selection",
-    "status": "needs_content"  },
+    "status": "needs_content"
+  },
   {
     "id": "personal-ai-studio",
     "title": "Personal-AI-Studio",
@@ -146,7 +149,8 @@
     "one_liner": null,
     "roles": [],
     "github": null,
-    "status": "needs_content"  },
+    "status": "needs_content"
+  },
   {
     "id": "ai-agent",
     "title": "AI_AGENT",
@@ -157,7 +161,44 @@
     "one_liner": null,
     "roles": [],
     "github": "https://github.com/coding-jhj/AI_AGENT",
-    "status": "needs_content"  },
+    "status": "needs_content"
+  },
+  {
+    "id": "aleph-first-homework",
+    "title": "Passkey 기반 Private 포트폴리오 (aleph-first-homework)",
+    "category": "ai",
+    "subgroup": "project",
+    "pinned_top": false,
+    "screenshot": null,
+    "one_liner": null,
+    "roles": [],
+    "github": null,
+    "status": "needs_content"
+  },
+  {
+    "id": "repopilot",
+    "title": "RepoPilot",
+    "category": "ai",
+    "subgroup": "project",
+    "pinned_top": false,
+    "screenshot": null,
+    "one_liner": null,
+    "roles": [],
+    "github": null,
+    "status": "needs_content"
+  },
+  {
+    "id": "datadiet",
+    "title": "datadiet",
+    "category": "ai",
+    "subgroup": "project",
+    "pinned_top": false,
+    "screenshot": null,
+    "one_liner": null,
+    "roles": [],
+    "github": null,
+    "status": "needs_content"
+  },
   {
     "id": "overwrite-ctf",
     "title": "Overwrite CTF",
@@ -169,7 +210,8 @@
     "difficulty": null,
     "role_note": "woojin님과 공동 풀이 — 팀/공동풀이로 표현, 단독 성과처럼 쓰지 않기",
     "writeup_or_flag_link": null,
-    "status": "needs_content"  },
+    "status": "needs_content"
+  },
   {
     "id": "earth-ctf",
     "title": "Earth CTF",
@@ -178,7 +220,8 @@
     "pinned_top": false,
     "screenshot": null,
     "one_liner": null,
-    "status": "needs_content"  },
+    "status": "needs_content"
+  },
   {
     "id": "digitalworld-fall-ctf",
     "title": "DigitalWorld FALL CTF",
@@ -187,7 +230,8 @@
     "pinned_top": false,
     "screenshot": null,
     "one_liner": null,
-    "status": "needs_content"  },
+    "status": "needs_content"
+  },
   {
     "id": "full-security-labs",
     "title": "Full-Security Labs",
@@ -198,7 +242,8 @@
     "one_liner": null,
     "roles": [],
     "github": null,
-    "status": "needs_content"  },
+    "status": "needs_content"
+  },
   {
     "id": "system-security-lab",
     "title": "System Security Lab",
@@ -209,7 +254,8 @@
     "one_liner": null,
     "roles": [],
     "github": null,
-    "status": "needs_content"  },
+    "status": "needs_content"
+  },
   {
     "id": "network-security-integration-lab",
     "title": "네트워크 보안 통합 Lab",
@@ -220,7 +266,8 @@
     "one_liner": null,
     "roles": [],
     "github": null,
-    "status": "needs_content"  },
+    "status": "needs_content"
+  },
   {
     "id": "byte-back",
     "title": "BYTE BACK (choi-bujang-secret-vault)",
@@ -230,7 +277,8 @@
     "screenshot": null,
     "one_liner": null,
     "github": null,
-    "status": "needs_content"  },
+    "status": "needs_content"
+  },
   {
     "id": "defense-ztna-xdr",
     "title": "defense-ztna-xdr",
@@ -241,7 +289,8 @@
     "one_liner": null,
     "roles": [],
     "github": null,
-    "status": "needs_content"  },
+    "status": "needs_content"
+  },
   {
     "id": "threatlens",
     "title": "threatlens",
@@ -252,40 +301,8 @@
     "one_liner": null,
     "roles": [],
     "github": null,
-    "status": "needs_content"  },
-  {
-    "id": "aleph-first-homework",
-    "title": "Passkey 기반 Private 포트폴리오 (aleph-first-homework)",
-    "category": "security",
-    "subgroup": "project",
-    "pinned_top": false,
-    "screenshot": null,
-    "one_liner": null,
-    "roles": [],
-    "github": null,
-    "status": "needs_content"  },
-  {
-    "id": "repopilot",
-    "title": "RepoPilot",
-    "category": "security",
-    "subgroup": "project",
-    "pinned_top": false,
-    "screenshot": null,
-    "one_liner": null,
-    "roles": [],
-    "github": null,
-    "status": "needs_content"  },
-  {
-    "id": "datadiet",
-    "title": "datadiet",
-    "category": "security",
-    "subgroup": "project",
-    "pinned_top": false,
-    "screenshot": null,
-    "one_liner": null,
-    "roles": [],
-    "github": null,
-    "status": "needs_content"  },
+    "status": "needs_content"
+  },
   {
     "id": "alpeh-fifth-homework",
     "title": "장애 내구성 모니터링 대시보드 (ALPEH_FIFTH_HOMEWORK)",
@@ -296,7 +313,8 @@
     "one_liner": null,
     "roles": [],
     "github": null,
-    "status": "needs_content"  },
+    "status": "needs_content"
+  },
   {
     "id": "my-career-planner",
     "title": "MY_CAREER_PLANNER",
@@ -307,7 +325,8 @@
     "one_liner": null,
     "roles": [],
     "github": "https://github.com/coding-jhj/MY_CAREER_PLANNER",
-    "status": "needs_content"  },
+    "status": "needs_content"
+  },
   {
     "id": "stelive-data",
     "title": "Stelive_data",
@@ -318,7 +337,8 @@
     "one_liner": null,
     "roles": [],
     "github": null,
-    "status": "needs_content"  },
+    "status": "needs_content"
+  },
   {
     "id": "arkan-forgotten-throne",
     "title": "ARKAN: 잊혀진 왕좌 (ARKAN_FORGOTTEN_THRONE)",
@@ -329,7 +349,8 @@
     "one_liner": null,
     "roles": [],
     "github": "https://github.com/coding-jhj/ARKAN_FORGOTTEN_THRONE",
-    "status": "needs_content"  },
+    "status": "needs_content"
+  },
   {
     "id": "aleph-second-mini-game",
     "title": "ALEPH 2차 과제 미니게임 (alpeh-second-mini-game)",
@@ -340,7 +361,8 @@
     "one_liner": null,
     "roles": [],
     "github": "https://github.com/coding-jhj/alpeh-second-mini-game",
-    "status": "needs_content"  },
+    "status": "needs_content"
+  },
   {
     "id": "aleph-third-homework",
     "title": "ALEPH 3차 과제 (aleph-third-homework)",
@@ -351,5 +373,6 @@
     "one_liner": null,
     "roles": [],
     "github": "https://github.com/coding-jhj/aleph-third-homework",
-    "status": "needs_content"  }
+    "status": "needs_content"
+  }
 ]
