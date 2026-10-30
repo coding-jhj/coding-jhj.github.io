@@ -164,8 +164,8 @@
     "status": "needs_content"
   },
   {
-    "id": "aleph-first-homework",
-    "title": "Passkey 기반 Private 포트폴리오 (aleph-first-homework)",
+    "id": "passkey-private-portfolio",
+    "title": "Passkey Private Portfolio",
     "category": "ai",
     "subgroup": "project",
     "pinned_top": false,
@@ -304,8 +304,8 @@
     "status": "needs_content"
   },
   {
-    "id": "alpeh-fifth-homework",
-    "title": "장애 내구성 모니터링 대시보드 (ALPEH_FIFTH_HOMEWORK)",
+    "id": "minecraft-uptime-dashboard",
+    "title": "Minecraft Uptime Dashboard",
     "category": "web",
     "subgroup": "project",
     "pinned_top": false,
@@ -352,8 +352,8 @@
     "status": "needs_content"
   },
   {
-    "id": "aleph-second-mini-game",
-    "title": "ALEPH 2차 과제 미니게임 (alpeh-second-mini-game)",
+    "id": "pop-tap",
+    "title": "POP TAP",
     "category": "web",
     "subgroup": "project",
     "pinned_top": false,
@@ -364,8 +364,8 @@
     "status": "needs_content"
   },
   {
-    "id": "aleph-third-homework",
-    "title": "ALEPH 3차 과제 (aleph-third-homework)",
+    "id": "study-card-studio",
+    "title": "Study Card Studio",
     "category": "web",
     "subgroup": "project",
     "pinned_top": false,
