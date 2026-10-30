@@ -164,6 +164,18 @@
     "status": "needs_content"
   },
   {
+    "id": "repopilot",
+    "title": "RepoPilot",
+    "category": "ai",
+    "subgroup": "project",
+    "pinned_top": false,
+    "screenshot": null,
+    "one_liner": null,
+    "roles": [],
+    "github": null,
+    "status": "needs_content"
+  },
+  {
     "id": "ai-agent",
     "title": "AI_AGENT",
     "category": "ai",
@@ -178,18 +190,6 @@
   {
     "id": "passkey-private-portfolio",
     "title": "Passkey Private Portfolio",
-    "category": "ai",
-    "subgroup": "project",
-    "pinned_top": false,
-    "screenshot": null,
-    "one_liner": null,
-    "roles": [],
-    "github": null,
-    "status": "needs_content"
-  },
-  {
-    "id": "repopilot",
-    "title": "RepoPilot",
     "category": "ai",
     "subgroup": "project",
     "pinned_top": false,
