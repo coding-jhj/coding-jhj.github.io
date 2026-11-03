@@ -58,7 +58,7 @@ function escapeHTML(str) {
 
 // Converts `**강조**` in detail content strings into a styled <strong>.
 function emphasize(str) {
-  return escapeHTML(str).replace(/\*\*(.+?)\*\*/g, '<strong class="detail-emph">$1</strong>');
+  return escapeHTML(str).replace(/\*\*(.+?)\*\*/g, '<strong class="detail-emph">$1</strong>').replace(/\n/g, "<br>");
 }
 
 function detailHeroHTML(d) {

@@ -240,7 +240,7 @@
     "screenshot": "assets/screenshots/datadiet-03-report.png",
     "one_liner": "소형 AI 모델 미세조정 시 어떤 학습 예시를 쓸지, 내 논문 실험 결과를 근거로 추천해 주는 브라우저 도구",
     "roles": [
-      "개인 프로젝트 · 구현은 AI 코딩 에이전트 활용"
+      "개인 프로젝트"
     ],
     "github": "https://github.com/coding-jhj/datadiet",
     "status": "ready",
@@ -248,7 +248,7 @@
       "hero_image": "assets/screenshots/datadiet-01-landing.png",
       "intro": "소형 AI 모델을 미세조정하는 사람이 학습 예산이 제한될 때 어떤 예시를 쓸지 고르도록 돕는 웹앱\n→ 직접 쓴 논문의 실험 결과를 근거로, 목표별 추천과 신뢰도를 알려 주고 학습용 파일까지 만들어 줌",
       "info_table": [
-        {"label": "구성", "value": "개인 프로젝트 (구현은 AI 코딩 에이전트 활용)"},
+        {"label": "구성", "value": "개인 프로젝트"},
         {"label": "기술 스택", "value": "React 19 · TypeScript · Vite · Tailwind · Web Worker(Comlink) · Transformers.js(브라우저 안 모델 실행) · vitest · Playwright"},
         {"label": "서비스", "value": "<a href=\"https://datadiet-pi.vercel.app/\" target=\"_blank\" rel=\"noopener\">datadiet-pi.vercel.app ↗</a>"},
         {"label": "근거 논문", "value": "<em>Effects of Data Selection under a Fixed Token Budget</em> · <a href=\"https://github.com/coding-jhj/Fixed-Token-SFT-Data-Selection\" target=\"_blank\" rel=\"noopener\">논문·실험 저장소 ↗</a>"}
@@ -259,7 +259,7 @@
           "title": "목표 선택 · 데이터 건강 검진",
           "bullets": [
             "목표(지시 수행 · 추론 · 수학 · 잘 모르겠음)를 고르고 .jsonl 파일을 올리거나 샘플 사용",
-            "쓸 수 있는 예시와 건너뛴 예시를 **이유별로** 표시 (형식 오류 · 너무 긴 예시 · 영어 아님 · 중복 등)"
+            "쓸 수 있는 예시와 건너뛴 예시를 **이유별로** 표시\n(형식 오류 · 너무 긴 예시 · 영어 아님 · 중복 등)"
           ],
           "image": "assets/screenshots/datadiet-02-health.png",
           "image_caption": "데이터 건강 검진 화면"
@@ -269,7 +269,7 @@
           "title": "세 전략을 같은 예산으로 비교",
           "bullets": [
             "**무작위 · 품질 우선 · 품질+다양성** 세 전략을 같은 토큰 예산으로 선택",
-            "논문 실험 코드(Python)를 TypeScript로 이식해 브라우저 Web Worker에서 실행",
+            "논문 실험 코드(Python)를 TypeScript로 이식해 브라우저 Web Worker에서 실행",
             "'품질+다양성'은 작은 공개 모델(약 25MB)을 한 번 내려받아 예시를 주제별로 묶음"
           ],
           "image": "assets/screenshots/datadiet-03-report.png",
@@ -289,12 +289,12 @@
           "step": "04",
           "title": "학습 파일 내려받기",
           "bullets": [
-            "선택된 예시를 학습용 JSONL로 다운로드, 선택 목록(CSV)과 실행 요약(JSON)도 제공"
+            "선택된 예시를 학습용 JSONL로 다운로드\n선택 목록(CSV)과 실행 요약(JSON)도 제공"
           ]
         }
       ],
       "problems": [
-        {"problem": "논문의 주가설이 지지되지 않았는데(지시 수행 −0.26%p, 구간이 0 포함) 앱이 효과를 부풀릴 위험", "solution": "**추천 라벨을 사람이 쓰지 않고 신뢰구간에서 계산**. 문구 파일에 숫자나 과장 표현이 들어가면 테스트가 실패하도록 설정. 가장 좋은 결과도 '유망하지만 입증 안 됨'으로만 표시"},
+        {"problem": "논문의 주가설이 지지되지 않았는데(지시 수행 −0.26%p, 구간이 0 포함) 앱이 효과를 부풀릴 위험", "solution": "**추천 라벨을 사람이 쓰지 않고 신뢰구간에서 계산**. 문구 파일에 숫자나 과장 표현이 들어가면 테스트가 실패하도록 설정. 가장 좋은 결과도 '유망하지만 입증 안 됨'으로만 표시"},
         {"problem": "Python 원본 선택 코드와 TypeScript 이식본이 같은 결과를 내는지", "solution": "정답 벡터(golden vector)로 무작위·품질 우선 전략의 선택이 원본과 동일함을 시험. 다양성 전략은 k-means 근사라 통계 시험으로 확인하고 **차이점을 화면에 공개**"},
         {"problem": "사용자 데이터를 외부로 보내지 않아야 함", "solution": "서버 없이 **브라우저 안(Web Worker)에서만 처리**. 외부로는 공개 모델 내려받기만 수행"}
       ],
