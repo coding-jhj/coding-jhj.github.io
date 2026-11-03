@@ -233,15 +233,81 @@
   },
   {
     "id": "datadiet",
-    "title": "datadiet",
+    "title": "DataDiet",
     "category": "ai",
     "subgroup": "project",
     "pinned_top": false,
-    "screenshot": null,
-    "one_liner": null,
-    "roles": [],
-    "github": null,
-    "status": "needs_content"
+    "screenshot": "assets/screenshots/datadiet-03-report.png",
+    "one_liner": "소형 AI 모델 미세조정 시 어떤 학습 예시를 쓸지, 내 논문 실험 결과를 근거로 추천해 주는 브라우저 도구",
+    "roles": [
+      "정환주(1인 · 논문 실험 설계·분석, 앱 주제·판단 · 구현은 AI 코딩 에이전트 활용)"
+    ],
+    "github": "https://github.com/coding-jhj/datadiet",
+    "status": "ready",
+    "detail": {
+      "hero_image": "assets/screenshots/datadiet-01-landing.png",
+      "intro": "소형 AI 모델을 미세조정하는 사람이 학습 예산이 제한될 때 어떤 예시를 쓸지 고르도록 돕는 웹앱\n→ 직접 쓴 논문의 실험 결과를 근거로, 목표별 추천과 신뢰도를 알려 주고 학습용 파일까지 만들어 줌",
+      "info_table": [
+        {"label": "팀 구성", "value": "1인"},
+        {"label": "내 역할", "value": "논문 실험 설계·분석 · 앱 주제와 대상(처음 미세조정하는 사람) 결정 · 논문과 코드가 다를 때 코드 동작을 따르기로 판단 · 영어 전용 범위 결정 (구현은 AI 코딩 에이전트에게 맡김)"},
+        {"label": "기술 스택", "value": "React 19 · TypeScript · Vite · Tailwind · Web Worker(Comlink) · Transformers.js(브라우저 안 모델 실행) · vitest · Playwright"},
+        {"label": "서비스", "value": "<a href=\"https://datadiet-pi.vercel.app/\" target=\"_blank\" rel=\"noopener\">datadiet-pi.vercel.app ↗</a> (서버·로그인 없음, 입력 데이터는 브라우저 밖으로 나가지 않음)"},
+        {"label": "근거 논문", "value": "<em>Effects of Data Selection under a Fixed Token Budget</em> · <a href=\"https://github.com/coding-jhj/Fixed-Token-SFT-Data-Selection\" target=\"_blank\" rel=\"noopener\">논문·실험 저장소 ↗</a>"}
+      ],
+      "flow": [
+        {
+          "step": "01",
+          "title": "목표 선택 · 데이터 건강 검진",
+          "bullets": [
+            "목표(지시 수행 · 추론 · 수학 · 잘 모르겠음)를 고르고 .jsonl 파일을 올리거나 샘플 사용",
+            "쓸 수 있는 예시와 건너뛴 예시를 **이유별로** 표시 (형식 오류 · 너무 긴 예시 · 영어 아님 · 중복 등)"
+          ],
+          "image": "assets/screenshots/datadiet-02-health.png",
+          "image_caption": "데이터 건강 검진 화면"
+        },
+        {
+          "step": "02",
+          "title": "세 전략을 같은 예산으로 비교",
+          "bullets": [
+            "**무작위 · 품질 우선 · 품질+다양성** 세 전략을 같은 토큰 예산으로 선택",
+            "논문 실험 코드(Python)를 TypeScript로 이식해 브라우저 Web Worker에서 실행",
+            "'품질+다양성'은 작은 공개 모델(약 25MB)을 한 번 내려받아 예시를 주제별로 묶음"
+          ],
+          "image": "assets/screenshots/datadiet-03-report.png",
+          "image_caption": "추천과 세 전략 비교 보고서 화면"
+        },
+        {
+          "step": "03",
+          "title": "논문 근거 기반 추천",
+          "bullets": [
+            "추천 라벨(**이득 없음 / 유망하지만 입증 안 됨 / 불분명**)을 논문의 95% 신뢰구간에서 계산",
+            "모든 비교 수치와 연구의 한계를 근거 화면에 그대로 공개"
+          ],
+          "image": "assets/screenshots/datadiet-04-evidence.png",
+          "image_caption": "신뢰구간 근거 화면"
+        },
+        {
+          "step": "04",
+          "title": "학습 파일 내려받기",
+          "bullets": [
+            "선택된 예시를 학습용 JSONL로 다운로드, 선택 목록(CSV)과 실행 요약(JSON)도 제공"
+          ]
+        }
+      ],
+      "problems": [
+        {"problem": "논문의 주가설이 지지되지 않았는데(지시 수행 −0.26%p, 구간이 0 포함) 앱이 효과를 부풀릴 위험", "solution": "**추천 라벨을 사람이 쓰지 않고 신뢰구간에서 계산**. 문구 파일에 숫자나 과장 표현이 들어가면 테스트가 실패하도록 설정. 가장 좋은 결과도 '유망하지만 입증 안 됨'으로만 표시"},
+        {"problem": "Python 원본 선택 코드와 TypeScript 이식본이 같은 결과를 내는지", "solution": "정답 벡터(golden vector)로 무작위·품질 우선 전략의 선택이 원본과 동일함을 시험. 다양성 전략은 k-means 근사라 통계 시험으로 확인하고 **차이점을 화면에 공개**"},
+        {"problem": "사용자 데이터를 외부로 보내지 않아야 함", "solution": "서버 없이 **브라우저 안(Web Worker)에서만 처리**. 외부로는 공개 모델 내려받기만 수행"}
+      ],
+      "metrics": [
+        {"label": "지시 수행 (다양성 − 무작위)", "value": "**−0.26%p** (95% 구간 −3.39 ~ +2.60) → 이득 없음"},
+        {"label": "수학 문제", "value": "**+2.73%p** (−0.98 ~ +6.45) → 유망하지만 입증 안 됨"},
+        {"label": "추론 퍼즐", "value": "**+9.49%p** (+4.63 ~ +14.58) → 유망하지만 입증 안 됨"},
+        {"label": "비교 실험 규모", "value": "**8개** 어댑터 학습, 토큰 예산 1,000,000개로 고정"}
+      ],
+      "metrics_note": "Qwen3-1.7B 모델 1개, 고정 평가 서브셋 기준입니다. 생성 길이 한도에 걸린 출력이 많아 일반화하지 않으며, 앱도 가장 좋은 결과를 '입증됨'이 아닌 '유망'으로만 표시합니다.",
+      "note": "논문 결과 기준"
+    }
   },
   {
     "id": "fixed-token-sft-data-selection",
