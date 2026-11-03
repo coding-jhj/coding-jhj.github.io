@@ -554,7 +554,8 @@ a:hover { text-decoration: underline; }
 .card-github-link { display: inline-block; }
 
 /* ===== project detail pane (dynamic tab) ===== */
-.project-detail { max-width: 54rem; margin: 0 auto; }
+.project-detail { max-width: 54rem; margin: 0 auto; word-break: keep-all; overflow-wrap: break-word; }
+.project-detail li, .project-detail td, .project-detail p { text-wrap: pretty; }
 .project-detail .eyebrow { color: var(--vscode-comment); }
 .project-detail .eyebrow::before { content: "// "; }
 .project-detail h2::before {
