@@ -133,7 +133,7 @@
       "hero_image": "assets/screenshots/rainbow-bridge-02-recovery.png",
       "intro": "반려동물과의 이별 전후 감정 기록·추모 콘텐츠·회복 미션을 이어주는 6인 팀 AI 서비스\n→ AI 엔지니어로 TTS·GPU 서버·RAG·평가 시스템을 전담",
       "info_table": [
-        {"label": "구성", "value": "6인 팀 프로젝트 · 2026.06.01~06.19 (SKT ALEPH)"},
+        {"label": "구성", "value": "6인 팀 프로젝트 · 2026.06.01~06.19 (이스트소프트 AI 휴먼 4기)"},
         {"label": "내 역할", "value": "AI 엔지니어 / GPU 서버 — TTS 폴백 파이프라인 · GPU 원격 서버 운영 · RAG 검색 파이프라인 · 회복점수 평가 (팀장 아님, 브랜치: jeonghwanju)"},
         {"label": "기술 스택", "value": "FastAPI · MongoDB/SQLite/Redis · Gemini 2.5 Flash · ChromaDB(RAG) · Qwen3 GPU(자체호스팅)/Google Cloud TTS/gTTS"}
       ],
@@ -150,17 +150,17 @@
           "step": "02",
           "title": "사람 블라인드 A/B로 자동지표 뒤집기",
           "bullets": [
-            "1라운드: STT CER·Gemini 오디오 평가 같은 자동지표로 'Google 유지' 결론 → 그런데 ElevenLabs Free 플랜이 한국어 네이티브 보이스를 막아 **영어권 핸디캡이 낀 불공정 비교**였음",
-            "팀장 피드백('TTS는 사람이 직접 들어야 의미 있다')을 받아들여 **블라인드 A/B 하네스를 직접 제작**(`pairwise_listen.py`), EL 보이스 9종을 수동으로 확보",
-            "2라운드 사람 청취 결과 **9전 9승(EL)**으로 1라운드 결론이 뒤집힘 — 다만 상업 라이선스 비용 문제로 **실제 채택은 PM 판단으로 넘김**(품질 검증과 도입 결정을 분리)"
+            "자동지표(CER·Gemini 평가)로는 'Google 유지' 결론 → ElevenLabs Free 플랜의 영어권 핸디캡 때문에 불공정 비교였음",
+            "**사람이 직접 듣는 블라인드 테스트 도구를 직접 제작**(`pairwise_listen.py`), ElevenLabs 보이스 9종 확보",
+            "사람 청취 결과 **9전 9승**으로 자동지표 결론이 뒤집힘 — 실제 채택은 라이선스 비용 문제로 PM 판단에 위임"
           ]
         },
         {
           "step": "03",
           "title": "GPU 원격 서버 운영 자동화",
           "bullets": [
-            "cloudflared 터널 URL이 재시작마다 바뀌는 문제 해결을 위해 **watchdog 자동등록 시스템**(30초 폴링 → health 검증 → 백엔드 push → Redis TTL)과 GPU 자동 재시작 로직을 설계·구현",
-            "긴 메시지 처리를 동기 호출에서 **제출→상태조회→결과 3단 비동기 잡**으로 전환, 운영 후반엔 pm2 전환 + TTS 로그 분석기·STT 발음평가(CER/WER) 도구까지 제작"
+            "cloudflared 터널 URL 자동 갱신 문제 해결 → **watchdog 자동등록 시스템**(30초 폴링 → health 검증 → 백엔드 push → Redis TTL) 설계·구현, GPU 자동 재시작 로직 추가",
+            "긴 메시지 처리를 **제출→상태조회→결과 3단 비동기 잡**으로 전환, pm2 운영 전환 + TTS 로그 분석기·STT 발음평가 도구 제작"
           ]
         },
         {
@@ -185,12 +185,13 @@
       ],
       "problems": [
         {"problem": "Google TTS 폴백이 voice 파라미터를 무시하고 항상 여성 보이스로 합성됨", "solution": "보이스 매핑 로직을 수정하고 male·narration 톤 추가"},
-        {"problem": "600자 이상 메시지 TTS가 깨끗한 GPU에서도 항상 폴백으로 빠짐", "solution": "'환경(VRAM) 탓'이라는 첫 결론을 의심하고 **코드 상수를 다시 읽어** 합성 타임아웃이 실제 합성 시간(~200초)보다 짧은 150초로 설정된 버그임을 확인, 300초로 수정"},
+        {"problem": "600자 이상 메시지 TTS가 깨끗한 GPU에서도 항상 폴백으로 빠짐", "solution": "첫 결론('환경 탓')을 의심하고 코드 상수 재확인 → **타임아웃이 150초로 짧게 설정된 버그**였음을 확인, 300초로 수정"},
         {"problem": "GPU 8GB를 데스크톱 앱과 공유해 VRAM이 부족하면 합성 job이 멈춘 채 영구 점유 → 이후 요청 전부 503", "solution": "**타임아웃 + 전역 `_degraded` 플래그**로 멈춘 job을 격리하고 연쇄 장애를 차단, 자동 재시작 watchdog으로 무인 복구"},
         {"problem": "cloudflared 터널 URL이 재시작마다 바뀌어 수동 갱신이 팀 진도를 막음", "solution": "**30초 폴링 → health 검증 → 백엔드 push → Redis TTL** 구조의 자동등록 watchdog을 설계, 리뷰에서 지적된 TTL 누락·SSRF 화이트리스트도 반영"},
         {"problem": "회복점수 산식에 활동(걸음) 데이터가 섞이면 활동과 무관하게 미션 개수만으로 점수가 튀는 버그", "solution": "동료 리뷰로 발견된 **미션 상한값(cap) 불일치(base 35 vs blend 25)를 35로 통일**하고, 재발을 막는 회귀 테스트 추가"},
         {"problem": "개인정보 비식별 처리(가림)가 위기감지 규칙엔진의 패턴 매칭 자체를 깨뜨릴 뻔함", "solution": "**규칙엔진엔 원문, LLM엔 가린 텍스트**로 입력을 분리해 위기감지 정확도와 PII 보호를 동시에 확보"},
-        {"problem": "동료 브랜치와 동시에 건드린 `report.py` 병합 충돌 + `PetResponse` 스키마 변경으로 생긴 500 에러(구버전 DB 문서에 신규 필드 기본값 없음)", "solution": "**두 필드 다 살리는 방식(additive)**으로 병합 충돌을 해결하고, 구버전 문서에도 기본값이 적용되도록 수정"},
+        {"problem": "동료 브랜치와 동시에 건드린 `report.py` 병합 충돌", "solution": "**두 필드 다 살리는 방식(additive)**으로 해결"},
+        {"problem": "`PetResponse` 스키마 변경으로 생긴 500 에러 (구버전 DB 문서에 신규 필드 기본값 없음)", "solution": "구버전 문서에도 기본값이 적용되도록 수정"},
         {"problem": "발표 시연영상용 TTS 더빙 파이프라인 제작 중 긴 편지 후반부 음량이 소실됨", "solution": "**RMS 실측**(전체 0.106 vs 후반 0.003~0.008)으로 원인을 확인하고 문장 단위 분할+정규화로 해결 (Day 17, PR 미제출로 브랜치에만 존재)"}
       ],
       "metrics": [
