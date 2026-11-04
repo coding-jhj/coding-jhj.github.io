@@ -178,7 +178,7 @@
     "status": "ready",
     "detail": {
       "hero_image": "assets/screenshots/byte-back-02-xdr-report.png",
-      "intro": "무인증 접근 · IDOR · 토큰 탈취 · CSRF · 세션 재사용 같은 공격을 단계마다 정의하고 방어\n→ \"그렇게 짰다\"가 아니라 \"실제로 요청을 보내 막힌 것을 확인했고, 그 요청 ID가 여기 있다\"로 증명",
+      "intro": "무인증 접근 · IDOR · 토큰 탈취 · CSRF · 세션 재사용 같은 공격을 단계마다 정의하고 방어\n→ 방어마다 실제 배포에 요청을 보내 막히는지 확인하고, 서버가 발급한 요청 ID를 증거로 남김",
       "info_table": [
         {
           "label": "구성",
@@ -186,15 +186,15 @@
         },
         {
           "label": "기간",
-          "value": "2026.10.06 – 2026.10.30 (12단계 통과 10-17 · 이후 13~22단계 보안 Agent 대시보드)"
+          "value": "2026.10.06 – 2026.10.30"
         },
         {
           "label": "기술 스택",
-          "value": "Node.js 22 · Vercel 서버리스 · Supabase(Postgres · RLS · Auth) · jose · node:test"
+          "value": "<span style=\"white-space:nowrap\">Node.js 22</span> · <span style=\"white-space:nowrap\">Vercel 서버리스</span> · <span style=\"white-space:nowrap\">Supabase(Postgres · RLS · Auth)</span> · <span style=\"white-space:nowrap\">jose</span> · <span style=\"white-space:nowrap\">node:test</span>"
         },
         {
           "label": "구분",
-          "value": "판정 계약과 채점 엔진, 대시보드 화면 틀은 과정 제공 · 보안 로직(src/·api/·supabase/·test/), XDR 탐지 모듈, student/extension.mjs는 직접 구현"
+          "value": "판정 계약과 채점 엔진, 대시보드 화면 틀은 과정 제공 · 보안 로직(src · api · supabase · test 폴더), XDR 탐지 모듈, student/extension.mjs는 직접 구현"
         },
         {
           "label": "링크",
@@ -265,8 +265,8 @@
           "solution": "**통과한 점검이 그 경우를 실제로 보고 있는지부터 의심**. 로그아웃 시 그 사용자의 승인 세션을 전부 회수하고, 회수 실패는 성공으로 답하지 않으며, 회귀 시험을 추가"
         },
         {
-          "problem": "12단계가 16번 재제출 끝에 통과 — 앞선 15번은 심판 내부를 추측해 고친 것",
-          "solution": "**Vercel·Supabase 실제 로그를 켜고 재제출해 심판의 동작을 관측**. 심판이 요청 헤더를 다시 만들어 보내고 URL로 대조한다는 것을 확인한 뒤 점검 이름을 URL 쿼리에 실어 통과 (어느 변경이 결정적이었는지는 구분 못 함)"
+          "problem": "12단계가 16번 재제출 끝에 통과\n앞선 15번은 심판 내부를 추측해 고친 것",
+          "solution": "**Vercel·Supabase 실제 로그를 켜고 재제출해 심판의 동작을 관측**. 심판이 요청 헤더를 다시 만들어 보내고 URL로 대조한다는 것을 확인한 뒤 점검 이름을 URL 쿼리에 실어 통과"
         },
         {
           "problem": "브라우저 저장소의 기기 번호, 이어서 로그인 토큰까지 \"저장된 키\"로 지적받음(S11_KEY_EXPOSED)",
@@ -299,7 +299,6 @@
           "value": "차단 **5** · 사람 확인 **1** · 정상 기록 **5** · 정상 트래픽 오탐 **0건**"
         }
       ],
-      "metrics_note": "심판의 41종과 자체 재시험 58건은 1:1로 대응하지 않습니다. XDR 수치는 합성 경보 기준입니다. 13~22단계는 공식 판정 결과 기록이 없고, detect()는 로컬 연습 단계라 실제 접속 회수에 연결돼 있지 않습니다. 판정기의 이상 접속 재확인 규칙은 신호가 없으면 통과하도록 설계했고(접근 관문은 기기 등록·경로 규칙이 닫힘 방식), 예전 공개 커밋과 배포에 남은 옛 키와 data.json은 해결되지 않았습니다.",
       "note": "심판 판정 · XDR은 합성 데이터"
     }
   },
