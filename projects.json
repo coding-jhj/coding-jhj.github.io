@@ -170,10 +170,12 @@
         },
         {
           "step": "04",
-          "title": "RAG 검색 파이프라인",
+          "title": "위로 문구 검색 파이프라인(RAG) 구축",
           "bullets": [
-            "ChromaDB 기반 임베딩·적재·검색 모듈(`ai/rag/`) 신설",
-            "패러프레이즈 쿼리셋으로 검색 품질을 직접 실증 — **Hit@1 100%, MRR 1.0**"
+            "corpus → Gemini 임베딩(`gemini-embedding-001`, 768차원) → ChromaDB 적재까지 `ai/rag/` 파이프라인 전체(embeddings·store·ingest·retrieve) 설계·구현",
+            "추모·장례안내·미션추천 3개 카테고리, 총 63건 corpus를 `category` 메타데이터로 필터링 — 검색 혼선 방지",
+            "위기감지·건강정보·1인칭 편지 생성에는 RAG를 의도적으로 배제(안전·윤리 우선 설계), `retrieve()` 인터페이스를 먼저 고정해 팀원의 LLM 연결 작업과 분리",
+            "패러프레이즈 쿼리셋(12개)으로 검색 품질 직접 실증 — **Hit@1 100%, MRR 1.0**, corpus 추가 시 지표를 공유받아 쿼리셋 직접 보완"
           ]
         },
         {
