@@ -142,7 +142,7 @@
     "status": "ready",
     "detail": {
       "hero_image": "assets/screenshots/full-security-labs-01-topology.png",
-      "intro": "GNS3 라우팅·VLAN·ASAv 방화벽, VirtualBox 서버군(DNS·Web-DB·Wazuh·OSSEC·Zabbix·PMM), pfSense 원격접속 VPN, 중앙 로그 수집, Snort IDS, Kali 기반 Earth VM 공략까지 하나의 과제로 구축\n→ 설정을 마쳤다는 사실이 아니라, 각 구간의 실제 명령 결과를 근거로 완료·부분완료·미완료를 구분",
+      "intro": "GNS3 라우팅·VLAN·ASAv 방화벽부터 VirtualBox 서버군(DNS·Web-DB·Wazuh·OSSEC·Zabbix·PMM)·pfSense 원격접속 VPN까지 구축\n→ 중앙 로그 수집·Snort IDS로 모니터링하고, Kali로 Earth VM을 공략해 User Flag·Root Flag까지 확보",
       "info_table": [
         {"label": "구성", "value": "개인 과제 · SKT ALEPH IT 인프라·보안 학습 교재 (Full-Security Labs)"},
         {"label": "기간", "value": "2026.09 (제출일 2026-09-30)"},
@@ -174,7 +174,7 @@
           "step": "03",
           "title": "서버 구축과 모니터링·보안",
           "bullets": [
-            "DNS(`dig` 조회 → 192.168.16.71 정상 반환)와 Web-DB(httpd·mariadb·php-fpm 전부 active, HTTP 200) 응답 확인",
+            "DNS(`dig` 조회 → 192.168.16.71 정상 반환)와\nWeb-DB(httpd·mariadb·php-fpm 전부 active, HTTP 200) 응답 확인",
             "Wazuh 대시보드는 정상이나 Agents Summary는 'No results'(에이전트 등록은 과제 범위 외로 구분), OSSEC은 매니저 6개 프로세스 정상 기동 · 에이전트 2개는 **Never connected로 미연결 상태 그대로 기록**",
             "PMM은 초기 gRPC 연결이 'no route to host'로 실패했다가 재확인 시 자연 복구(Connected: true, 지연 7.7ms) — 원인은 추정으로만 남기고 확정하지 않음"
           ]
@@ -183,7 +183,7 @@
           "step": "04",
           "title": "중앙 로그 수집과 Snort IDS",
           "bullets": [
-            "DNS 서버의 rsyslog 재시작 이벤트를 식별자로 삼아 rsyslog→Web-DB(/var/log/messages)→MariaDB(syslog.SystemEvents ID 876~880)→LogAnalyzer까지 **전 구간을 하나의 이벤트로 추적**",
+            "DNS 서버의 rsyslog 재시작 이벤트를 식별자로 삼아\nrsyslog→Web-DB(/var/log/messages)→MariaDB(syslog.SystemEvents ID 876~880)→LogAnalyzer까지 **전 구간을 하나의 이벤트로 추적**",
             "LogAnalyzer 검색이 Host 컬럼이 아닌 메시지 본문에 매칭돼 무관한 로그가 섞여 나온 오조회를 발견 → 메시지 키워드로 재검색해 정정",
             "Snort 3.12.2를 소스 빌드로 구축하고 ICMP·HTTP·SSH 3종 로컬 규칙 작성, `-T` 설정 검증은 통과했지만 **실제 탐지 트래픽은 전송하지 못해 alert 로그는 미확보로 분류**"
           ]
