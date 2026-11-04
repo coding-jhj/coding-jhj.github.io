@@ -245,7 +245,7 @@
     "category": "security",
     "subgroup": "project",
     "pinned_top": false,
-    "screenshot": null,
+    "screenshot": "assets/screenshots/system-security-lab-01-overview.png",
     "one_liner": "Rocky 서버 보안 강화부터 Snort/Suricata 탐지·예방, 보안 점검 스크립트, DVWA Command Injection, DigitalWorld FALL CTF까지 수행한 리눅스·네트워크 보안 랩",
     "roles": [
       "개인 과제",
@@ -255,6 +255,7 @@
     "github": null,
     "status": "ready",
     "detail": {
+      "hero_image": "assets/screenshots/system-security-lab-01-overview.png",
       "intro": "Rocky Linux 서버 보안 강화부터 Snort 3·Suricata 탐지/예방, 보안 점검 자동화, DVWA Command Injection까지 실습망에서 구성\n→ DigitalWorld FALL CTF로 정찰부터 권한 상승까지 전 과정을 직접 공략해 검증",
       "info_table": [
         {"label": "구성", "value": "개인 과제 4건 · 팀 과제 1건 · 연구과제 1건 · SKT ALEPH IT 인프라·보안 학습 교재 (System Security Lab)"},
@@ -270,7 +271,9 @@
             "pwquality.conf(최소 8자·대소문자·숫자·특수문자 각 1개 이상)와 PAM 연결을 확인하고, 계정에 `chage -M 90`으로 패스워드 90일 만료 적용",
             "firewalld Rich Rule 3개(ICMP·HTTP·HTTPS 차단)와 iptables Rule을 각각 구성 → **TCP 22번(SSH 관리 접속)은 건드리지 않고** Windows ping/curl.exe로 차단을 검증한 뒤 즉시 제거",
             "SetUID/SGID 파일을 `find -perm -4000/-2000`으로 전수 조사하고, 발견된 파일을 소유자·필요성 기준으로 판단(이름만 보고 취약점으로 단정하지 않음)"
-          ]
+          ],
+          "image": "assets/screenshots/system-security-lab-01-overview.png",
+          "image_caption": "과제 구성도 — Kali 공격자부터 Snort/Suricata 탐지, Rocky 방화벽, 팀/연구과제 영역까지"
         },
         {
           "step": "02",
