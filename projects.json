@@ -121,7 +121,7 @@
     "category": "ai",
     "subgroup": "project",
     "pinned_top": false,
-    "screenshot": "assets/screenshots/rainbow-bridge-02-recovery.png",
+    "screenshot": "assets/screenshots/rainbow-bridge-demo.gif",
     "one_liner": "펫로스 애프터케어 서비스에서 TTS 폴백 파이프라인·GPU 원격 서버 운영·RAG 검색·회복점수 평가 시스템을 전담한 AI 엔지니어 역할",
     "roles": [
       "정환주(AI 엔지니어 · TTS 파이프라인·GPU 서버·RAG 검색·회복점수 평가)",
@@ -130,11 +130,11 @@
     "github": "https://github.com/mosejong/Rainbow-Bridge",
     "status": "ready",
     "detail": {
-      "hero_image": "assets/screenshots/rainbow-bridge-02-recovery.png",
+      "hero_image": "assets/screenshots/rainbow-bridge-demo.gif",
       "intro": "반려동물과의 이별 전후 감정 기록·추모 콘텐츠·회복 미션을 이어주는 6인 팀 AI 서비스\n→ AI 엔지니어로 TTS·GPU 서버·RAG·평가 시스템을 전담",
       "info_table": [
         {"label": "구성", "value": "6인 팀 프로젝트 · 2026.06.01~06.19 (이스트소프트 AI 휴먼 4기)"},
-        {"label": "내 역할", "value": "AI 엔지니어 / GPU 서버 — TTS 폴백 파이프라인 · GPU 원격 서버 운영 · RAG 검색 파이프라인 · 회복점수 평가 (팀장 아님, 브랜치: jeonghwanju)"},
+        {"label": "내 역할", "value": "AI 엔지니어 / GPU 서버 — TTS 폴백 파이프라인 · GPU 원격 서버 운영 · RAG 검색 파이프라인 · 회복점수 평가"},
         {"label": "기술 스택", "value": "FastAPI · MongoDB/SQLite/Redis · Gemini 2.5 Flash · ChromaDB(RAG) · Qwen3 GPU(자체호스팅)/Google Cloud TTS/gTTS"}
       ],
       "flow": [
@@ -143,8 +143,11 @@
           "title": "TTS 백엔드 연결 + 3단계 폴백 구조",
           "bullets": [
             "Google Cloud TTS 키 발급 → 백엔드 stub를 `ai/tts.synthesize()` 실호출로 교체, 합성 mp3를 `uploads/tts/`에 저장, duration은 ffprobe 실측",
-            "Qwen3 GPU(자체호스팅)를 주 엔진으로 두고, 실패 시 **Google Cloud TTS → gTTS**로 이어지는 3단계 폴백 체인을 설계·구현"
-          ]
+            "Qwen3 GPU(자체호스팅)를 주 엔진으로 두고, 실패 시 **Google Cloud TTS → gTTS**로 이어지는 3단계 폴백 체인을 설계·구현",
+            "비개발자 팀원도 따라 할 수 있게 **TTS 실행 가이드 문서**(서버 기동 → 터널 연결 → 백엔드 URL 등록 순서) 작성"
+          ],
+          "image": "assets/screenshots/rainbow-bridge-pipeline.svg",
+          "image_caption": "펫로스 애프터케어 내부 파이프라인 — \"3. TTS 낭독\" 구간이 본인 담당 영역"
         },
         {
           "step": "02",
@@ -152,7 +155,7 @@
           "bullets": [
             "자동지표(CER·Gemini 평가)로는 'Google 유지' 결론 → ElevenLabs Free 플랜의 영어권 핸디캡 때문에 불공정 비교였음",
             "**사람이 직접 듣는 블라인드 테스트 도구를 직접 제작**(`pairwise_listen.py`), ElevenLabs 보이스 9종 확보",
-            "사람 청취 결과 **9전 9승**으로 자동지표 결론이 뒤집힘 — 실제 채택은 라이선스 비용 문제로 PM 판단에 위임"
+            "사람 청취 결과 **9전 9승**으로 자동지표 결론이 뒤집힘 — 실제 채택은 라이선스 비용 문제로 PM 판단에 위임(품질 검증과 도입 결정은 분리)"
           ]
         },
         {
@@ -161,7 +164,9 @@
           "bullets": [
             "cloudflared 터널 URL 자동 갱신 문제 해결 → **watchdog 자동등록 시스템**(30초 폴링 → health 검증 → 백엔드 push → Redis TTL) 설계·구현, GPU 자동 재시작 로직 추가",
             "긴 메시지 처리를 **제출→상태조회→결과 3단 비동기 잡**으로 전환, pm2 운영 전환 + TTS 로그 분석기·STT 발음평가 도구 제작"
-          ]
+          ],
+          "image": "assets/screenshots/rainbow-bridge-architecture.svg",
+          "image_caption": "시스템 구성도 — AI/멀티모달 GPU 서버가 본인이 운영한 영역"
         },
         {
           "step": "04",
@@ -181,6 +186,17 @@
           ],
           "image": "assets/screenshots/rainbow-bridge-01-hero.png",
           "image_caption": "회복 여정 끝에 열리는 추억 선물함 — 회복점수가 일정 구간을 넘으면 단계적으로 열림"
+        },
+        {
+          "step": "06",
+          "title": "동료 PR 교차검토로 버그 선제 발견",
+          "bullets": [
+            "비밀번호 해시 DB가 그대로 커밋될 뻔한 `.db` gitignore 누락을 리뷰에서 발견해 변경 요청",
+            "관리자 사용량 집계 필드 불일치(`tokens_used`/`total_tokens`)를 찾아 정합성 확인 후 승인",
+            "위기감지 로직을 실제 환경(worktree)에서 직접 검증 — 위험도별 정상 동작과 오탐 없음을 확인 후 승인"
+          ],
+          "image": "assets/screenshots/rainbow-bridge-03-team-roles.jpg",
+          "image_caption": "팀 역할표 — Rainbow Bridge Team 5"
         }
       ],
       "problems": [
