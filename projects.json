@@ -463,14 +463,123 @@
   {
     "id": "passkey-private-portfolio",
     "title": "Passkey Private Portfolio",
-    "category": "ai",
+    "category": "security",
     "subgroup": "project",
     "pinned_top": false,
-    "screenshot": null,
-    "one_liner": null,
-    "roles": [],
-    "github": null,
-    "status": "needs_content"
+    "screenshot": "assets/screenshots/passkey-02-workspace.png",
+    "one_liner": "비밀번호 없이 패스키(WebAuthn)로 인증하고, 인증된 계정의 자료만 서버가 응답하는 포트폴리오 보안 공간",
+    "roles": [
+      "개인 프로젝트"
+    ],
+    "github": "https://github.com/coding-jhj/aleph-first-homework",
+    "status": "ready",
+    "detail": {
+      "hero_image": "assets/screenshots/passkey-02-workspace.png",
+      "intro": "공개 포트폴리오와 패스키 전용 private 공간을 한 페이지에 둔 서비스\n→ 서버가 WebAuthn 서명을 검증한 뒤에만 계정별 자료를 응답",
+      "info_table": [
+        {
+          "label": "구성",
+          "value": "개인 프로젝트 · ALEPH 과제(T08)"
+        },
+        {
+          "label": "기간",
+          "value": "2026.09.09 – 2026.09.10"
+        },
+        {
+          "label": "기술 스택",
+          "value": "<span style=\"white-space:nowrap\">Vercel Functions</span> · <span style=\"white-space:nowrap\">@simplewebauthn/server</span> · <span style=\"white-space:nowrap\">Supabase PostgreSQL</span> · <span style=\"white-space:nowrap\">표준 WebAuthn API</span>"
+        },
+        {
+          "label": "링크",
+          "value": "<a href=\"https://aleph-first-homework.vercel.app/\" target=\"_blank\" rel=\"noopener\">배포 사이트 ↗</a> · <a href=\"https://github.com/coding-jhj/aleph-first-homework/blob/main/docs/T08_EVIDENCE_TEMPLATE.md\" target=\"_blank\" rel=\"noopener\">검증 기록 ↗</a>"
+        },
+        {
+          "label": "참고",
+          "value": "공개 화면의 이름·연락처와 private 자료는 제출용 가상(synthetic) 데이터"
+        }
+      ],
+      "flow": [
+        {
+          "step": "01",
+          "title": "패스키 등록",
+          "bullets": [
+            "서버가 5분 만료 challenge를 발급·저장 → 브라우저가 기기에 패스키 생성",
+            "서버가 서명·origin·RP ID를 검증한 뒤 **공개 키만 저장**하고 계정과 가상 자료 3개 생성"
+          ],
+          "image": "assets/screenshots/passkey-01-locked.png",
+          "image_caption": "잠긴 상태: 공개 영역과 private 영역의 경계"
+        },
+        {
+          "step": "02",
+          "title": "패스키 로그인",
+          "bullets": [
+            "등록된 credential만 허용하고, challenge는 **검증 직전에 한 번만 소비**",
+            "서명·counter 검증 뒤 세션 발급 (쿠키에는 불투명 토큰, DB에는 SHA-256 해시만 저장)"
+          ]
+        },
+        {
+          "step": "03",
+          "title": "계정별 private 자료",
+          "bullets": [
+            "자료 조회는 **세션의 계정으로만** 수행, URL에 다른 계정 ID를 넣으면 403과 보안 이벤트 기록"
+          ],
+          "image": "assets/screenshots/passkey-02-workspace.png",
+          "image_caption": "인증 후 private 자료·패스키 목록·인증 기록 화면"
+        },
+        {
+          "step": "04",
+          "title": "다중 패스키 · 보안 기록",
+          "bullets": [
+            "한 계정에 여러 기기를 등록하고 개별 삭제 (마지막 패스키를 지우면 세션도 회수)",
+            "성공·실패·replay·거부를 fingerprint와 reason code만 남겨 기록"
+          ],
+          "image": "assets/screenshots/passkey-03-security-events.png",
+          "image_caption": "인증 기록 (원본 challenge·서명은 표시하지 않음)"
+        }
+      ],
+      "problems": [
+        {
+          "problem": "같은 로그인 요청을 다시 보내는 재전송(replay) 공격",
+          "solution": "challenge를 **\"미사용·미만료\" 조건부 update로 한 번만 소비**. 같은 요청의 두 번째 전송은 401 거부와 이벤트 기록으로 끝남"
+        },
+        {
+          "problem": "DB가 유출되면 세션 토큰으로 계정을 탈취당할 위험",
+          "solution": "쿠키에는 무작위 불투명 토큰만 두고 **DB에는 SHA-256 해시만 저장**. 토큰 원문은 서버에도 남지 않음"
+        },
+        {
+          "problem": "URL이나 요청 값으로 다른 계정의 자료를 읽으려는 시도",
+          "solution": "계정 범위를 **세션에서만 결정**. URL의 계정 ID가 다르면 자료를 읽기 전에 403으로 거부"
+        },
+        {
+          "problem": "브라우저에서 DB가 직접 노출될 위험",
+          "solution": "브라우저는 DB에 연결하지 않고 서버 API만 호출. 6개 테이블에 RLS를 켜고 일반 역할 권한을 회수해 **서버 전용 키로만 접근**"
+        }
+      ],
+      "metrics": [
+        {
+          "label": "로그인 없는 private 읽기",
+          "value": "**401** 거부, 자료 없음"
+        },
+        {
+          "label": "A 세션으로 B 계정 URL 요청 (양방향)",
+          "value": "**403** account_scope_mismatch"
+        },
+        {
+          "label": "같은 로그인 요청 재전송",
+          "value": "**401** challenge_rejected"
+        },
+        {
+          "label": "삭제한 패스키로 로그인 시도",
+          "value": "**401** credential_not_registered"
+        },
+        {
+          "label": "정적 검사 · 의존성 점검",
+          "value": "**15개 통과** · npm audit 취약점 **0건**"
+        }
+      ],
+      "metrics_note": "배포 사이트에 Chromium 가상 authenticator로 시험한 결과이며, 실기기 패스키 시험은 하지 않았습니다.",
+      "note": "가상 authenticator 기준"
+    }
   },
   {
     "id": "minecraft-uptime-dashboard",
