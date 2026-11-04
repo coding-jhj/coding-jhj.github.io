@@ -666,7 +666,7 @@
   },
   {
     "id": "my-career-planner",
-    "title": "MY_CAREER_PLANNER (지원 준비 실행 다이어리)",
+    "title": "MY_CAREER_PLANNER",
     "category": "web",
     "subgroup": "project",
     "pinned_top": false,
@@ -695,7 +695,7 @@
         },
         {
           "label": "구분",
-          "value": "AI 보조: 기존 저장소 분석, Supabase Auth·RLS 초안, 테스트와 문서 틀 · 직접 판단: 쿠키 세션 + DB 소유권 방식 선택, 기존 계획·할 일·실행 모델 유지, 생성한 5일 데이터를 실사용 증거로 쓰지 않기"
+          "value": "AI 보조: <span style=\"white-space:nowrap\">기존 저장소 분석,</span> <span style=\"white-space:nowrap\">Supabase Auth·RLS 초안,</span> <span style=\"white-space:nowrap\">테스트와 문서 틀</span><br>직접 판단: <span style=\"white-space:nowrap\">쿠키 세션 + DB 소유권 방식 선택,</span> <span style=\"white-space:nowrap\">기존 계획·할 일·실행 모델 유지,</span> <span style=\"white-space:nowrap\">생성한 5일 데이터를 실사용 증거로 쓰지 않기</span>"
         },
         {
           "label": "링크",
