@@ -246,10 +246,92 @@
     "subgroup": "project",
     "pinned_top": false,
     "screenshot": null,
-    "one_liner": null,
-    "roles": [],
+    "one_liner": "Rocky 서버 보안 강화부터 Snort/Suricata 탐지·예방, 보안 점검 스크립트, DVWA Command Injection, DigitalWorld FALL CTF까지 수행한 리눅스·네트워크 보안 랩",
+    "roles": [
+      "개인 과제",
+      "팀 과제",
+      "연구과제"
+    ],
     "github": null,
-    "status": "needs_content"
+    "status": "ready",
+    "detail": {
+      "intro": "Rocky Linux 서버 보안 강화부터 Snort 3·Suricata 탐지/예방, 보안 점검 자동화, DVWA Command Injection까지 실습망에서 구성\n→ DigitalWorld FALL CTF로 정찰부터 권한 상승까지 전 과정을 직접 공략해 검증",
+      "info_table": [
+        {"label": "구성", "value": "개인 과제 4건 · 팀 과제 1건 · 연구과제 1건 · SKT ALEPH IT 인프라·보안 학습 교재 (System Security Lab)"},
+        {"label": "환경", "value": "Rocky(192.168.16.110) · Snort 센서(Rocky 192.168.16.149 · Ubuntu 192.168.16.154) · Suricata 센서(192.168.16.139) · Kali(192.168.16.97) · DVWA(192.168.16.78) · DigitalWorld FALL CTF(192.168.16.136)"},
+        {"label": "구성 요소", "value": "SSH·패스워드 정책·firewalld/iptables·SetUID 점검 · Snort 3·Suricata 탐지/예방 Rule 3종 · 리눅스 보안 점검 스크립트(팀) · 디스크·Sticky Bit 정기 점검(cron, 연구) · DVWA Command Injection 4레벨 · DigitalWorld FALL CTF(LFI→SSH 키→권한상승)"}
+      ],
+      "flow": [
+        {
+          "step": "01",
+          "title": "Rocky 보안 강화·방화벽·권한",
+          "bullets": [
+            "sshd_config와 drop-in(`/etc/ssh/sshd_config.d/*.conf`)을 모두 확인해 PermitRootLogin no 적용 → **메인 파일만 고치면 drop-in의 yes가 우선 적용되는 함정**을 피하려고 `sshd -T`로 최종 유효값을 기준으로 판단",
+            "pwquality.conf(최소 8자·대소문자·숫자·특수문자 각 1개 이상)와 PAM 연결을 확인하고, 계정에 `chage -M 90`으로 패스워드 90일 만료 적용",
+            "firewalld Rich Rule 3개(ICMP·HTTP·HTTPS 차단)와 iptables Rule을 각각 구성 → **TCP 22번(SSH 관리 접속)은 건드리지 않고** Windows ping/curl.exe로 차단을 검증한 뒤 즉시 제거",
+            "SetUID/SGID 파일을 `find -perm -4000/-2000`으로 전수 조사하고, 발견된 파일을 소유자·필요성 기준으로 판단(이름만 보고 취약점으로 단정하지 않음)"
+          ]
+        },
+        {
+          "step": "02",
+          "title": "Snort 3·Suricata 탐지/예방 Rule",
+          "bullets": [
+            "Rocky·Ubuntu 두 센서에 Snort 3를 소스 빌드(libdaq→snort3)로 설치하고, 같은 ICMP·HTTP(/etc/passwd)·SSH 탐지 Rule 3개(SID 1000001~1000003)를 두 환경에 동일 적용",
+            "Suricata는 별도 센서에서 suricata.yaml의 HOME_NET·rule-files를 구성하고 **alert Rule로 먼저 탐지를 확인한 뒤**, drop Rule 3개(SID 1000101~1000103)를 별도 파일로 분리해 예방 Rule을 설계",
+            "**alert 로그에 SID가 찍히는 것(IDS 탐지)과 실제 트래픽이 끊기는 것(IPS 차단)은 다른 조건**이라는 점을 반영해, drop Rule이 로드돼도 inline 경로(NFQUEUE/AF_PACKET) 없이는 차단되지 않는다는 전제로 검증 순서를 설계"
+          ]
+        },
+        {
+          "step": "03",
+          "title": "DigitalWorld FALL CTF",
+          "bullets": [
+            "nmap 전체 스캔 → gobuster/ffuf로 test.php의 LFI 파라미터(file)를 발견 → `/etc/passwd`로 일반 계정 확인",
+            "LFI로 SSH 개인키(`/home/qiu/.ssh/id_rsa`)를 읽어와 로그인에 성공하고, 권한 상승 점검(sudo -l·SUID 전수조사)을 거쳐 **root flag 획득까지 완료**",
+            "VM이 브리지 DHCP라 세션마다 IP가 바뀔 수 있다는 점을 반영해, 주소가 바뀌어도 이미 확보한 결과(LFI·개인키·권한상승)는 유지하고 연결 상태만 재검증하는 운영 기준을 분리"
+          ]
+        },
+        {
+          "step": "04",
+          "title": "Linux 보안 점검 스크립트 (팀과제)",
+          "bullets": [
+            "계정·파일권한(SUID/SGID/World-writable)·서비스/포트·방화벽·SSH/웹 설정·로그·패치 상태 7개 영역을 한 번에 점검하는 읽기 전용 bash 스크립트를 팀으로 설계",
+            "**설정을 자동으로 고치지 않고 근거만 남기는 것**을 원칙으로 삼음 — `dnf check-update`의 종료코드 100을 스크립트 실패와 구분해 처리하는 등 오탐 방지 로직 포함",
+            "역할을 계정/인증, 파일/서비스, 검증, 문서 4개로 나눠 분담"
+          ]
+        },
+        {
+          "step": "05",
+          "title": "디스크·Sticky Bit 정기 점검 (연구과제)",
+          "bullets": [
+            "매주 금요일 17:00 cron으로 루트 파일시스템 사용률(80% 임계치)과 /home 하위 Sticky Bit 상태를 반복 기록하는 점검 스크립트를 설계",
+            "Sticky Bit는 **디렉터리에 적용됐을 때만 삭제 보호가 성립**한다는 점을 반영해, 공유 디렉터리(1777)에서 실제 삭제 제한을 재현해 검증하는 절차를 포함"
+          ]
+        },
+        {
+          "step": "06",
+          "title": "DVWA Command Injection 레벨별 실습",
+          "bullets": [
+            "Low(`&&id`)·Medium(`|id`)·High(공백 없는 `|id`)·Impossible 4단계를 순서대로 입력해 **같은 공격 문자열이 필터 수준에 따라 어떻게 막히는지** 비교",
+            "Low/Medium은 `uid=`·`gid=` 출력으로 명령 실행을, Impossible은 Invalid IP 오류로 입력 검증이 작동함을 확인 — 결과가 없으면 우회 문자열을 반복하지 않고 현재 Level·버전을 그대로 기록하는 원칙 적용"
+          ]
+        }
+      ],
+      "problems": [
+        {"problem": "PermitRootLogin을 메인 sshd_config에만 no로 설정하면 drop-in 파일(sshd_config.d/*.conf)에 남은 yes가 우선 적용될 수 있음", "solution": "**최종 유효 설정을 보여주는 sshd -T 결과를 판단 기준**으로 삼고, 메인 파일과 drop-in을 모두 grep으로 대조하도록 절차에 명시"},
+        {"problem": "Suricata에서 drop Rule을 작성해도 센서가 일반 수신 모드면 트래픽이 계속 통과함(IDS≠IPS)", "solution": "**탐지(alert)와 예방(drop) Rule을 별도 파일로 분리**하고, inline 경로(NFQUEUE/AF_PACKET) 조건을 먼저 확인한 뒤에만 예방 테스트를 수행하도록 순서를 설계"},
+        {"problem": "Suricata의 HTTP 평문 content Rule은 HTTPS(443) 요청에는 적용되지 않음", "solution": "검증 전에 Rocky 웹 대상의 TCP 80 Listen 여부를 먼저 확인하도록 절차에 명시"},
+        {"problem": "DigitalWorld FALL CTF VM이 브리지 DHCP라 재부팅할 때마다 IP가 바뀔 수 있음", "solution": "이미 확보한 LFI·SSH 키·권한상승 결과는 유지하고, 주소가 바뀌면 연결·서비스 상태만 재검증하도록 운영 기준을 분리"},
+        {"problem": "보안 점검 스크립트에서 dnf check-update는 업데이트가 있으면 종료코드 100을 반환", "solution": "**이를 스크립트 오류로 오인하지 않도록** 종료코드를 별도로 분기 처리"}
+      ],
+      "metrics": [
+        {"label": "DigitalWorld FALL CTF", "value": "LFI → SSH 키 탈취 → 권한 상승 → **root flag 획득 완료**(본인 보고 기준)"},
+        {"label": "Snort 3·Suricata Rule", "value": "ICMP·HTTP·SSH 탐지 3종(SID 1000001~1000003) + Suricata 예방 Rule 3종(SID 1000101~1000103) 설계"},
+        {"label": "DVWA Command Injection", "value": "Low~Impossible **4개 Security Level** 비교"},
+        {"label": "다룬 보안 영역", "value": "SSH·방화벽·IDS/IPS·보안 점검 자동화·정기 점검·웹 취약점·CTF **7개 축**"}
+      ],
+      "metrics_note": "SKT ALEPH IT 인프라·보안 학습 교재의 실습 절차와 설계 기준을 정리한 카드이며, 별도로 제출된 실행 결과 보고서는 없습니다. DigitalWorld FALL CTF의 root flag 획득을 제외한 나머지 항목은 실행 로그·스크린샷 근거가 아니라 구성·점검 절차 기준으로 기록했습니다.",
+      "note": "실습 절차·설계 기준 (실행 결과 보고서 없음)"
+    }
   },
   {
     "id": "network-security-integration-lab",
@@ -425,16 +507,6 @@
     "difficulty": null,
     "role_note": "woojin님과 공동 풀이 — 팀/공동풀이로 표현, 단독 성과처럼 쓰지 않기",
     "writeup_or_flag_link": null,
-    "status": "needs_content"
-  },
-  {
-    "id": "digitalworld-fall-ctf",
-    "title": "DigitalWorld FALL CTF",
-    "category": "security",
-    "subgroup": "ctf",
-    "pinned_top": false,
-    "screenshot": null,
-    "one_liner": null,
     "status": "needs_content"
   },
   {
