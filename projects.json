@@ -122,7 +122,7 @@
     "subgroup": "project",
     "pinned_top": false,
     "screenshot": "assets/screenshots/rainbow-bridge-01-hero.png",
-    "one_liner": "펫로스 애프터케어 서비스에서 TTS 4단계 폴백 파이프라인·GPU 원격 서버 운영·회복점수 평가 시스템을 전담한 AI 엔지니어 역할",
+    "one_liner": "펫로스 애프터케어 서비스에서 TTS 폴백 파이프라인·GPU 원격 서버 운영·회복점수 평가 시스템을 전담한 AI 엔지니어 역할",
     "roles": [
       "정환주(AI 엔지니어 · TTS 파이프라인·GPU 서버·회복점수 평가)",
       "모세종(PM·백엔드) · 김윤한(백엔드·인프라) · 반소람(AI·프롬프트·위기감지) · 장민수(멀티모달) · 민경이(프론트엔드)"
@@ -134,18 +134,18 @@
       "intro": "반려동물과의 이별 전후 감정 기록·추모 콘텐츠·회복 미션을 이어주는 6인 팀 AI 서비스\n→ AI 엔지니어로 TTS·GPU 서버·평가 시스템을 전담",
       "info_table": [
         {"label": "구성", "value": "6인 팀 프로젝트 · 2026.06.01~06.19 (SKT ALEPH)"},
-        {"label": "내 역할", "value": "AI 엔지니어 / GPU 서버 — TTS 4단계 폴백 · GPU 원격 서버 운영 · 회복점수 평가 (팀장 아님, 브랜치: jeonghwanju)"},
-        {"label": "기술 스택", "value": "FastAPI · MongoDB/SQLite/Redis · Gemini 2.5 Flash · ChromaDB(RAG) · Qwen3 GPU/WaveSpeedAI/Google Cloud TTS/gTTS"},
-        {"label": "링크", "value": "<a href=\"https://github.com/mosejong/Rainbow-Bridge\" target=\"_blank\" rel=\"noopener\">GitHub ↗</a> (팀장 모세종 소유 레포)"}
+        {"label": "내 역할", "value": "AI 엔지니어 / GPU 서버 — TTS 폴백 파이프라인 · GPU 원격 서버 운영 · 회복점수 평가 (팀장 아님, 브랜치: jeonghwanju)"},
+        {"label": "기술 스택", "value": "FastAPI · MongoDB/SQLite/Redis · Gemini 2.5 Flash · ChromaDB(RAG) · Qwen3 GPU(자체호스팅)/Google Cloud TTS/gTTS"}
       ],
       "flow": [
         {
           "step": "01",
-          "title": "TTS 백엔드 연결 + 4단계 폴백 구조",
+          "title": "TTS 백엔드 연결 + 3단계 폴백 구조",
           "bullets": [
             "Google Cloud TTS 키 발급 → 백엔드 stub를 `ai/tts.synthesize()` 실호출로 교체, 합성 mp3를 `uploads/tts/`에 저장",
             "합성 실패 시 샘플 mp3로 graceful 폴백, duration은 ffprobe 실측(추정은 보조)",
-            "최종 폴백 체인 **Qwen3 GPU(자체호스팅) → WaveSpeedAI → Google Cloud TTS → gTTS**를 설계하고, 분기 중 하나가 폴백 래퍼를 안 거쳐 500을 내던 **불일치 버그**(`tts.py:166`)를 찾아 수정"
+            "Qwen3 GPU(자체호스팅)를 주 엔진으로 두고, 실패 시 **Google Cloud TTS → gTTS**로 이어지는 3단계 폴백 체인을 설계·구현",
+            "Google 폴백이 voice 파라미터를 무시하고 **여성 보이스로 고정되는 버그**를 발견해 수정, male·narration 톤 추가"
           ]
         },
         {
@@ -162,8 +162,8 @@
           "title": "GPU 원격 서버 운영 자동화",
           "bullets": [
             "cloudflared 터널 URL이 재시작마다 바뀌는 문제 → **watchdog 자동등록 시스템**(30초 폴링 → health 검증 → 백엔드 push → Redis TTL) + GPU 자동 재시작 로직을 설계·구현",
-            "**VRAM hang 503 버그**: GPU 8GB를 데스크톱 앱과 공유해 746MB만 남으면 합성 job이 멈춘 채 VRAM을 영구 점유 → 타임아웃 + `_degraded` 플래그로 연쇄 장애 차단",
-            "**오진단을 스스로 바로잡은 사례**: 600자 메시지 폴백을 처음엔 '환경(VRAM) 탓'으로 결론 냈다가, 코드 상수(`_SYNTH_TIMEOUT=150s`)를 다시 읽고 애초에 600자 합성(~200초)엔 150초가 부족했던 **설정값 버그**였음을 확인 → 300초로 수정",
+            "**VRAM hang 503 버그**: GPU 8GB를 데스크톱 앱과 공유해 VRAM이 바닥나면 합성 job이 멈춘 채 영구 점유 → 타임아웃 가드와 `_degraded` 플래그로 연쇄 장애 차단",
+            "**오진단을 스스로 바로잡은 사례**: 600자 메시지가 계속 폴백되는 원인을 처음엔 '환경(VRAM) 탓'으로 결론 냈다가, 코드 상수를 다시 읽고 애초에 600자 합성(~200초)엔 타임아웃 150초가 부족했던 **설정값 버그**였음을 확인 → 300초로 수정",
             "긴 메시지 처리를 동기 호출에서 **제출→상태조회→결과 3단 비동기 잡**으로 전환, 운영 후반엔 pm2 전환 + TTS 로그 분석기·STT 발음평가(CER/WER) 도구까지 제작"
           ]
         },
@@ -180,7 +180,8 @@
           "title": "회복점수(Recovery Score) 평가 시스템",
           "bullets": [
             "`recovery_signal.py` 소유 — DB 조회와 분리된 **순수 함수**로 설계해 GPU·DB 없이 테스트·시뮬레이션 가능하게 구조화",
-            "산식을 **감정 40 / 미션 35 / 꾸준함 25**로 정착시켰는데, 동료 리뷰에서 **미션캡 불일치 버그**(base 35 vs blend 25 — 활동 데이터가 섞이면 미션 개수만으로 점수가 튐)를 발견해 통일 + 회귀 테스트 추가",
+            "산식을 **미션완료 40 / 꾸준함 30 / 감정추이 15 / 생활패턴 15**로 정착시켰고, 데이터가 빠진 축은 패널티 없이 재정규화되도록 설계",
+            "동료 리뷰에서 **미션 상한값(cap) 불일치 버그**(base 경로 35 vs blend 경로 25 — 걸음 데이터가 들어와 base→blend로 전환되면 활동과 무관하게 미션 개수만으로 점수가 튐)를 발견해 35로 통일 + 회귀 테스트 추가",
             "삼성헬스 export 파일 파서로 수면·활동 객관 데이터를 회복점수에 연결(실기기 연동 없이 발표용 백업 경로 확보)",
             "PII 비식별 처리 중 **'가림 처리가 위기감지 패턴 자체를 깨뜨리는' 버그**를 리뷰에서 발견 → 규칙엔진엔 원문, LLM엔 가린 텍스트로 입력을 분리해 해결"
           ],
@@ -200,10 +201,10 @@
         }
       ],
       "problems": [
-        {"problem": "600자 이상 메시지 TTS가 깨끗한 GPU에서도 항상 폴백으로 빠짐", "solution": "'환경(VRAM) 탓'이라는 첫 결론을 의심하고 **코드 상수를 다시 읽어** `_SYNTH_TIMEOUT=150s`가 실제 합성 시간(~200초)보다 짧은 설정값 버그임을 확인, 300초로 수정"},
+        {"problem": "600자 이상 메시지 TTS가 깨끗한 GPU에서도 항상 폴백으로 빠짐", "solution": "'환경(VRAM) 탓'이라는 첫 결론을 의심하고 **코드 상수를 다시 읽어** 합성 타임아웃이 실제 합성 시간(~200초)보다 짧은 150초로 설정된 버그임을 확인, 300초로 수정"},
         {"problem": "GPU 8GB를 데스크톱 앱과 공유해 VRAM이 부족하면 합성 job이 멈춘 채 영구 점유 → 이후 요청 전부 503", "solution": "**타임아웃 + 전역 `_degraded` 플래그**로 멈춘 job을 격리하고 연쇄 장애를 차단, 자동 재시작 watchdog으로 무인 복구"},
         {"problem": "cloudflared 터널 URL이 재시작마다 바뀌어 수동 갱신이 팀 진도를 막음", "solution": "**30초 폴링 → health 검증 → 백엔드 push → Redis TTL** 구조의 자동등록 watchdog을 설계, 리뷰에서 지적된 TTL 누락·SSRF 화이트리스트도 반영"},
-        {"problem": "회복점수 산식에 활동(걸음) 데이터가 섞이면 활동과 무관하게 미션 개수만으로 점수가 튀는 버그", "solution": "동료 리뷰로 발견된 **base/blend 미션캡 불일치(35 vs 25)를 통일**하고, 재발을 막는 회귀 테스트 추가"},
+        {"problem": "회복점수 산식에 활동(걸음) 데이터가 섞이면 활동과 무관하게 미션 개수만으로 점수가 튀는 버그", "solution": "동료 리뷰로 발견된 **미션 상한값(cap) 불일치(base 35 vs blend 25)를 35로 통일**하고, 재발을 막는 회귀 테스트 추가"},
         {"problem": "개인정보 비식별 처리(가림)가 위기감지 규칙엔진의 패턴 매칭 자체를 깨뜨릴 뻔함", "solution": "**규칙엔진엔 원문, LLM엔 가린 텍스트**로 입력을 분리해 위기감지 정확도와 PII 보호를 동시에 확보"}
       ],
       "metrics": [
