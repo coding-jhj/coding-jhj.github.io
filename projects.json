@@ -128,6 +128,19 @@
     "status": "needs_content"
   },
   {
+    "id": "overwrite-ctf",
+    "title": "Overwrite CTF",
+    "category": "security",
+    "subgroup": "ctf",
+    "pinned_top": false,
+    "screenshot": null,
+    "one_liner": null,
+    "difficulty": null,
+    "role_note": "woojin님과 공동 풀이 — 팀/공동풀이로 표현, 단독 성과처럼 쓰지 않기",
+    "writeup_or_flag_link": null,
+    "status": "needs_content"
+  },
+  {
     "id": "full-security-labs",
     "title": "Full-Security Labs",
     "category": "security",
@@ -497,19 +510,6 @@
     "one_liner": null,
     "roles": [],
     "github": null,
-    "status": "needs_content"
-  },
-  {
-    "id": "overwrite-ctf",
-    "title": "Overwrite CTF",
-    "category": "security",
-    "subgroup": "ctf",
-    "pinned_top": false,
-    "screenshot": null,
-    "one_liner": null,
-    "difficulty": null,
-    "role_note": "woojin님과 공동 풀이 — 팀/공동풀이로 표현, 단독 성과처럼 쓰지 않기",
-    "writeup_or_flag_link": null,
     "status": "needs_content"
   },
   {
