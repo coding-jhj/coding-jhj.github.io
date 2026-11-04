@@ -133,11 +133,111 @@
     "category": "security",
     "subgroup": "project",
     "pinned_top": false,
-    "screenshot": null,
-    "one_liner": null,
-    "roles": [],
+    "screenshot": "assets/screenshots/full-security-labs-01-topology.png",
+    "one_liner": "GNS3 라우팅·방화벽부터 서버 보안 모니터링, 중앙 로그 수집, Snort IDS, Kali 기반 Earth VM 공략까지 구축하고 직접 검증한 보안 인프라 통합 랩",
+    "roles": [
+      "개인 과제"
+    ],
     "github": null,
-    "status": "needs_content"
+    "status": "ready",
+    "detail": {
+      "hero_image": "assets/screenshots/full-security-labs-01-topology.png",
+      "intro": "GNS3 라우팅·VLAN·ASAv 방화벽, VirtualBox 서버군(DNS·Web-DB·Wazuh·OSSEC·Zabbix·PMM), pfSense 원격접속 VPN, 중앙 로그 수집, Snort IDS, Kali 기반 Earth VM 공략까지 하나의 과제로 구축\n→ 설정을 마쳤다는 사실이 아니라, 각 구간의 실제 명령 결과를 근거로 완료·부분완료·미완료를 구분",
+      "info_table": [
+        {"label": "구성", "value": "개인 과제 · SKT ALEPH IT 인프라·보안 학습 교재 (Full-Security Labs)"},
+        {"label": "기간", "value": "2026.09 (제출일 2026-09-30)"},
+        {"label": "환경", "value": "GNS3(R1~R4 · ASAv 방화벽 · ESW1~ESW3) + VirtualBox(DNS · Web-DB · Wazuh · OSSEC · Zabbix · PMM · pfSense · Snort 3 · Kali · Earth)"},
+        {"label": "구성 요소", "value": "VLAN·OSPF·ACL(GNS3) · pfSense 원격접속 VPN · DNS·Web-DB · Wazuh·OSSEC·Zabbix·PMM 모니터링 · rsyslog→MariaDB→LogAnalyzer · Snort 3 IDS · Kali 기반 Earth CTF(User/Root Flag)"}
+      ],
+      "flow": [
+        {
+          "step": "01",
+          "title": "GNS3 네트워크 구축·검증",
+          "bullets": [
+            "ASAv `show access-list ALL-IN` 결과를 과제 요구사항 문서와 직접 대조 → 문서는 'ICMP·SSH·HTTP·HTTPS·DNS' 5종 서비스로 기술됐지만, 실제 적용은 icmp/tcp/udp/ospf/ip **프로토콜 단위 5개 규칙**(icmp hitcnt=38)으로 구성됨을 그대로 기록",
+            "R4에서 OSPF 경로 **5개** 학습, 이웃은 3.3.3.3·5.5.5.5 모두 **FULL/BDR**로 수렴 확인",
+            "VLAN10↔VLAN30 간 양방향 ping으로 트렁크 경유 통신 확인(첫 패킷 timeout은 ARP 해석 지연으로 판단해 재조치 없이 기록)"
+          ],
+          "image": "assets/screenshots/full-security-labs-01-topology.png",
+          "image_caption": "GNS3 전체 네트워크 구성도 (VLAN·IP 대역 표기)"
+        },
+        {
+          "step": "02",
+          "title": "pfSense 방화벽·원격 접속 VPN",
+          "bullets": [
+            "GNS3와 분리된 VirtualBox VM으로 WAN(192.168.16.200/24)·LAN(192.168.30.254/24) 구성",
+            "OpenVPN 터널(10.10.20.0/24, AES-256-GCM) 연결 뒤 Status 화면에서 Client Connections: 1, 가상주소 10.10.20.2 확인",
+            "웹 대시보드 Interfaces 위젯과 클라이언트 ipconfig는 캡처하지 못해 **콘솔·상태 화면으로 대체했다고 보고서에 명시**"
+          ]
+        },
+        {
+          "step": "03",
+          "title": "서버 구축과 모니터링·보안",
+          "bullets": [
+            "DNS(`dig` 조회 → 192.168.16.71 정상 반환)와 Web-DB(httpd·mariadb·php-fpm 전부 active, HTTP 200) 응답 확인",
+            "Wazuh 대시보드는 정상이나 Agents Summary는 'No results'(에이전트 등록은 과제 범위 외로 구분), OSSEC은 매니저 6개 프로세스 정상 기동 · 에이전트 2개는 **Never connected로 미연결 상태 그대로 기록**",
+            "PMM은 초기 gRPC 연결이 'no route to host'로 실패했다가 재확인 시 자연 복구(Connected: true, 지연 7.7ms) — 원인은 추정으로만 남기고 확정하지 않음"
+          ]
+        },
+        {
+          "step": "04",
+          "title": "중앙 로그 수집과 Snort IDS",
+          "bullets": [
+            "DNS 서버의 rsyslog 재시작 이벤트를 식별자로 삼아 rsyslog→Web-DB(/var/log/messages)→MariaDB(syslog.SystemEvents ID 876~880)→LogAnalyzer까지 **전 구간을 하나의 이벤트로 추적**",
+            "LogAnalyzer 검색이 Host 컬럼이 아닌 메시지 본문에 매칭돼 무관한 로그가 섞여 나온 오조회를 발견 → 메시지 키워드로 재검색해 정정",
+            "Snort 3.12.2를 소스 빌드로 구축하고 ICMP·HTTP·SSH 3종 로컬 규칙 작성, `-T` 설정 검증은 통과했지만 **실제 탐지 트래픽은 전송하지 못해 alert 로그는 미확보로 분류**"
+          ]
+        },
+        {
+          "step": "05",
+          "title": "Kali 정찰 — Earth 포트·가상호스트 조사",
+          "bullets": [
+            "`nmap -sV -v -p-`로 Earth(192.168.16.150) 전체 포트 스캔(190.54초) → 22/80/443 확인",
+            "`gobuster dir` 실행 시 DNS 확인 실패 → `/etc/hosts`에 earth.local 미등록이 원인임을 확인하고 수동 추가 후 재스캔(4613/4613, 100%)으로 /admin, /cgi-bin 발견",
+            "TLS 인증서 SAN에서 두 번째 가상호스트 terratest.earth.local을 찾아 testingnotes.txt·testdata.txt 단서 확보"
+          ],
+          "image": "assets/screenshots/full-security-labs-02-nmap.png",
+          "image_caption": "nmap 전체 포트 스캔 결과"
+        },
+        {
+          "step": "06",
+          "title": "XOR 키 복구 → 로그인 → RCE로 User Flag",
+          "bullets": [
+            "사전 대입 28개(관리자 로그인 18개 + SSH 16개 중복 포함) 전부 실패, Kasiski 기법·crib-dragging도 완전 해독에는 실패",
+            "사이트 안에서 평문 원본(testdata.txt)을 발견 → 평문⊕암호문으로 키를 추측 없이 **100% 역산**(키 길이 28, `earthclimatechangebad4humans`)",
+            "로그인 1차 시도는 Referer 헤더 누락으로 CSRF 403 실패 → Referer 추가 뒤 성공, 관리자 CLI의 `nc -e` 리버스쉘은 'Remote connections are forbidden'로 차단 → **base64 인코딩으로 필터 우회**해 apache 권한 셸과 User Flag 확보"
+          ],
+          "image": "assets/screenshots/full-security-labs-04-userflag.png",
+          "image_caption": "User Flag 확인 (apache 권한 리버스쉘)"
+        },
+        {
+          "step": "07",
+          "title": "SUID reset_root 동적분석 → Root Flag",
+          "bullets": [
+            "SUID 바이너리 전수 조사에서 표준 목록에 없는 `/usr/bin/reset_root` 발견, Earth에는 strace/ltrace가 없어 **바이너리를 /dev/tcp로 Kali에 전송**해 Kali에서 동적분석",
+            "`strace`로 access() 호출 3개 트리거 경로(/dev/shm/kHgTFI5G, /dev/shm/Zw7bV9U5, /tmp/kcM0Wewe) 확인 → Earth에서 생성 뒤 재실행해 root 비밀번호 리셋",
+            "`su root` 전환 전 `pty.spawn`으로 TTY를 먼저 확보하는 절차를 거쳐 root 전환·Root Flag 확인까지 완료"
+          ],
+          "image": "assets/screenshots/full-security-labs-05-rootflag.png",
+          "image_caption": "Root Flag 확인 및 완료 화면"
+        }
+      ],
+      "problems": [
+        {"problem": "요구사항 문서는 ASA ACL을 'ICMP·SSH·HTTP·HTTPS·DNS' 5종 서비스로 명시했지만 실제 장비 설정은 프로토콜 단위로 구현됨", "solution": "**둘을 일치시켜 보고하지 않고 차이를 그대로 기록**. show access-list 실행 결과를 1차 증거로 삼아 트래픽은 허용되나 표현 단위가 다르다고 명시"},
+        {"problem": "Earth 관리자 비밀번호를 사전 단어·Kasiski·crib-dragging으로 28개 넘게 시도했지만 전부 실패", "solution": "사이트 안의 평문 원본 파일(testdata.txt)을 찾아 **평문⊕암호문으로 키를 추측 없이 역산**(28자 키 완전 복구). 추측이 막히면 평문이 어딘가 있을 가능성을 먼저 의심하는 순서로 전환"},
+        {"problem": "관리자 CLI의 nc -e 리버스쉘 명령이 'Remote connections are forbidden'로 직접 차단됨", "solution": "**명령을 base64로 인코딩**해 서버에서 디코딩 후 실행하도록 우회 — 필터가 문자열 패턴만 검사한다는 점을 이용"},
+        {"problem": "Earth 안에 strace/ltrace가 없어 SUID 바이너리(reset_root)의 트리거 조건을 알 수 없음", "solution": "바이너리를 **/dev/tcp로 Kali에 전송**해 Kali에서 동적분석, access() 호출 3개 경로를 특정해 트리거 파일을 재현"},
+        {"problem": "Wazuh·OSSEC 에이전트 미연결, Snort 탐지 로그 미확보, PMM 일시 연결 실패", "solution": "**완료되지 않은 항목을 완료로 보고하지 않고** '부분 완료'·'미확보'·'원인 추정'으로 구분해 종합 판정표에 남김"}
+      ],
+      "metrics": [
+        {"label": "GNS3 OSPF·VLAN", "value": "경로 **5개** 학습, 이웃 **FULL/BDR** 정상, VLAN10↔30 양방향 통신 확인"},
+        {"label": "서버·모니터링 7개 항목", "value": "DNS·Web-DB·Zabbix·PMM **완료** · Wazuh·OSSEC·Snort 3 IDS **부분 완료**(에이전트/탐지 로그 미확보)"},
+        {"label": "중앙 로그 수집", "value": "rsyslog→MariaDB→LogAnalyzer **전 구간 추적 확인**(테스트 이벤트 1건 기준)"},
+        {"label": "Earth CTF", "value": "**User Flag·Root Flag 모두 확보**(2026-09-29)"}
+      ],
+      "metrics_note": "개인 과제 제출 보고서(2026-09-30) 기준이며, Wazuh·OSSEC 에이전트 등록과 Snort 실제 탐지 트래픽 확인은 과제 범위·시간 제약으로 완료하지 못해 후속 과제로 남겼습니다. 플래그 값과 민감한 식별값은 공개 화면에서 가렸습니다.",
+      "note": "개인 과제 보고서 기준 · 플래그·민감정보 마스킹"
+    }
   },
   {
     "id": "system-security-lab",
@@ -325,16 +425,6 @@
     "difficulty": null,
     "role_note": "woojin님과 공동 풀이 — 팀/공동풀이로 표현, 단독 성과처럼 쓰지 않기",
     "writeup_or_flag_link": null,
-    "status": "needs_content"
-  },
-  {
-    "id": "earth-ctf",
-    "title": "Earth CTF",
-    "category": "security",
-    "subgroup": "ctf",
-    "pinned_top": false,
-    "screenshot": null,
-    "one_liner": null,
     "status": "needs_content"
   },
   {
