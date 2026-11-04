@@ -121,7 +121,7 @@
     "category": "ai",
     "subgroup": "project",
     "pinned_top": false,
-    "screenshot": "assets/screenshots/rainbow-bridge-01-pipeline.png",
+    "screenshot": "assets/screenshots/rainbow-bridge-01-hero.png",
     "one_liner": "펫로스 애프터케어 서비스에서 TTS 4단계 폴백 파이프라인·GPU 원격 서버 운영·회복점수 평가 시스템을 전담한 AI 엔지니어 역할",
     "roles": [
       "정환주(AI 엔지니어 · TTS 파이프라인·GPU 서버·회복점수 평가)",
@@ -130,8 +130,8 @@
     "github": "https://github.com/mosejong/Rainbow-Bridge",
     "status": "ready",
     "detail": {
-      "hero_image": "assets/screenshots/rainbow-bridge-01-pipeline.png",
-      "intro": "반려동물과의 이별 전후 감정 기록·추모 콘텐츠·회복 미션을 이어주는 6인 팀 AI 서비스\n→ 팀장이 아닌 AI 엔지니어로 TTS·GPU 서버·평가 시스템을 전담, 117개 커밋 중 116개를 dev에 병합",
+      "hero_image": "assets/screenshots/rainbow-bridge-01-hero.png",
+      "intro": "반려동물과의 이별 전후 감정 기록·추모 콘텐츠·회복 미션을 이어주는 6인 팀 AI 서비스\n→ AI 엔지니어로 TTS·GPU 서버·평가 시스템을 전담",
       "info_table": [
         {"label": "구성", "value": "6인 팀 프로젝트 · 2026.06.01~06.19 (SKT ALEPH)"},
         {"label": "내 역할", "value": "AI 엔지니어 / GPU 서버 — TTS 4단계 폴백 · GPU 원격 서버 운영 · 회복점수 평가 (팀장 아님, 브랜치: jeonghwanju)"},
@@ -146,9 +146,7 @@
             "Google Cloud TTS 키 발급 → 백엔드 stub를 `ai/tts.synthesize()` 실호출로 교체, 합성 mp3를 `uploads/tts/`에 저장",
             "합성 실패 시 샘플 mp3로 graceful 폴백, duration은 ffprobe 실측(추정은 보조)",
             "최종 폴백 체인 **Qwen3 GPU(자체호스팅) → WaveSpeedAI → Google Cloud TTS → gTTS**를 설계하고, 분기 중 하나가 폴백 래퍼를 안 거쳐 500을 내던 **불일치 버그**(`tts.py:166`)를 찾아 수정"
-          ],
-          "image": "assets/screenshots/rainbow-bridge-02-architecture.png",
-          "image_caption": "시스템 구성도 — nginx·FastAPI·GPU 서버·외부 API 레이어"
+          ]
         },
         {
           "step": "02",
@@ -185,7 +183,9 @@
             "산식을 **감정 40 / 미션 35 / 꾸준함 25**로 정착시켰는데, 동료 리뷰에서 **미션캡 불일치 버그**(base 35 vs blend 25 — 활동 데이터가 섞이면 미션 개수만으로 점수가 튐)를 발견해 통일 + 회귀 테스트 추가",
             "삼성헬스 export 파일 파서로 수면·활동 객관 데이터를 회복점수에 연결(실기기 연동 없이 발표용 백업 경로 확보)",
             "PII 비식별 처리 중 **'가림 처리가 위기감지 패턴 자체를 깨뜨리는' 버그**를 리뷰에서 발견 → 규칙엔진엔 원문, LLM엔 가린 텍스트로 입력을 분리해 해결"
-          ]
+          ],
+          "image": "assets/screenshots/rainbow-bridge-02-recovery.png",
+          "image_caption": "오늘의 회복 미션 화면 — 회복점수 기반 미션 추천"
         },
         {
           "step": "06",
