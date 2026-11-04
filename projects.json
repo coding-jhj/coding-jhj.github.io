@@ -666,15 +666,128 @@
   },
   {
     "id": "my-career-planner",
-    "title": "MY_CAREER_PLANNER",
+    "title": "MY_CAREER_PLANNER (지원 준비 실행 다이어리)",
     "category": "web",
     "subgroup": "project",
     "pinned_top": false,
-    "screenshot": null,
-    "one_liner": null,
-    "roles": [],
+    "screenshot": "assets/screenshots/my-career-planner-01-today.png",
+    "one_liner": "계획·실행·회고를 한 작업공간에서 잇고, 로그인한 계정의 기록만 보이도록 DB에서 격리한 지원 준비 다이어리",
+    "roles": [
+      "개인 프로젝트"
+    ],
     "github": "https://github.com/coding-jhj/MY_CAREER_PLANNER",
-    "status": "needs_content"
+    "status": "ready",
+    "detail": {
+      "hero_image": "assets/screenshots/my-career-planner-01-today.png",
+      "intro": "Post-training Research Engineer 지원 준비를 계획 → 실행 → 회고로 기록하는 개인 다이어리 웹앱\n→ 계정별 기록 격리는 DB가, 완료 중복과 세션 재사용 차단은 서버가 맡음",
+      "info_table": [
+        {
+          "label": "구성",
+          "value": "개인 프로젝트 · ALEPH 과제"
+        },
+        {
+          "label": "기간",
+          "value": "2026.09.07 – 2026.09.08"
+        },
+        {
+          "label": "기술 스택",
+          "value": "Next.js 16 · React 19 · TypeScript · Supabase(Auth · Postgres · RLS) · Zod · Vitest · Playwright · Vercel"
+        },
+        {
+          "label": "구분",
+          "value": "AI 보조: 기존 저장소 분석, Supabase Auth·RLS 초안, 테스트와 문서 틀 · 직접 판단: 쿠키 세션 + DB 소유권 방식 선택, 기존 계획·할 일·실행 모델 유지, 생성한 5일 데이터를 실사용 증거로 쓰지 않기"
+        },
+        {
+          "label": "링크",
+          "value": "<a href=\"https://my-career-planner.vercel.app/\" target=\"_blank\" rel=\"noopener\">배포 화면 ↗</a> (로그인 필요)"
+        }
+      ],
+      "flow": [
+        {
+          "step": "01",
+          "title": "계획과 수정 이력",
+          "bullets": [
+            "목표 · 기간 · 우선순위 · 성공 기준 · 예상 시간을 계획으로 저장",
+            "계획을 고치기 전 이전 값을 수정 이력으로 보존하고, 이력 저장과 계획 갱신을 **하나의 트랜잭션**으로 처리"
+          ],
+          "image": "assets/screenshots/my-career-planner-02-plan.png",
+          "image_caption": "계획 화면 (목표 · 기간 · 성공 기준)"
+        },
+        {
+          "step": "02",
+          "title": "실행 기록과 완료 중복 방지",
+          "bullets": [
+            "시작·종료 시각으로 실제 소요 시간을 서버에서 계산해 저장",
+            "같은 완료 요청이 여러 번 와도 한 번만 저장되도록 **3겹으로 방어**\n→ 화면 버튼 잠금 · 서비스의 idempotency key 검증 · DB unique 제약과 행 잠금"
+          ]
+        },
+        {
+          "step": "03",
+          "title": "회고와 다음 계획",
+          "bullets": [
+            "완료 · 지연 · 막힘 수와 예상·실제 시간 차이를 현재 데이터에서 매번 다시 계산하고, 숫자마다 원본 할 일 ID 목록을 함께 반환",
+            "회고의 개선점을 다음 계획으로 연결"
+          ]
+        },
+        {
+          "step": "04",
+          "title": "로그인과 계정별 격리",
+          "bullets": [
+            "이메일 로그인(Supabase Auth, 쿠키 세션), 로그인하지 않으면 대시보드와 보호 API 접근 불가",
+            "모든 테이블에 소유권 정책(RLS)을 걸고, UPDATE는 조건 두 가지(USING · WITH CHECK)를 모두 설정해 **다른 작업공간으로 옮기는 것까지 차단**",
+            "로그아웃하면 앱 세션을 폐기해 이미 발급된 토큰의 재사용을 막음"
+          ]
+        },
+        {
+          "step": "05",
+          "title": "5일 일지",
+          "bullets": [
+            "질문 · 지표 · 단위 · 계산식 · 계획 규칙을 날짜별로 저장하고, 규칙 변경 전후 평균을 같은 단위와 계산식으로 비교",
+            "테스트용으로 만든 데이터는 synthetic_test로 구분하고, 운영 환경에서는 생성할 수 없게 막음"
+          ],
+          "image": "assets/screenshots/my-career-planner-03-five-day.png",
+          "image_caption": "5일 기록과 계획 규칙 영역 (실제 기록은 아직 없음)"
+        }
+      ],
+      "problems": [
+        {
+          "problem": "로그아웃해도 이미 발급된 토큰이 만료 전까지 유효할 수 있음",
+          "solution": "로그아웃 시 **앱 세션을 폐기 처리**하고, 보호 요청마다 활성 세션인지 검사"
+        },
+        {
+          "problem": "같은 완료 요청이 동시에 두 번 들어오는 경쟁 상황",
+          "solution": "idempotency key를 먼저 조회한 뒤 행을 잠그고 저장. 동시 요청이 unique 충돌을 내면 **먼저 커밋된 기록을 결과로 반환**"
+        },
+        {
+          "problem": "서비스 키로만 접근하던 기존 구조로는 사용자별 격리가 불가능",
+          "solution": "쿠키 세션 클라이언트로 바꿔 RLS가 요청마다 평가되게 하고, 소유권을 작업공간 → 계획 → 할 일 → 실행 기록으로 이어지는 관계를 따라 정책화"
+        },
+        {
+          "problem": "생성한 5일 데이터가 실제 사용 기록으로 오해될 위험",
+          "solution": "생성 행에 **synthetic_test**를 기록하고, 운영 환경에서는 생성 경로가 403을 돌려주도록 차단"
+        }
+      ],
+      "metrics": [
+        {
+          "label": "자동 테스트 (Vitest)",
+          "value": "**67개 통과** (12개 파일)"
+        },
+        {
+          "label": "타입 검사 · 린트 · 스키마 계약 검증",
+          "value": "**전부 통과**"
+        },
+        {
+          "label": "프로덕션 빌드",
+          "value": "**성공**"
+        },
+        {
+          "label": "비로그인 요청 (배포 화면)",
+          "value": "/ 는 로그인 화면으로 이동, /api/dashboard는 **401**"
+        }
+      ],
+      "metrics_note": "테스트와 빌드는 로컬에서 실행한 결과입니다. 로그인 이후의 계정 간 격리와 로그아웃 뒤 재사용 차단은 배포 화면에서 아직 검증하지 못했습니다. 5일 일지는 기능만 구현했고 실제 5일 기록은 없습니다.",
+      "note": "로컬 실행 기준"
+    }
   },
   {
     "id": "stelive-data",
