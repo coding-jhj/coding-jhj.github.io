@@ -121,20 +121,20 @@
     "category": "ai",
     "subgroup": "project",
     "pinned_top": false,
-    "screenshot": "assets/screenshots/rainbow-bridge-01-hero.png",
-    "one_liner": "펫로스 애프터케어 서비스에서 TTS 폴백 파이프라인·GPU 원격 서버 운영·회복점수 평가 시스템을 전담한 AI 엔지니어 역할",
+    "screenshot": "assets/screenshots/rainbow-bridge-02-recovery.png",
+    "one_liner": "펫로스 애프터케어 서비스에서 TTS 폴백 파이프라인·GPU 원격 서버 운영·RAG 검색·회복점수 평가 시스템을 전담한 AI 엔지니어 역할",
     "roles": [
-      "정환주(AI 엔지니어 · TTS 파이프라인·GPU 서버·회복점수 평가)",
+      "정환주(AI 엔지니어 · TTS 파이프라인·GPU 서버·RAG 검색·회복점수 평가)",
       "모세종(PM·백엔드) · 김윤한(백엔드·인프라) · 반소람(AI·프롬프트·위기감지) · 장민수(멀티모달) · 민경이(프론트엔드)"
     ],
     "github": "https://github.com/mosejong/Rainbow-Bridge",
     "status": "ready",
     "detail": {
-      "hero_image": "assets/screenshots/rainbow-bridge-01-hero.png",
-      "intro": "반려동물과의 이별 전후 감정 기록·추모 콘텐츠·회복 미션을 이어주는 6인 팀 AI 서비스\n→ AI 엔지니어로 TTS·GPU 서버·평가 시스템을 전담",
+      "hero_image": "assets/screenshots/rainbow-bridge-02-recovery.png",
+      "intro": "반려동물과의 이별 전후 감정 기록·추모 콘텐츠·회복 미션을 이어주는 6인 팀 AI 서비스\n→ AI 엔지니어로 TTS·GPU 서버·RAG·평가 시스템을 전담",
       "info_table": [
         {"label": "구성", "value": "6인 팀 프로젝트 · 2026.06.01~06.19 (SKT ALEPH)"},
-        {"label": "내 역할", "value": "AI 엔지니어 / GPU 서버 — TTS 폴백 파이프라인 · GPU 원격 서버 운영 · 회복점수 평가 (팀장 아님, 브랜치: jeonghwanju)"},
+        {"label": "내 역할", "value": "AI 엔지니어 / GPU 서버 — TTS 폴백 파이프라인 · GPU 원격 서버 운영 · RAG 검색 파이프라인 · 회복점수 평가 (팀장 아님, 브랜치: jeonghwanju)"},
         {"label": "기술 스택", "value": "FastAPI · MongoDB/SQLite/Redis · Gemini 2.5 Flash · ChromaDB(RAG) · Qwen3 GPU(자체호스팅)/Google Cloud TTS/gTTS"}
       ],
       "flow": [
@@ -185,8 +185,8 @@
             "삼성헬스 export 파일 파서로 수면·활동 객관 데이터를 회복점수에 연결(실기기 연동 없이 발표용 백업 경로 확보)",
             "PII 비식별 처리 중 **'가림 처리가 위기감지 패턴 자체를 깨뜨리는' 버그**를 리뷰에서 발견 → 규칙엔진엔 원문, LLM엔 가린 텍스트로 입력을 분리해 해결"
           ],
-          "image": "assets/screenshots/rainbow-bridge-02-recovery.png",
-          "image_caption": "오늘의 회복 미션 화면 — 회복점수 기반 미션 추천"
+          "image": "assets/screenshots/rainbow-bridge-01-hero.png",
+          "image_caption": "회복 여정 끝에 열리는 추억 선물함 — 회복점수가 일정 구간을 넘으면 단계적으로 열림"
         },
         {
           "step": "06",
