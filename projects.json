@@ -131,14 +131,93 @@
     "id": "overwrite-ctf",
     "title": "Overwrite CTF",
     "category": "security",
-    "subgroup": "ctf",
+    "subgroup": "project",
     "pinned_top": false,
-    "screenshot": null,
-    "one_liner": null,
-    "difficulty": null,
-    "role_note": "woojin님과 공동 풀이 — 팀/공동풀이로 표현, 단독 성과처럼 쓰지 않기",
-    "writeup_or_flag_link": null,
-    "status": "needs_content"
+    "screenshot": "assets/screenshots/overwrite-ctf-01-intro.png",
+    "one_liner": "4인 팀이 설계한 KLOAD대학교병원 배경 추리형 CTF — 포트 노킹부터 권한 상승까지 체인형 시나리오를 웹 게임으로 구현",
+    "roles": [
+      "정환주(CTF 게임화 — 'Overwrite' 추리 웹 게임 UI·흐름 제작)",
+      "송우진(User → Root 권한상승 체인 설계)",
+      "하태형(기획 · User Flag까지 설계)",
+      "변준혁(User Flag까지 설계)"
+    ],
+    "github": null,
+    "status": "ready",
+    "detail": {
+      "hero_image": "assets/screenshots/overwrite-ctf-01-intro.png",
+      "intro": "병원 침투 시나리오를 소재로 팀이 직접 설계한 CTF 문제 — 포트 노킹 → 계정정보 유출 → 웹쉘 업로드 → 권한 상승까지 체인형 공격 경로로 구성\n→ 공략 과정을 그대로 노출하지 않고, 추리 게임 형태의 웹 UI('사건 기록철')로 감싸 플레이어가 단서를 직접 찾아내도록 제작",
+      "info_table": [
+        {"label": "구성", "value": "팀 프로젝트 4인 · KLOAD대학교병원 웹 침투 시나리오"},
+        {"label": "내 역할", "value": "CTF 게임화 — '사건 기록철' 추리 게임 UI·단서 입력 흐름 제작"},
+        {"label": "팀원 역할", "value": "송우진(User→Root 권한상승 체인 설계) · 하태형(기획·User Flag까지 설계) · 변준혁(User Flag까지 설계)"},
+        {"label": "시나리오·대상", "value": "호스트명 overwrite-rebuild · 취약 웹서버(nginx/PHP 게시판) · VirtualBox 대상 VM"},
+        {"label": "공략 검증 도구", "value": "netdiscover · nmap · exiftool · steghide · ffuf · curl · nc"},
+        {"label": "플래그", "value": "User `FLAG{39fa70f4b3a76e65}` · Root `FLAG{8e0469de71f0f3b6}`"}
+      ],
+      "flow": [
+        {
+          "step": "01",
+          "title": "CTF 게임화 — 시나리오·UI 설계",
+          "bullets": [
+            "KLOAD대학교병원 침투 시나리오를 '사건 기록철' 형식의 추리 게임 프런트엔드로 감쌈 — 조정 신청서·수술기록지·진료비 명세서·익명 우편 네 갈래 힌트로 단서를 분산 배치",
+            "정답을 바로 입력받지 않고 **플레이어가 찾은 '값'을 순서대로 입력해야 다음 사건 파일이 열리는 구조**로 설계",
+            "시작 화면에 '이 작품은 허구이며, 의료사고와 상실을 다룹니다'라는 디스클레이머를 명시"
+          ],
+          "image": "assets/screenshots/overwrite-ctf-01-intro.png",
+          "image_caption": "Overwrite 인트로 화면 — 사건번호·디스클레이머·이어하기"
+        },
+        {
+          "step": "02",
+          "title": "정찰 단서 체인 설계 (하태형 기획)",
+          "bullets": [
+            "nmap으로 22/80 포트만 보이고 8080은 filtered로 숨긴 뒤, exiftool 메타데이터·HTML 주석·steghide 스테가노그래피 **세 가지 다른 기법에 번호를 하나씩 분산 은닉**",
+            "모은 세 번호가 실은 **포트 노킹 시퀀스**가 되도록 설계해, 순서대로 접속해야만 8080이 열리는 구조"
+          ],
+          "image": "assets/screenshots/overwrite-ctf-02-clueboard.png",
+          "image_caption": "사건 기록철 — 단서 값 입력 패널"
+        },
+        {
+          "step": "03",
+          "title": "8080 게시판 계정정보 유출 체인",
+          "bullets": [
+            "guest 계정 글쓰기를 403으로 막아 다른 계정을 찾게 유도하고, robots.txt의 Disallow 경로에 **base64로 인코딩된 회원 백업 비밀번호**를 노출",
+            "그 비밀번호로 로그인 실패 시 '비밀번호 일괄 초기화 안내'로 유도 → 게시글에 지워지지 않은 HTML 주석을 남겨 **더 최신 임시 비밀번호(.pwreset_D1.bak)**까지 역추적하도록 설계"
+          ],
+          "image": "assets/screenshots/overwrite-ctf-04-pwreset.png",
+          "image_caption": ".pwreset_D1.bak — 재설정 임시 비밀번호 파일"
+        },
+        {
+          "step": "04",
+          "title": "업로드 우회 → User Flag (하태형·변준혁 설계)",
+          "bullets": [
+            "게시판 업로드에 확장자 필터를 걸되, **다른 게시글의 첨부파일 확장자(.phtml)를 역으로 확인**하면 우회 확장자를 알 수 있도록 단서를 분리 배치",
+            "허용 확장자로 위장한 리버스쉘 업로드 → 서비스 계정(dangjik) 권한 획득과 User Flag로 이어지는 체인"
+          ],
+          "image": "assets/screenshots/overwrite-ctf-05-upload-block.png",
+          "image_caption": "허용되지 않는 파일 형식 — 업로드 필터 차단 화면"
+        },
+        {
+          "step": "05",
+          "title": "권한 상승 3분할 체인 → Root Flag (송우진 설계)",
+          "bullets": [
+            "삭제되지 않은 설정 백업(config.php.bak)으로 상위 계정(director) 탈취 경로를 심어둠",
+            "root 비밀번호를 **zip 압축 암호 · strings로 읽는 바이너리 문자열 · 토큰 인증 내부 API(base58 인코딩)** 세 조각으로 분할해, 서로 다른 도구를 모두 써야만 순서대로 조합 가능하도록 설계"
+          ]
+        }
+      ],
+      "problems": [
+        {"problem": "공략 과정을 그대로 노출하면 추리 재미가 사라짐", "solution": "**'사건 기록철' UI로 단서를 정답이 아닌 '찾아야 할 값'으로만 제시**, 네 갈래 문서에 힌트를 나눠 배치해 플레이어가 직접 연결하도록 설계"},
+        {"problem": "포트 노킹 번호를 그대로 나열하면 추측이 너무 쉬움", "solution": "**exiftool·HTML 주석·steghide 세 가지 서로 다른 기법에 번호를 분산 은닉**해, 플레이어가 세 가지 정찰 도구를 모두 쓰도록 유도"},
+        {"problem": "업로드 허용 확장자를 바로 알려주면 우회가 너무 쉬움", "solution": "업로드 폼에는 필터만 걸고, **다른 게시글 첨부파일에서 허용 확장자를 역추적**하도록 단서를 분리"},
+        {"problem": "root 권한까지 한 번에 뚫리면 난이도 조절이 안 됨", "solution": "비밀번호를 **zip 암호·바이너리 문자열·토큰 기반 API 세 조각으로 분할**, 서로 다른 도구(unzip·strings·curl+base58)를 순서대로 써야만 완성되는 구조로 설계"}
+      ],
+      "metrics": [
+        {"label": "검증 플레이 결과", "value": "User Flag `FLAG{39fa70f4b3a76e65}` · Root Flag `FLAG{8e0469de71f0f3b6}` **모두 확보**(팀원 공략 기록 기준)"},
+        {"label": "설계 체인 단계", "value": "정찰 단서 3종 → 계정정보 유출 → 재설정 비번 역추적 → 업로드 우회 → 권한상승 3분할, 총 **8단계**"}
+      ],
+      "metrics_note": "이 카드는 팀이 설계한 CTF 문제를 소개하며, 공략 검증은 팀원이 직접 플레이한 walkthrough를 근거로 합니다. 제 담당 범위는 게임화(웹 UI·흐름) 제작이고, 취약점 체인 설계는 하태형·변준혁·송우진이 맡았습니다.",
+      "note": "팀 제작 CTF · 역할별 기여 범위 명시"
+    }
   },
   {
     "id": "full-security-labs",
