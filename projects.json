@@ -583,7 +583,7 @@
   },
   {
     "id": "minecraft-uptime-dashboard",
-    "title": "오늘의 진짜 정보판 (마인크래프트 접속자 기록)",
+    "title": "Honest Board (Minecraft Player Count)",
     "category": "web",
     "subgroup": "project",
     "pinned_top": false,
