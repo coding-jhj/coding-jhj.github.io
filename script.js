@@ -160,8 +160,7 @@ function matchesFilter(p, filter) {
   if (filter === "all") return true;
   if (filter === "ai") return p.category === "ai";
   if (filter === "web") return p.category === "web";
-  if (filter === "security-project") return p.category === "security" && p.subgroup === "project";
-  if (filter === "security-ctf") return p.category === "security" && p.subgroup === "ctf";
+  if (filter === "security-project") return p.category === "security";
   return false;
 }
 
