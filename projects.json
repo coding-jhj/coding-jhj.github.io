@@ -121,11 +121,10 @@
       "hero_image": "assets/screenshots/voiceguide-demo.gif",
       "intro": "시각장애인의 보행 중 '지금 이 순간'의 위험을 스마트폰 카메라로 감지해 음성·진동으로 즉시 알리는 보조 안전 레이어\n→ 길 안내가 아니라, 바로 앞 장애물을 더 빨리 인지하도록 돕는 보조 기능에 집중",
       "info_table": [
-        {"label": "기간", "value": "2026.04.24 – 2026.06.22 · 이스트소프트 AI 휴먼 4기(K-디지털 트레이닝)"},
+        {"label": "기간", "value": "2026.04.24 – 2026.06.22 · 이스트소프트 AI 휴먼 4기"},
         {"label": "팀 구성", "value": "5인 · 정환주(팀장·Android/서버 총괄) · myungkwang(NLG·파인튜닝) · jaehyun7849(Vision/YOLO) · msc010312(TTS·정책) · yudeukshin(FastAPI/DB)"},
         {"label": "내 역할", "value": "팀장 · Android 온디바이스 탐지 파이프라인 · FastAPI 서버 · GCP Cloud Run 배포 · 대시보드 · 문서화"},
-        {"label": "기술 스택", "value": "Kotlin · CameraX · TFLite(YOLO11n) / FastAPI · SQLite·PostgreSQL · SSE / GCP Cloud Run · MapLibre 대시보드"},
-        {"label": "결과", "value": "공모전 서류 제출 · 서류 심사 탈락"}
+        {"label": "기술 스택", "value": "Kotlin · CameraX · TFLite(YOLO11n) / FastAPI · SQLite·PostgreSQL · SSE / GCP Cloud Run · MapLibre 대시보드"}
       ],
       "flow": [
         {
@@ -172,11 +171,10 @@
         },
         {
           "step": "05",
-          "title": "실측 검증과 공모전 제출",
+          "title": "실측 검증",
           "bullets": [
             "자동 테스트(pytest) 22~24건 통과, NLG 문장 생성 0.015ms, YOLO 추론 약 29~36ms(기기·측정 조건별 상이) 확보",
-            "공모전 제출 전 자체 점검 문서(`contest_readiness_plan.html`)에서 Android 실기 FPS·장시간 안정성·mAP50처럼 아직 측정하지 못한 항목을 '추가 검증 필요'로 명시해 완료로 포장하지 않음",
-            "공모전에는 제출했으나 서류 심사에서 탈락 — 결과를 그대로 기록"
+            "자체 점검 문서(`contest_readiness_plan.html`)에서 Android 실기 FPS·장시간 안정성·mAP50처럼 아직 측정하지 못한 항목을 '추가 검증 필요'로 명시해 완료로 포장하지 않음"
           ],
           "image": "assets/screenshots/voiceguide-04-demo-validation.png",
           "image_caption": "실기 측정 기반 추론 시간·NLG 생성 속도 데모 화면"
@@ -195,7 +193,7 @@
         {"label": "서버 평균 응답", "value": "**26.37ms**"}
       ],
       "metrics_note": "수치는 팀 자체 시뮬레이션·단위테스트 기준이며, 실기기 FPS·발열·장시간 안정성·모델별 mAP50은 프로젝트 자체 문서에서도 '추가 검증 필요'로 분류해 과장하지 않았습니다.",
-      "note": "5인 팀 프로젝트 · 공모전 서류 제출(탈락) · 팀장 역할"
+      "note": "5인 팀 프로젝트 · 팀장 역할"
     }
   },
   {
