@@ -320,6 +320,14 @@ function renderFile(fileKey) {
     const active = key === fileKey;
     pane.classList.toggle("active", active);
     pane.setAttribute("aria-hidden", active ? "false" : "true");
+    // Videos inserted into a pane while it was still hidden never got an
+    // autoplay chance (and won't retry on their own once shown), so kick
+    // them explicitly whenever their pane becomes the active one.
+    if (active) {
+      pane.querySelectorAll("video[autoplay]").forEach((v) => {
+        v.play().catch(() => {});
+      });
+    }
   });
 
   document.querySelectorAll(".tree-file").forEach((el) => {
