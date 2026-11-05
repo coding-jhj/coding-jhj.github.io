@@ -16,7 +16,7 @@
     "github": "https://github.com/coding-jhj/Lease-Companion",
     "status": "ready",
     "detail": {
-      "hero_image": "assets/screenshots/lease-companion-02-result.png",
+      "hero_image": "assets/screenshots/lease-companion-demo.mp4",
       "intro": "첫 전월세 계약을 준비하는 청년을 위한 계약 확인 도우미 웹앱\n→ 안전/위험을 단정하지 않고, 확인 항목 · 질문 · 체크리스트 · 증빙 행동으로 안내",
       "info_table": [
         {"label": "기간", "value": "2026.07 – 2026.08 · 이스트소프트 AI 휴먼 4기(K-디지털 트레이닝)"},
