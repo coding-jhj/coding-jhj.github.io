@@ -6,7 +6,7 @@
     "subgroup": "project",
     "pinned_top": true,
     "award": "제8회 K-디지털 트레이닝 해커톤 장려상(고용노동부장관상), 2026-09",
-    "screenshot": "assets/screenshots/lease-companion-01-checklist.png",
+    "screenshot": "assets/screenshots/lease-companion-demo.mp4",
     "one_liner": "첫 전월세 계약을 준비하는 청년을 위한 계약 확인 도우미",
     "roles": [
       "정환주(팀장·AI/LLM 파이프라인·RAG, MuseTalk 아바타 파이프라인 통합)",
@@ -60,7 +60,9 @@
           "title": "확인 질문 · 체크리스트 안내",
           "bullets": [
             "판정 결과 기반으로 임대인/중개사에게 물어볼 질문, 남겨야 할 기록 안내"
-          ]
+          ],
+          "image": "assets/screenshots/lease-companion-05-checklist-confirm.png",
+          "image_caption": "직접 입력·다른 자료 확인이 필요한 항목을 하나씩 체크하는 화면"
         },
         {
           "step": "05",
@@ -109,20 +111,20 @@
     "category": "ai",
     "subgroup": "project",
     "pinned_top": false,
-    "screenshot": "assets/screenshots/voiceguide-demo.gif",
+    "screenshot": "assets/screenshots/voiceguide-demo.mp4",
     "one_liner": "스마트폰 카메라로 전방 위험을 온디바이스에서 즉시 감지해 음성·진동으로 안내하는 시각장애인 보행 보조 앱",
     "roles": [
       "정환주(팀장·Android 온디바이스 파이프라인·FastAPI 서버·배포·문서)",
-      "myungkwang(NLG 문장·모델 파인튜닝·데모 시뮬레이션) · jaehyun7849(Vision/YOLO 온디바이스 전환) · msc010312(TTS 파이프라인·정책) · yudeukshin(FastAPI/DB)"
+      "임명광(NLG 문장·모델 파인튜닝·데모 시뮬레이션) · 김재현(Vision/YOLO 온디바이스 전환) · 문수찬(TTS 파이프라인·정책) · 신유득(FastAPI/DB)"
     ],
     "github": "https://github.com/coding-jhj/VoiceGuide",
     "status": "ready",
     "detail": {
-      "hero_image": "assets/screenshots/voiceguide-demo.gif",
+      "hero_image": "assets/screenshots/voiceguide-demo.mp4",
       "intro": "시각장애인의 보행 중 '지금 이 순간'의 위험을 스마트폰 카메라로 감지해 음성·진동으로 즉시 알리는 보조 안전 레이어\n→ 길 안내가 아니라, 바로 앞 장애물을 더 빨리 인지하도록 돕는 보조 기능에 집중",
       "info_table": [
         {"label": "기간", "value": "2026.04.24 – 2026.06.22 · 이스트소프트 AI 휴먼 4기"},
-        {"label": "팀 구성", "value": "5인 · 정환주(팀장·Android/서버 총괄) · myungkwang(NLG·파인튜닝) · jaehyun7849(Vision/YOLO) · msc010312(TTS·정책) · yudeukshin(FastAPI/DB)"},
+        {"label": "팀 구성", "value": "5인 · 정환주(팀장·Android/서버 총괄) · 임명광(NLG·파인튜닝) · 김재현(Vision/YOLO) · 문수찬(TTS·정책) · 신유득(FastAPI/DB)"},
         {"label": "내 역할", "value": "팀장 · Android 온디바이스 탐지 파이프라인 · FastAPI 서버 · GCP Cloud Run 배포 · 대시보드 · 문서화"},
         {"label": "기술 스택", "value": "Kotlin · CameraX · TFLite(YOLO11n) / FastAPI · SQLite·PostgreSQL · SSE / GCP Cloud Run · MapLibre 대시보드"}
       ],
@@ -154,7 +156,7 @@
           "title": "서버 아키텍처 피벗 — 추론 제거, 기록·대시보드로 역할 분리",
           "bullets": [
             "초기에는 서버 추론 구조로 설계했으나, 네트워크 지연이 보행 중 즉시성과 맞지 않는다는 문제를 팀 내에서 공유",
-            "**jaehyun7849이 온디바이스 전환을 주도**, 서버는 Android가 보낸 탐지 JSON·GPS를 받아 DB 저장·SSE 실시간 푸시·대시보드만 담당하도록 역할을 분리",
+            "**김재현이 온디바이스 전환을 주도**, 서버는 Android가 보낸 탐지 JSON·GPS를 받아 DB 저장·SSE 실시간 푸시·대시보드만 담당하도록 역할을 분리",
             "직접 FastAPI 서버(`/detect`, `/gps`, `/events`)와 GCP Cloud Run 배포, MapLibre 기반 실시간 대시보드 구현"
           ],
           "image": "assets/screenshots/voiceguide-01-architecture.png",

@@ -1,5 +1,12 @@
 const CATEGORY_LABEL = { security: "SECURITY", ai: "AI SYSTEMS", web: "WEB" };
 
+function mediaTag(src, alt) {
+  if (/\.(mp4|webm)$/i.test(src)) {
+    return `<video src="${src}" autoplay loop muted playsinline aria-label="${alt}"></video>`;
+  }
+  return `<img src="${src}" alt="${alt}">`;
+}
+
 async function loadProjects() {
   const res = await fetch("projects.json");
   const projects = await res.json();
@@ -11,7 +18,7 @@ function cardHTML(p) {
   const pending = p.status !== "ready";
   const clickable = !pending && !!p.detail;
   const thumbImg = !pending && p.screenshot
-    ? `<img src="${p.screenshot}" alt="${p.title} 스크린샷">`
+    ? mediaTag(p.screenshot, `${p.title} 스크린샷`)
     : "";
   const oneLiner = pending ? "콘텐츠 준비 중입니다." : (p.one_liner || "");
   const roles = pending ? "" : (p.roles || []).join(" · ");
@@ -63,7 +70,7 @@ function emphasize(str) {
 
 function detailHeroHTML(d) {
   if (!d.hero_image) return "";
-  return `<div class="detail-hero"><img src="${d.hero_image}" alt="프로젝트 대표 이미지"></div>`;
+  return `<div class="detail-hero">${mediaTag(d.hero_image, "프로젝트 대표 이미지")}</div>`;
 }
 
 function detailIntroHTML(d) {
@@ -82,7 +89,7 @@ function detailFlowStepHTML(step) {
   const bullets = (step.bullets || []).map(b => `<li>${emphasize(b)}</li>`).join("");
   const media = step.image
     ? `<figure class="detail-flow-media">
-        <img src="${step.image}" alt="${step.image_caption || step.title}">
+        ${mediaTag(step.image, step.image_caption || step.title)}
         ${step.image_caption ? `<figcaption>${step.image_caption}</figcaption>` : ""}
       </figure>`
     : "";
