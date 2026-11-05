@@ -322,10 +322,17 @@ function renderFile(fileKey) {
     pane.setAttribute("aria-hidden", active ? "false" : "true");
     // Videos inserted into a pane while it was still hidden never got an
     // autoplay chance (and won't retry on their own once shown), so kick
-    // them explicitly whenever their pane becomes the active one.
+    // them explicitly whenever their pane becomes the active one. The very
+    // first attempt can lose a race with layout/decoding right after the
+    // pane is unhidden, so retry once on the next frame as a fallback.
     if (active) {
       pane.querySelectorAll("video[autoplay]").forEach((v) => {
-        v.play().catch(() => {});
+        const tryPlay = () => v.play().catch(() => {});
+        tryPlay();
+        requestAnimationFrame(() => { if (v.paused) tryPlay(); });
+        // Last-resort net: if the video hasn't buffered enough yet, catch it
+        // the moment it can actually play.
+        v.addEventListener("canplay", tryPlay, { once: true });
       });
     }
   });
