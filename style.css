@@ -591,10 +591,12 @@ a:hover { text-decoration: underline; }
 }
 
 .detail-hero {
-  margin: 1.5rem 0 2rem;
+  margin: 1.5rem auto 2rem;
   width: fit-content;
   max-width: 46rem;
-  background: var(--vscode-sidebar-bg);
+  background:
+    radial-gradient(ellipse at center, rgba(86, 156, 214, 0.22), transparent 65%),
+    var(--vscode-sidebar-bg);
   border: 1px solid var(--vscode-border);
   padding: 0.85rem;
 }
