@@ -255,7 +255,6 @@ initSkillChips();
 
 const FILE_LANG = {
   readme: "Markdown",
-  resume: "Markdown",
   education: "Markdown",
   skills: "JSON",
   projects: "Markdown",
