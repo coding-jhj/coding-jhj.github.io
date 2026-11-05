@@ -862,14 +862,14 @@
     "category": "security",
     "subgroup": "project",
     "pinned_top": false,
-    "screenshot": "assets/screenshots/threatlens-demo.jpg",
-    "one_liner": "AI 서비스 구조를 그리면 공격 경로·위험 점수·대응 순서를 보여주는 서버 없는 브라우저 위협 모델링 도구",
+    "screenshot": "assets/screenshots/threatlens-hero.jpg",
+    "one_liner": "전문가 상담 없이, 서버에 올리지 않고도 AI 서비스 구조를 그리는 것만으로 공격 경로와 먼저 막을 지점을 계산해 주는 브라우저 위협 모델링 도구",
     "roles": [],
     "github": "https://github.com/coding-jhj/threatlens",
     "status": "ready",
     "detail": {
-      "hero_image": "assets/screenshots/threatlens-demo.jpg",
-      "intro": "'우리 AI 서비스가 어디서 뚫릴지 감이 안 온다'는 문제에서 시작한 위협 모델링 도구\n→ 구조를 외부 서버에 올리기 어려운 경우를 위해, 질문 8개 또는 캔버스 입력만으로 공격 경로·위험 점수·대응 순서까지 브라우저 안에서 전부 계산",
+      "hero_image": "assets/screenshots/threatlens-hero.jpg",
+      "intro": "AI 서비스를 점검 없이 그냥 운영하면, 어디서부터 뚫릴지조차 모르는 채로 서비스를 돌리는 셈입니다. ThreatLens는 그 구조를 그림으로 옮기기만 하면 공격 경로와 위험 점수, 먼저 할 일을 계산해 주는 위협 모델링 도구입니다.\n→ 보안 전문가도, 외부 서버 업로드도 필요 없게 서버·로그인 없이 전부 브라우저 안에서 동작하도록 설계",
       "info_table": [
         {"label": "기간", "value": "2026.10.02 – 2026.10.21"},
         {"label": "역할", "value": "개인 프로젝트"},
@@ -878,49 +878,73 @@
       "flow": [
         {
           "step": "01",
-          "title": "질문 마법사",
+          "title": "질문 마법사로 구조 입력",
           "bullets": [
-            "질문 8개에 답하면 AI 서비스 구조를 자동 생성",
-            "256개 답 조합을 전부 검사해 빠짐 없는 분기 설계"
-          ]
+            "보안 지식 없이도 질문 8개에 답하면 AI 서비스 구조를 자동으로 그려 줌",
+            "256개 답 조합을 전부 자동 시험해, 어떤 답을 골라도 구조가 깨지지 않도록 설계"
+          ],
+          "image": "assets/screenshots/threatlens-01-wizard.jpg",
+          "image_caption": "질문 마법사 — 8개 질문 중 첫 번째"
         },
         {
           "step": "02",
-          "title": "캔버스 편집",
+          "title": "캔버스에서 직접 구조 조정",
           "bullets": [
-            "부품 20종·속성 18종(사외 영역·신뢰 경계 포함)을 끌어 놓고 화살표로 연결"
-          ]
+            "질문만으로 부족하면 부품 20종·속성 18종(사외 영역·신뢰 경계 포함)을 끌어 놓고 화살표로 직접 연결",
+            "업로드 문서 → AI 에이전트 → 메일 전송 → 외부 수신자처럼, 실제 데이터·명령 흐름 그대로 도면화"
+          ],
+          "image": "assets/screenshots/threatlens-02-canvas.jpg",
+          "image_caption": "캔버스 편집기 — 부품·화살표로 그린 AI 서비스 구조"
         },
         {
           "step": "03",
-          "title": "위협 탐지",
+          "title": "공개 표준 근거 규칙으로 위협 탐지",
           "bullets": [
-            "규칙 40개(R-01~R-40), 규칙마다 OWASP LLM 2025·MITRE ATLAS·MITRE ATT&CK ICS·CISA·IEC 61511 근거 표기",
+            "규칙 40개(R-01~R-40) 전부에 OWASP LLM 2025·MITRE ATLAS·MITRE ATT&CK ICS·CISA·IEC 61511 중 출처를 표기",
             "범주: 프롬프트 주입 6 · 데이터 유출 9 · 도구 오남용 12 · 저장·로그 5 · 화학·공정 8",
-            "'원인 → AI가 하는 일 → 결과' 3줄 시나리오로 설명, 도면에 경로 번호 표시"
-          ]
+            "'원인 → AI가 하는 일 → 결과' 3줄 시나리오로 왜 위험한지 설명하고, 도면에 공격 경로를 빨간 화살표로 표시"
+          ],
+          "image": "assets/screenshots/threatlens-03-rules.jpg",
+          "image_caption": "규칙 라이브러리 — 근거 표준이 달린 40개 규칙"
         },
         {
           "step": "04",
-          "title": "구조 점검",
+          "title": "구조 설계 결함 자동 점검",
           "bullets": [
-            "입력 없는 AI, 끊긴 부품, 닿지 않는 도구, 뒤집힌 화살표 4종 경고 탐지"
-          ]
+            "입력 없는 AI, 끊긴 부품, 닿지 않는 도구, 뒤집힌 화살표 4종을 구조 단계에서 바로 경고"
+          ],
+          "image": "assets/screenshots/threatlens-04-check.jpg",
+          "image_caption": "구조 점검 — 설계 결함 자동 탐지 결과"
         },
         {
           "step": "05",
-          "title": "행동 계획",
+          "title": "행동 계획으로 우선순위 확인",
           "bullets": [
-            "난이도를 반영해 우선순위를 추천하고, 적용 시 점수가 얼마나 내려가는지 미리 계산"
-          ]
+            "난이도를 반영해 먼저 할 일을 순서대로 추천하고, 적용하면 위험 점수가 얼마나 내려가는지 미리 계산",
+            "실제로 메일 비서 예시에서 대응 1개만 적용해도 위험 점수가 55 → 35로 즉시 하락"
+          ],
+          "image": "assets/screenshots/threatlens-05-plan.jpg",
+          "image_caption": "행동 계획 적용 — 위험 점수 55 → 35로 하락"
         },
         {
           "step": "06",
-          "title": "보고서·평가표",
+          "title": "A4 보고서로 내보내기",
           "bullets": [
-            "A4 인쇄용 보고서·Markdown 내보내기, 링크·파일로 구조 저장·재오픈",
-            "정답표 대비 재현율과 한계를 평가표 화면에서 그대로 공개"
-          ]
+            "위험 마름모·구조 도면·행동 계획표가 담긴 A4 보고서를 인쇄(PDF)나 Markdown으로 내보냄",
+            "링크·파일로 구조를 저장하고 다시 열 수 있음"
+          ],
+          "image": "assets/screenshots/threatlens-06-report.jpg",
+          "image_caption": "A4 위협 분석 보고서 — 위험 마름모·구조 도면·행동 계획표"
+        },
+        {
+          "step": "07",
+          "title": "평가표로 신뢰도 공개",
+          "bullets": [
+            "정답표 대비 재현율(느슨 79%·엄격 59%)과 경고 적중률(86%)을 숨기지 않고 화면에 그대로 공개",
+            "정답은 규칙을 보지 않은 별도 AI 에이전트가 공개 표준만 보고 작성했고, 사람 전문가 검수는 아직 거치지 않았다는 한계까지 같은 화면에 표기"
+          ],
+          "image": "assets/screenshots/threatlens-07-eval.jpg",
+          "image_caption": "평가표 — 정답표 대비 재현율·경고 적중률 공개"
         }
       ],
       "problems": [
