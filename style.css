@@ -598,7 +598,11 @@ a:hover { text-decoration: underline; }
 }
 .detail-hero img, .detail-hero video {
   display: block;
-  width: 100%;
+  width: auto;
+  max-width: 100%;
+  max-height: 28rem;
+  object-fit: contain;
+  margin: 0 auto;
 }
 
 .detail-intro { margin-bottom: 2rem; max-width: 50rem; }
