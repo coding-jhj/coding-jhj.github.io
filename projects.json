@@ -729,6 +729,7 @@
       "개인 프로젝트"
     ],
     "github": "https://github.com/coding-jhj/choi-bujang-secret-vault",
+    "demo": "https://choi-bujang-secret-vault-omega.vercel.app/",
     "status": "ready",
     "detail": {
       "hero_image": "assets/screenshots/byte-back-02-xdr-report.png",
@@ -866,6 +867,7 @@
     "one_liner": "전문가 상담 없이, 서버에 올리지 않고도 AI 서비스 구조를 그리는 것만으로 공격 경로와 먼저 막을 지점을 계산해 주는 브라우저 위협 모델링 도구",
     "roles": [],
     "github": "https://github.com/coding-jhj/threatlens",
+    "demo": "https://threatlens-peach.vercel.app/",
     "status": "ready",
     "detail": {
       "hero_image": "assets/screenshots/threatlens-hero.jpg",
@@ -873,7 +875,8 @@
       "info_table": [
         {"label": "기간", "value": "2026.10.02 – 2026.10.21"},
         {"label": "역할", "value": "개인 프로젝트"},
-        {"label": "기술 스택", "value": "React 19 · Vite · TypeScript · React Flow 12 / vitest · Playwright / GitHub Actions(CI/CD)"}
+        {"label": "기술 스택", "value": "React 19 · Vite · TypeScript · React Flow 12 / vitest · Playwright / GitHub Actions(CI/CD)"},
+        {"label": "링크", "value": "<a href=\"https://threatlens-peach.vercel.app/\" target=\"_blank\" rel=\"noopener\">배포 화면 ↗</a>"}
       ],
       "flow": [
         {
@@ -983,6 +986,7 @@
       "개인 프로젝트"
     ],
     "github": "https://github.com/coding-jhj/datadiet",
+    "demo": "https://datadiet-pi.vercel.app/",
     "status": "ready",
     "detail": {
       "hero_image": "assets/screenshots/datadiet-01-landing.png",
@@ -1096,6 +1100,7 @@
       "개인 프로젝트"
     ],
     "github": "https://github.com/coding-jhj/aleph-first-homework",
+    "demo": "https://aleph-first-homework.vercel.app/",
     "status": "ready",
     "detail": {
       "hero_image": "assets/screenshots/passkey-02-workspace.png",
@@ -1217,6 +1222,7 @@
       "개인 프로젝트"
     ],
     "github": "https://github.com/coding-jhj/MINECRART_DASHBOARD",
+    "demo": "https://minecraft-dashboard-zeta.vercel.app/",
     "status": "ready",
     "detail": {
       "hero_image": "assets/screenshots/minecraft-01-board.png",
@@ -1226,7 +1232,7 @@
         {"label": "기간", "value": "2026.08.28 – 2026.08.29"},
         {"label": "기술 스택", "value": "Next.js 15 · React 19 · TypeScript · Supabase(Postgres) · Vercel(Cron) · 인라인 SVG 차트"},
         {"label": "구분", "value": "fixture 9종과 스키마 계약은 과정 제공 · 그 외 전부 직접 구현"},
-        {"label": "링크", "value": "<a href=\"https://t04-real-information-board.vercel.app\" target=\"_blank\" rel=\"noopener\">배포 화면 ↗</a>"}
+        {"label": "링크", "value": "<a href=\"https://minecraft-dashboard-zeta.vercel.app/\" target=\"_blank\" rel=\"noopener\">배포 화면 ↗</a>"}
       ],
       "flow": [
         {
@@ -1300,6 +1306,7 @@
       "개인 프로젝트"
     ],
     "github": "https://github.com/coding-jhj/MY_CAREER_PLANNER",
+    "demo": "https://my-career-planner.vercel.app/",
     "status": "ready",
     "detail": {
       "hero_image": "assets/screenshots/my-career-planner-01-today.png",

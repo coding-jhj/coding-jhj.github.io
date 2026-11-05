@@ -21,12 +21,14 @@ function cardHTML(p) {
     ? mediaTag(p.screenshot, `${p.title} 스크린샷`)
     : "";
   const oneLiner = pending ? "콘텐츠 준비 중입니다." : (p.one_liner || "");
-  const roles = pending ? "" : (p.roles || []).join(" · ");
   const award = p.award ? `<p class="award-tag">🏆 ${p.award}</p>` : "";
   const statusLabel = pending ? "콘텐츠 준비 중" : "LIVE";
   const catLabel = CATEGORY_LABEL[p.category] || p.category.toUpperCase();
   const githubLink = (!pending && p.github)
     ? `<a class="card-github-link" href="${p.github}" target="_blank" rel="noopener">GitHub에서 보기 ↗</a>`
+    : "";
+  const demoLink = (!pending && p.demo)
+    ? `<a class="card-demo-link" href="${p.demo}" target="_blank" rel="noopener">Vercel에서 보기 ↗</a>`
     : "";
 
   const inner = `
@@ -40,9 +42,8 @@ function cardHTML(p) {
     <div class="card-body">
       <h3>${p.title}</h3>
       <p class="one-liner">${oneLiner}</p>
-      <p class="roles">${roles}</p>
       ${award}
-      <div class="card-footer">${githubLink}</div>
+      <div class="card-footer">${demoLink}${githubLink}</div>
     </div>`;
 
   const classNames = ["project-card"];
@@ -196,6 +197,7 @@ async function init() {
   const grid = document.getElementById("project-grid");
   grid.addEventListener("click", (e) => {
     if (e.target.closest(".card-github-link")) return;
+    if (e.target.closest(".card-demo-link")) return;
     const card = e.target.closest(".project-card.clickable");
     if (!card) return;
     const p = projects.find(proj => proj.id === card.dataset.projectId);
