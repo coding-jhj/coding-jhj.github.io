@@ -502,7 +502,8 @@ a:hover { text-decoration: underline; }
   font-family: var(--mono);
   font-size: 0.82rem;
 }
-.project-card .thumb img, .project-card .thumb video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.project-card .thumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.project-card .thumb video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
 .thumb-meta {
   position: relative;
   z-index: 1;
