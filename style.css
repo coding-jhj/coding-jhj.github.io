@@ -716,6 +716,18 @@ a:hover { text-decoration: underline; }
   color: #ffffff;
 }
 .detail-github-link:hover { text-decoration: none; opacity: 0.85; }
+.detail-demo-link {
+  display: inline-block;
+  margin-top: 1rem;
+  margin-right: 0.8rem;
+  font-family: var(--mono);
+  font-size: 0.92rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 999px;
+  border: 1px solid var(--vscode-statusbar-bg);
+  color: var(--vscode-fg);
+}
+.detail-demo-link:hover { text-decoration: none; background: #ffffff14; }
 
 /* ===== contact.md pane ===== */
 .contact-actions { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 0.5rem; }

@@ -139,6 +139,9 @@ function projectDetailHTML(p) {
   const githubCTA = p.github
     ? `<a class="detail-github-link" href="${p.github}" target="_blank" rel="noopener">GitHub에서 전체 코드 보기 ↗</a>`
     : "";
+  const demoCTA = p.demo
+    ? `<a class="detail-demo-link" href="${p.demo}" target="_blank" rel="noopener">배포 사이트에서 보기 ↗</a>`
+    : "";
   const problemsSection = (d.problems && d.problems.length)
     ? `<h3 class="detail-section-title">문제 해결</h3>${detailProblemsHTML(d.problems)}`
     : "";
@@ -160,6 +163,7 @@ function projectDetailHTML(p) {
       ${problemsSection}
       ${leadershipSection}
       ${metricsSection}
+      ${demoCTA}
       ${githubCTA}
     </div>`;
 }
