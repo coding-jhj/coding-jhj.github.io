@@ -1447,11 +1447,43 @@
     "category": "web",
     "subgroup": "project",
     "pinned_top": false,
-    "screenshot": null,
-    "one_liner": null,
+    "screenshot": "assets/screenshots/pop-tap-hero.jpg",
+    "one_liner": "D·F·J·K 키로 떨어지는 노트를 정확한 타이밍에 쳐서 점수와 정확도를 겨루는 24초 리듬 게임",
     "roles": [],
     "github": "https://github.com/coding-jhj/alpeh-second-mini-game",
-    "status": "needs_content"
+    "demo": "https://alpeh-second-mini-game.vercel.app/",
+    "status": "ready",
+    "detail": {
+      "hero_image": "assets/screenshots/pop-tap-hero.jpg",
+      "intro": "24초 동안 4개 레인(D·F·J·K)에 떨어지는 노트를 정확한 타이밍에 눌러 점수를 쌓는 미니 리듬 게임입니다.\n프레임워크나 외부 라이브러리 없이 순수 HTML·CSS·JavaScript 한 파일로 구현했습니다.\n매 판 동일한 패턴(고정 시드 49개 노트)이 등장해, 반복 연습으로 실력을 올릴 수 있도록 설계했습니다.",
+      "info_table": [
+        { "label": "기간", "value": "2026.08 · 단기 과제" },
+        { "label": "역할", "value": "개인 프로젝트" },
+        { "label": "기술 스택", "value": "Vanilla JavaScript · HTML · CSS / Web Audio API" }
+      ],
+      "flow": [
+        {
+          "step": "01",
+          "title": "판정 규칙과 조작",
+          "bullets": [
+            "D·F·J·K 키(또는 화면 하단 패드)로 레인별 노트를 타격 — 판정창은 기본 **140ms**, 설정에서 60~240ms로 조절 가능",
+            "**PERFECT(+100) / GOOD(+60) / MISS(0, 콤보 초기화)** 3단계 판정과 Web Audio 효과음으로 즉시 피드백"
+          ],
+          "image": "assets/screenshots/pop-tap-02-play.jpg",
+          "image_caption": "진행 중 화면 — 레인별로 떨어지는 노트와 판정 팝업"
+        },
+        {
+          "step": "02",
+          "title": "결과 판정과 기록",
+          "bullets": [
+            "**미스 8회** 누적 시 즉시 실패, 24초 완주 + **정확도 70% 이상**이면 통과",
+            "통과 시 정확도 기준 **S/A/B/C 랭크** 부여, localStorage에 최고 기록과 최근 60개 플레이 기록 저장"
+          ],
+          "image": "assets/screenshots/pop-tap-03-result.jpg",
+          "image_caption": "결과 화면 — 판정별 집계와 정확도 그래프"
+        }
+      ]
+    }
   },
   {
     "id": "study-card-studio",
